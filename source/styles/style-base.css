@@ -1,0 +1,47 @@
+body {
+    background-color: #b0c4db;	
+    background-image: url("../styles/img/paper.gif");
+    background-repeat: repeat-x;
+    background-position: 50% 20%;
+    background-attachment: fixed;
+    color: grey;
+}
+h1 {
+    color: navy;
+    margin-left: 20px;
+    text-align: center;
+    text-decoration: overline;
+}
+
+p{
+    color: red;
+    /*text-align: center;*/
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+}
+        /*This is
+        a multi-line
+        comment */
+#para1{
+    color: blue;
+    text-align: justify;
+}
+.tlf{
+    text-align: left;
+}
+span.up{
+    vertical-align: super;
+}
+span.sub{
+    vertical-align: sub;
+}
+
+div.out{
+    padding: 5px;
+    border: 3px red solid;
+    margin: 10px;
+    outline: 3px grey groove;
+}
