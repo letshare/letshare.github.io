@@ -19,7 +19,7 @@ w3组织提到flex让我们轻易地可以实现这些：
 一个设有「display:flex」或「display:inline-flex」的元素是一个伸缩容器，伸缩容器的子元素被称为伸缩项目，这些子元素使用伸缩布局模型来排版。
 
 与布局计算偏向使用书写模式方向的块布局与行内布局不同，伸缩布局偏向使用伸缩流的方向。为了让描述伸缩布局变得更容易，本章节定义一系列相对于伸缩流的术语。「flex-flow」的值决定了这些术语如何对应到物理方向（上／右／下／左）、物理轴（垂直／水平）、物理大小（宽度／高度）。
-![一个row伸缩容器中各种方向与大小术语的示意图。](/images/201307/flex-intro.png)
+![一个row伸缩容器中各种方向与大小术语的示意图。](/img/201307/flex-intro.png)
 
 **主轴、主轴方向**  
 	浏览器沿着一个伸缩容器的主轴渲染伸缩项目，主轴是主轴方向的延伸。
@@ -53,7 +53,7 @@ w3组织提到flex让我们轻易地可以实现这些：
 伸缩容器不是块容器，因此有些设计用来控制块布局的属性，在伸缩布局中不适用。column-*、float、clear、vertical-align在伸缩布局中不适用。
 
 ###flex-direction
-![](/images/201307/flex-direction1.svg)
+![](/img/201307/flex-direction1.svg)
 这个主要用来创建主轴，从而定义了伸缩项目放置在伸缩容器的方向。
 ```css
 .container {
@@ -66,7 +66,7 @@ w3组织提到flex让我们轻易地可以实现这些：
 + `column-reverse`：类似于`row-reverse`，不过是从下到上排列。
 
 ###flex-wrap
-![](/images/201307/flex-wrap.svg)
+![](/img/201307/flex-wrap.svg)
 默认伸缩容器是单行显示，你可以这个定义属性决定伸缩容器里是单行还是多行显示，侧轴的方向决定了新行堆放的方向。
 ```css
 .container{
@@ -86,7 +86,7 @@ w3组织提到flex让我们轻易地可以实现这些：
 ```
 
 ###justify-content
-![](/images/201307/justify-content.svg)
+![](/img/201307/justify-content.svg)
 这个是用来定义伸缩项目沿着主轴线的对齐方式。当一行上的所有伸缩项目都不能伸缩或可伸缩但是已经达到其最大长度时，这一属性才会对多余的空间进行分配。当项目溢出某一行时，这一属性也会在项目的对齐上施加一些控制。
 ```css
 .container {
@@ -100,7 +100,7 @@ w3组织提到flex让我们轻易地可以实现这些：
 + `space-around`：伸缩项目会平均地分布在行里，两端保留一半的空间。
 
 ###align-items
-![](/images/201307/align-items.svg)
+![](/img/201307/align-items.svg)
 这个主要用来定义伸缩项目可以在伸缩容器的当前行的侧轴上对齐方式。可以把他想像成侧轴（垂直于主轴）的“justify-content”。
 ```css
 .container {
@@ -114,7 +114,7 @@ w3组织提到flex让我们轻易地可以实现这些：
 + `stretch`（默认值）：伸缩项目拉伸填充整个伸缩容器。此值会使项目的外边距盒的尺寸在遵照「min/max-width/height」属性的限制下尽可能接近所在行的尺寸。
 
 ###align-content
-![](/images/201307/align-content.svg)
+![](/img/201307/align-content.svg)
 这个属性主要用来调准伸缩行在伸缩容器里的对齐方式。类似于伸缩项目在主轴上使用“justify-content”一样。
 > **注**：请注意本属性在只有一行的伸缩容器上没有效果。
 

@@ -15,7 +15,7 @@ tags: ['git','版本']
 直接记录快照，而非差异比较
 
 **文件的三种状态：**已提交（committed），已修改（modified）和已暂存（staged）。用git管理项目的时候，文件在三个地方流转：Git 的工作目录，暂存区域，以及本地仓库。
-![git三种文件流转区](/images/201307/3spaces.jpg)
+![git三种文件流转区](/img/201307/3spaces.jpg)
 
 如果是 Git 目录中保存着的特定版本文件，就属于已提交状态；如果作了修改并已放入暂存区域，就属于已暂存状态；如果自上次取出后，作了修改但还没有放到暂存区域，就是已修改状态。
 
@@ -45,13 +45,13 @@ tags: ['git','版本']
 有些命令比较容易混淆，稍不注意就用错了。要特别注意那些命令对三个区域操作的方向性。
 
 文件如何在三个区域流转呢？就要用到这几个命令git add commit reset checkout 
-![文件流转](/images/201307/1step-operations.png)
+![文件流转](/img/201307/1step-operations.png)
 > `--`参数的作用是区分分支名还是文件名，加了`--`参数命令就知道后面的是文件名而不是分支名
 > `git add -A `将工作目录所有修改提交
 > `git checkout -- files` 把文件从暂存区域复制到工作目录，用来丢弃本地修改。files不能少，不然会无效
 
 上面的图是分步操作，也可以一条命令同时对暂存区和工作目录操作。
-![文件流转2](/images/201307/2step-operations.png)
+![文件流转2](/img/201307/2step-operations.png)
 
 
 ###git checkout
@@ -68,7 +68,7 @@ $ git checkout hello.c             #(3) 从暂存区签回hello.c
 reset命令把当前分支指向另一个位置，并且有选择的变动工作目录和暂存区。也用来在从历史仓库中复制文件到暂存区，而不动工作目录。
 
 如果不给选项，那么当前分支指向到那个提交。如果用`--hard`选项，那么工作目录也更新，如果用`--soft`选项，那么都不变。
-![git reset](/images/201307/git-reset.png)
+![git reset](/img/201307/git-reset.png)
 如果没有给出提交点的版本号，那么默认用HEAD。这样，分支指向不变，但是索引会回滚到最后一次提交，如果用--hard选项，工作目录也同样。
 
 ###git merge
@@ -77,18 +77,18 @@ merge 命令把不同分支合并起来。合并前，索引必须和当前提�
 也就是说如果另一个分支是当前提交的祖父节点，那么合并命令将什么也不做，因为没有更新的内容，而如果当前提交是另一个分支的祖父节点，就导致fast-forward合并。指向只是简单的移动，工作目录和暂存区的文件会改变但并不会生成一个新的提交。
 
 如果当前分支和另外一个分支有共同的祖先节点而不是直接线性节点关系的话，将会进行一个文件的合并，并创建一个新的提交。如果当前分支合并的时候出现了冲突了，只要重新编辑冲突的文件，在解决了所有文件里的所有冲突后，运行 git add 将把它们标记为已解决状态（实际上就是来一次快照保存到暂存区域。）。因为一旦暂存，就表示冲突已经解决。或者使用`git merge --abort`放弃合并，工作目录和暂存区会回退。
-![git merge](/images/201307/true-merge.png)
+![git merge](/img/201307/true-merge.png)
 
 ###git cherry-pick
 cherry-pick命令"复制"一个提交节点并在当前分支做一次完全一样的新提交。
-![git cherry-pick](/images/201307/cherry-pick.png)
+![git cherry-pick](/img/201307/cherry-pick.png)
 
 ###git rebase
 rebase衍合是合并命令的另一种选择。合并把两个父分支合并进行一次提交，提交历史不是线性的。衍合在当前分支上重演另一个分支的历史，提交历史是线性的。 本质上，这是线性化的自动的 cherry-pick。
-![git rebase](/images/201307/git-rebase.png)
+![git rebase](/img/201307/git-rebase.png)
 
 上面的命令都在topic分支中进行，而不是master分支，在master分支上重演，并且把分支指向新的节点。注意旧提交没有被引用，将被回收。要限制回滚范围，使用`--onto`选项。下面的命令在master分支上重演当前分支从169a6以来的最近几个提交，即2c33a。
-![git rebase onto](/images/201307/rebase-onto.png)
+![git rebase onto](/img/201307/rebase-onto.png)
 
 
 ###其他命令

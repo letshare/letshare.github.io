@@ -17,7 +17,7 @@ categories: css
 >caption  { display: table-caption }
 
 如图：
-![tbl-layers.png](/images/201206/tbl-layers.png)
+![tbl-layers.png](/img/201206/tbl-layers.png)
 
 ###Table Borders
 可以设置table、td、th的border属性，值有：  
@@ -44,7 +44,7 @@ separate模式下，可以设置table的border-spacing属性来设置边框的�
 border-spacing:	<length> <length>? | inherit
 ```
 如图所示：
-![border-spacing](/images/201206/tbl-spacing.png)
+![border-spacing](/img/201206/tbl-spacing.png)
 
 separate模式下，可以设置table的empty-cells来控制空的cell是否显示border和background,语法：
 ```css

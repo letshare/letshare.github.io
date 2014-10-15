@@ -57,7 +57,7 @@ z-index属性决定了一个元素的堆叠顺序，根据它和其他元素的�
 
 ###top、right、bottom、left
 这4个属性在position为static的时候无效，它们值的正负如图所示：
-![position](/images/201206/position.png)
+![position](/img/201206/position.png)
 
 水平方向，right的值跟left的值是相反的，垂直方向上，top的值跟bottom的值是相反的。  
 left表示元素左边框相对某位置(abusolte是父元素左边框，fixed是浏览器窗口左边框，relative是元素自身左边框)向右偏移多少，而right相反表示元素右边框相对某位置向左偏移多少。

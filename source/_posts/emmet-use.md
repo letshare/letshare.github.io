@@ -6,7 +6,7 @@ categories: 效率
 
 ##简介
 Emmet的前身是大名鼎鼎的Zen coding，如果你从事Web前端开发的话，对该插件一定不会陌生。它使用仿CSS选择器的语法来生成代码，大大提高了HTML/CSS代码编写的速度，比如下面的演示：
-![Emmet演示](/images/201401/emmet-demo.gif)
+![Emmet演示](/img/201401/emmet-demo.gif)
 
 ###sublime下安装
 `shift+ctrl+p`调出全局设置框，输入'install'，选择'package control:install package',搜索'emmet',选中后回车就会开始安装。

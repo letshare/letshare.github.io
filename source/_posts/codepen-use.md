@@ -22,10 +22,10 @@ codepen中一个项目称为一个pen。
 在codepen首页展示一些共享的pen，并且可以按照被引用数、流行度、更新事件等排序。
 
 比如：打开一个pen
-![open public pen](/images/201401/pick-pen.png)
+![open public pen](/img/201401/pick-pen.png)
 
 打开一个pen的代码页面后，选择右下角的"embed"就可以打开一个窗口,这个窗口用来设置一些选项，规定将codepen嵌入一个网页时的主题。
-![embed this pen](/images/201401/embed-pen.png)
+![embed this pen](/img/201401/embed-pen.png)
 
 然后将那段embed代码嵌入网页就可以引入一个codepen项目了。比如下面将引入一个codepen：
 ```html

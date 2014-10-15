@@ -8,7 +8,7 @@ categories: css
 文档中的每个元素被描绘为矩形盒子。确定其大小，属性——比如颜色、背景、边框，及其位置是渲染引擎的目标。
 
 CSS下这些矩形盒子由标准盒模型描述。这个模型描述元素内容占用空间。盒子有四个边界：外边距边界margin edge, 边框边界border edge, 内边距边界padding edge 与 内容边界content edge。如图所示：
-![box-model](/images/201206/box-model.gif)
+![box-model](/img/201206/box-model.gif)
 
 每部分的含义如下：
 + Content - 真正包含元素内容的区域。文本和图片出现的地方。

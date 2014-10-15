@@ -28,7 +28,7 @@ selector {declaration1; declaration2; ... declarationN }
 ```css
 h1 {color:red; font-size:14px;}
 ```
-![示意图](/images/201206/ct_css_selector.gif)
+![示意图](/img/201206/ct_css_selector.gif)
 
 ###选择器
 css选择器让你可以找到html元素(基于它们的id, classes, types, attributes, values of attributes and much more)，并可以操作它们。

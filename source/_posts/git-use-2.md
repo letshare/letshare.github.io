@@ -1,4 +1,4 @@
-title: git简易使用指南2
+title: git简易使用指南-2
 date: 2013-7-14 19:20:00
 categories: 工具
 tags: ['git','版本']
@@ -18,6 +18,12 @@ $git remote -v
 
 $git remote show <name>
 #查看远程仓库的详细信息
+
+$git remote rename <newname> <oldname>
+#改变远程仓库名字
+
+$git remote set-url' [--push] <name> <newurl> [<oldurl>]
+#改变远程仓库url
 ```
 
 ###git clone
@@ -26,8 +32,20 @@ $git remote show <name>
 $ mkdir path && cd path
 $ git init      #初始化一个本地仓库
 $ git remote add origin <url>
-$ git pull
+$ git pull origin master
 ```
+
+
+###git pull
+```bash
+'git pull' [options] [<repository> [<refspec>...]]
+```
+合并远程仓库代码到本地分支 ，实际上它有两条命令复合而成，
+`git fetch`然后`git merge FETCH_HEAD`。git fetch是将代码down到FETCH_HEAD中。FETCH_HEAD一般来说, 存在两种情况:
+1. 如果没有显式的指定远程分支, 则远程分支的master将作为默认的FETCH_HEAD.
+2. 如果指定了远程分支, 就将这个远程分支作为FETCH_HEAD.
+
+
 ##子树合并
 在项目中难免会引用到其他项目作为主项目的一个模块，但不能同时存在两个仓库，然后都提交。有一个解决文档是，将子项目作为子树提交，新建立一个分支作为子项目，然后跟踪更新。然后切换回主分支，主分支合并读取分支的树，这时在子目录下会有子项目的文件，子项目和主分支的更新和合并都通过子树作为桥梁。
 
@@ -60,7 +78,6 @@ Automatic merge went well; stopped before committing as requested
 ```bash
 $ git diff-tree -p rack_branch
 ```
-
 
 ##think in git
 ###git 对象

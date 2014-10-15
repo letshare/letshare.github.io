@@ -1,5 +1,5 @@
 title: 用hexo建blog
-date: 2013-06-02 20:08:20
+date: 2014-08-02 20:08:20
 categories: web
 tags: ['hexo','blog']
 ---

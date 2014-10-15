@@ -6,7 +6,7 @@ categaries: javascript
 ##跨域
 ###什么是跨域？
 简单地理解就是因为JavaScript同源策略的限制，a.com 域名下的js无法操作b.com或是c.a.com域名下的对象。更详细的说明可以看下表：
-![跨域图示](/images/201206/cross-domain.jpg)
+![跨域图示](/img/201206/cross-domain.jpg)
 
 ---------------------------------------------------------------
 ##Ajax

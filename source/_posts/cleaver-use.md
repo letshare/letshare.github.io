@@ -5,13 +5,16 @@ categories: 工具
 author:
     name: Bruce Cai
     url: http://xuntuu.com
-output: ../html/smart-slide.html
+output: ../demo/smart-slide.html
 -----------------------------
 
 #  大家好!
 ## 这是一个幻灯片演示
 
+####幻灯片演示请狂点这里[--》演示](/demo/smart-slide.html)
+
 --
+
 ###简介
 cleaver是一个幻灯片制作工具，将markdown文档转化为html5的幻灯片，它只有非常简单的规定：
 + markdown编写
@@ -22,7 +25,7 @@ cleaver是一个幻灯片制作工具，将markdown文档转化为html5的幻灯
 <style type="text/css">
 	.cleaver-cool{
 		color: #66D9EF;
-		background-image: url('../images/201401/cleaver-cool.jpg');
+		background-image: url('../img/201401/cleaver-cool.jpg');
 	}
 </style>
 
@@ -78,4 +81,4 @@ theme:                                      //主题
 + `###`时会呈现为内容页
 + `--`幻灯片分割符后面可以加class，作为这个幻灯页的特有样式
 
-[演示](/html/smart-slide.html)
+

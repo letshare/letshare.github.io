@@ -55,7 +55,7 @@ categories: css
 
 
 另外需要强调的是mac、window、photoshop、linux跨平台的情况下，中文字体的视觉有差异。
-![font-cross-max-win](/images/201206/font-cross-max-win.png)
+![font-cross-max-win](/img/201206/font-cross-max-win.png)
 
 所以考虑到跨平台的问题，因为每种系统自带的字体不一样，特别是对中文的支持情况，所以推荐使用以下安全字体设置：
 ```css

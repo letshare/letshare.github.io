@@ -24,7 +24,7 @@ DOM API提供了大量的节点属性让我们来往上或者往下查询节点�
 5. Node.nextSibling: 访问DOM树上与当前节点同级别的下一个节点。
 6. Node.previousSibling: 访问DOM树上与当前节点同级别的上一个节点。
 
-![节点属性示意图](/images/201206/dom-find.png)
+![节点属性示意图](/img/201206/dom-find.png)
 
 元素之间不能有空格，如果ul和li之间有空格的话，就会被认为是内容为空的text node节点，这样ul.childNodes[0]就不是第一个li元素了。相应地，`<p>`的下一个节点也不是`<ul>`，因为`<p>`和`<ul>`之间有一个空行的节点，一般遇到这种情况需要遍历所有的子节点然后判断nodeType类型，1是元素，2是属性，3是text节点，详细的type类型如下：
 ```javascript
