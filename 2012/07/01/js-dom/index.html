@@ -1,0 +1,491 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>javascript魔法--DOM | xuntuu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="bruce">
+    
+    <meta name="description" content="DOM（Document Object Model，文档对象模型）是一个通过和JavaScript进行内容交互的API。Javascript和DOM一般经常作为一个整体，因为Javascript通常都是用来进行DOM操作和交互的。
+DOM查找
+方法
+主要有两个查找节点的方法：
+
+document.g">
+    
+    
+    
+    
+    <link rel="alternate" href="/atom.xml## RSS address." title="xuntuu" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="xuntuu" title="xuntuu"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="xuntuu">xuntuu</a></h1>
+				<h2 class="blog-motto">程序猿、全栈工程师</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/board">留言</a></li>
+					
+					<li>
+									
+					<form class="search" method="get" target="_blank" action="http://www.baidu.com/baidu" accept-charset="utf-8">       
+				        <input name="word" id="search" autocomplete="off" size="30" maxlength="30" placeholder="搜索" />
+				        <input type="submit" value="Baidu Search" style="display:none;"/>					       
+				        <input name="tn" type="hidden" value="bds" />
+				        <input name="cl" type="hidden" value="3" />
+				        <input name="si" type="hidden" value="www.xuntuu.com" />
+				        <input name=ie type=hidden value=utf-8>
+				        <input name="ct" type="hidden" value="2097152" />
+				        <label for="s">Search</label>
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2012/07/01/js-dom/" title="javascript魔法--DOM" itemprop="url">javascript魔法--DOM</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://www.xuntuu.com" title="bruce">bruce</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2012-07-01T14:20:20.000Z" itemprop="datePublished">7月 1 2012</time>
+    更新日期:<time datetime="2012-07-01T14:20:20.000Z" itemprop="dateModified">7月 1 2012</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM查找"><span class="toc-number">1.</span> <span class="toc-text">DOM查找</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#方法"><span class="toc-number">1.1.</span> <span class="toc-text">方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#属性"><span class="toc-number">1.2.</span> <span class="toc-text">属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NodeList"><span class="toc-number">1.3.</span> <span class="toc-text">NodeList</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ELEMENT操作"><span class="toc-number">2.</span> <span class="toc-text">ELEMENT操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建节点"><span class="toc-number">2.1.</span> <span class="toc-text">创建节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#是否包含子节点"><span class="toc-number">2.2.</span> <span class="toc-text">是否包含子节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#操作子节点"><span class="toc-number">2.3.</span> <span class="toc-text">操作子节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#操作内容"><span class="toc-number">2.4.</span> <span class="toc-text">操作内容</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#几种NODE"><span class="toc-number">3.</span> <span class="toc-text">几种NODE</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ELEMENT"><span class="toc-number">3.1.</span> <span class="toc-text">ELEMENT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Text"><span class="toc-number">3.2.</span> <span class="toc-text">Text</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DocumentFragment"><span class="toc-number">3.3.</span> <span class="toc-text">DocumentFragment</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他"><span class="toc-number">4.</span> <span class="toc-text">其他</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#document"><span class="toc-number">4.1.</span> <span class="toc-text">document</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#节点的集合"><span class="toc-number">4.2.</span> <span class="toc-text">节点的集合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#呈现模式"><span class="toc-number">4.3.</span> <span class="toc-text">呈现模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#滚动，让元素可视"><span class="toc-number">4.4.</span> <span class="toc-text">滚动，让元素可视</span></a></li></ol></li></ol>
+		</div>
+		
+		<p>DOM（Document Object Model，文档对象模型）是一个通过和JavaScript进行内容交互的API。Javascript和DOM一般经常作为一个整体，因为Javascript通常都是用来进行DOM操作和交互的。</p>
+<h2 id="DOM查找">DOM查找</h2>
+<h3 id="方法">方法</h3>
+<p>主要有两个查找节点的方法：</p>
+<ol>
+<li>document.getElementById(domid)
+ 因为domid唯一，所以返回唯一的节点</li>
+<li>document.getElementsByTagName(tagname)</li>
+</ol>
+<h3 id="属性">属性</h3>
+<p>DOM API提供了大量的节点属性让我们来往上或者往下查询节点。</p>
+<ol>
+<li>Node.parentNode: 访问当前节点的父节点，父节点只能有一个，祖节点可以用<code>Node.parentNode.parentNode</code>的形式来访问。</li>
+<li>Node.childNodes: 访问一个单元素下所有的直接子节点元素，可以是一个可循环的类数组对象。该节点集合可以保护不同的类型的子节点（比如text节点或其他元素节点）。</li>
+<li>Node.firstChild: 与<code>childNodes</code>数组的第一个项(<code>Element.childNodes[0]</code>)是同样的效果，仅仅是快捷方式。</li>
+<li>Node.lastChild: 与’childNodes’数组的最后一个项(<code>Element.childNodes[Element.childNodes.length-1]</code>)是同样的效果，仅仅是快捷方式。shortcut。</li>
+<li>Node.nextSibling: 访问DOM树上与当前节点同级别的下一个节点。</li>
+<li>Node.previousSibling: 访问DOM树上与当前节点同级别的上一个节点。</li>
+</ol>
+<p><img src="/img/201206/dom-find.png" alt="节点属性示意图"></p>
+<p>元素之间不能有空格，如果ul和li之间有空格的话，就会被认为是内容为空的text node节点，这样ul.childNodes[0]就不是第一个li元素了。相应地，<code>&lt;p&gt;</code>的下一个节点也不是<code>&lt;ul&gt;</code>，因为<code>&lt;p&gt;</code>和<code>&lt;ul&gt;</code>之间有一个空行的节点，一般遇到这种情况需要遍历所有的子节点然后判断nodeType类型，1是元素，2是属性，3是text节点，详细的type类型如下：</p>
+<figure class="highlight javascript"><pre><div class="line">Node.ELEMENT_NODE == <span class="number">1</span></div><div class="line">Node.ATTRIBUTE_NODE == <span class="number">2</span></div><div class="line">Node.TEXT_NODE == <span class="number">3</span></div><div class="line">Node.CDATA_SECTION_NODE == <span class="number">4</span></div><div class="line">Node.ENTITY_REFERENCE_NODE == <span class="number">5</span></div><div class="line">Node.ENTITY_NODE == <span class="number">6</span></div><div class="line">Node.PROCESSING_INSTRUCTION_NODE == <span class="number">7</span></div><div class="line">Node.COMMENT_NODE == <span class="number">8</span></div><div class="line">Node.DOCUMENT_NODE == <span class="number">9</span></div><div class="line">Node.DOCUMENT_TYPE_NODE == <span class="number">10</span></div><div class="line">Node.DOCUMENT_FRAGMENT_NODE == <span class="number">11</span></div><div class="line">Node.NOTATION_NODE == <span class="number">12</span></div></pre></figure>
+
+<p>javascript中的所有节点类型都继承自Node类型。表示nodeType的Node常量在IE中无效，必须用数字表示。</p>
+<h3 id="NodeList">NodeList</h3>
+<p>NodeList对象是一个节点的集合,是由Node.childNodes and the querySelectorAll返回的。每个节点都有一个NodeList属性保存了子节点，可以用索引可以用item访问单个子节点。非IE可以用Array.prototype.slice将NodeList转化为数组，而IE是将NodeList实现为COM对象，不可以转化为数组。</p>
+<p>大多数情况下,NodeList对象都是个live集合。意思是说,如果文档中的节点树发生变化,则已经存在的NodeList对象也可能会变化。但如果该NodeList对象是由document.querySelectorAll(或者Element.querySelectorAll)方法返回的, 则它是非live的(就算把页面内的所有节点清空,links.length还等于2)。</p>
+<hr>
+<h2 id="ELEMENT操作">ELEMENT操作</h2>
+<h3 id="创建节点">创建节点</h3>
+<p>document.createElement();</p>
+<h3 id="是否包含子节点">是否包含子节点</h3>
+<p>判断元素是否含有某个子节点 parent.contains(child) ，firefox不支持。</p>
+<h3 id="操作子节点">操作子节点</h3>
+<figure class="highlight javascript"><pre><div class="line">parent.appendChild(childNode)  <span class="comment">//添加子节点到parent下</span></div><div class="line"><span class="keyword">new</span>.insertBefore(parent,front)   <span class="comment">//添加子节点new到parent下的front前面</span></div><div class="line">parent.replaceChild(<span class="keyword">new</span>,old)   <span class="comment">//替换new节点替换掉old节点</span></div><div class="line">parent.removeChild(node)      <span class="comment">//移除子节点node</span></div><div class="line">cloneNode = srcNode.cloneNode(<span class="literal">true</span>) <span class="comment">//递归复制其子节点，false则不复制其子节点</span></div></pre></figure>
+
+<h3 id="操作内容">操作内容</h3>
+<p><code>innerText、outerText 、innerHTML、outerHTML</code>四个属性可以直接读写，相应内容会发生改变</p>
+<p>区别在于xxxText是去除了标签的纯文本，xxxHTML是HTML内容。</p>
+<p>firefox中用textContent对应innerText,firefox不支持outerText。</p>
+<p>读取的时候 innerText等于outerText，但写的时候inner 只会替换子节点 ，而outer会替换元素自身。</p>
+<p>innerHTML写入<code>&lt;script&gt;</code>时只有ie支持，且要加defer，且认为是作用域外，必须在前面加一个作用域内元素才行，例如：文本，<code>&lt;input type=&#39;hidden&#39;/&gt;</code>，<code>&lt;div&gt;&amp;nbsp;&lt;/div&gt;</code></p>
+<hr>
+<h2 id="几种NODE">几种NODE</h2>
+<h3 id="ELEMENT">ELEMENT</h3>
+<p>其nodeType等于1。</p>
+<p>操作属性的方法：getAttribute、setAttribute、removeAttribut。属性名不区分大小写，使用标准的属性名即使是javascript保留字。</p>
+<p>W3C规范还有一个方法 hasAttribute 用于判断是否含有某属性</p>
+<h3 id="Text">Text</h3>
+<p>其nodeType等于3。</p>
+<p>创建一个Text节点document.createTextNode();</p>
+<p>操作Text节点内容的方法有：</p>
+<figure class="highlight javascript"><pre><div class="line">var box = document.createElement('div');</div><div class="line">box.id = 'box';</div><div class="line">var text1 = document.createTextNode('Mr.');</div><div class="line">var text2 = document.createTextNode('Cai!);</div><div class="line">box.appendChild(text1);</div><div class="line">box.appendChild(text2);</div><div class="line">document.body.appendChild(box);</div><div class="line">alert(box.childNodes.length);                             //2，两个文本节点</div><div class="line">box.normalize();                                          //合并成一个节点</div><div class="line">alert(box.childNodes.length);        //1</div><div class="line">box.firstChild.splitText(3);       //分离一个节点，参数表示分离位置</div><div class="line">alert(box.childNodes.length);        //2</div><div class="line">box.firstChild.deleteData(0,2);                         //删除从0位置的2个字符</div><div class="line">box.firstChild.insertData(0,'Hello.');                  //从0位置添加指定字符</div><div class="line">box.firstChild.replaceData(0,2,'Miss');               //从0位置替换掉2个指定字符</div><div class="line">box.firstChild.substringData(0,2);                    //从0位置获取2个字符，直接输出</div><div class="line">alert(box.firstChild.nodeValue);                         //Missllo..</div></pre></figure>
+
+<p>另外Text和CDATASection 都是CharacterData的子类型，可以用data和nodeValue属性获取文本</p>
+<h3 id="DocumentFragment">DocumentFragment</h3>
+<p>其nodeType等于11。</p>
+<p>创建一个片段document.createDocumentFragment();  </p>
+<p>将片段添加到文档中时，只会把片段的子节点添加进去，它本身不会成为文档树的一部分</p>
+<hr>
+<h2 id="其他">其他</h2>
+<h3 id="document">document</h3>
+<p>document代表整个文档
+html == document.documentElement;
+body == document.body;
+document几个常用的属性
+titile URL domain referrer</p>
+<h3 id="节点的集合">节点的集合</h3>
+<p>document.images document.forms document.links document.anchors</p>
+<h3 id="呈现模式">呈现模式</h3>
+<p>如何判断呈现模式是标准还是混杂？</p>
+<figure class="highlight javascript"><pre><div class="line"><span class="built_in">document</span>.compatMode == <span class="string">"CSS1Compat"</span>  <span class="comment">//标准模式</span></div><div class="line"><span class="built_in">document</span>.compatMode == <span class="string">"BackCompat"</span>  <span class="comment">//混杂模式</span></div></pre></figure>
+
+<p>ie8还有一个属性 document.documentMode，用于判断渲染模式，有以下值:</p>
+<ul>
+<li>5   表示 “in IE5 mode”</li>
+<li>7   表示 “in IE7 mode”</li>
+<li>8   表示 “in IE8 mode”</li>
+<li>9   表示 “in IE9 mode”</li>
+</ul>
+<h3 id="滚动，让元素可视">滚动，让元素可视</h3>
+<p>element.scrollIntoView()滚动浏览器滚动条使得元素显示在视图 。 </p>
+<p>属性scrollLeft、scrollTop 可用于设置有滚动条元素的滚动条位置。</p>
+<p>window.scrollTo(xpos,ypos) 把内容滚动到指定的坐标。</p>
+<p>window.scrollBy(xpos,ypos)如果有滚动条，将横向滚动条移动到相对于当前横向滚动条的x个像素的位置(就是向左移动x像素)，将纵向滚动条移动到相对于当前纵向滚动条高度为y个像素的位置(就是向下移动y像素)。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/前端/">前端</a><a href="/tags/javascript/">javascript</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/javascript/">javascript</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://www.xuntuu.com/2012/07/01/js-dom/" data-title="javascript魔法--DOM | xuntuu" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2012/07/03/dom-must-know/" title="DOM必知">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  DOM必知</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2012/06/25/css-position/"  title="css之position">
+ <strong>NEXT:</strong><br/> 
+ <span>css之position
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM查找"><span class="toc-number">1.</span> <span class="toc-text">DOM查找</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#方法"><span class="toc-number">1.1.</span> <span class="toc-text">方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#属性"><span class="toc-number">1.2.</span> <span class="toc-text">属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NodeList"><span class="toc-number">1.3.</span> <span class="toc-text">NodeList</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ELEMENT操作"><span class="toc-number">2.</span> <span class="toc-text">ELEMENT操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建节点"><span class="toc-number">2.1.</span> <span class="toc-text">创建节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#是否包含子节点"><span class="toc-number">2.2.</span> <span class="toc-text">是否包含子节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#操作子节点"><span class="toc-number">2.3.</span> <span class="toc-text">操作子节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#操作内容"><span class="toc-number">2.4.</span> <span class="toc-text">操作内容</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#几种NODE"><span class="toc-number">3.</span> <span class="toc-text">几种NODE</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ELEMENT"><span class="toc-number">3.1.</span> <span class="toc-text">ELEMENT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Text"><span class="toc-number">3.2.</span> <span class="toc-text">Text</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DocumentFragment"><span class="toc-number">3.3.</span> <span class="toc-text">DocumentFragment</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他"><span class="toc-number">4.</span> <span class="toc-text">其他</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#document"><span class="toc-number">4.1.</span> <span class="toc-text">document</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#节点的集合"><span class="toc-number">4.2.</span> <span class="toc-text">节点的集合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#呈现模式"><span class="toc-number">4.3.</span> <span class="toc-text">呈现模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#滚动，让元素可视"><span class="toc-number">4.4.</span> <span class="toc-text">滚动，让元素可视</span></a></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/categories/css/" title="css">css<sup>11</sup></a></li>
+		
+			<li><a href="/categories/javascript/" title="javascript">javascript<sup>8</sup></a></li>
+		
+			<li><a href="/categories/web/" title="web">web<sup>3</sup></a></li>
+		
+			<li><a href="/categories/安全/" title="安全">安全<sup>2</sup></a></li>
+		
+			<li><a href="/categories/工具/" title="工具">工具<sup>4</sup></a></li>
+		
+			<li><a href="/categories/效率/" title="效率">效率<sup>3</sup></a></li>
+		
+			<li><a href="/categories/算法/" title="算法">算法<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">归档</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/03/">March 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/01/">January 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/07/">July 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/06/">June 2012</a><span class="archive-list-count">13</span></li></ul>
+  </div>
+
+
+  
+  <div class="tagcloudlist">
+    <p class="asidetitle">标签云</p>
+    <div class="tagcloudlist clearfix">
+       <a href="/tags/A-Pathfinding/" style="font-size: 10.00px;">A* Pathfinding</a><a href="/tags/DOM/" style="font-size: 10.00px;">DOM</a><a href="/tags/Emmet/" style="font-size: 10.00px;">Emmet</a><a href="/tags/Zen-coding/" style="font-size: 10.00px;">Zen coding</a><a href="/tags/ajax/" style="font-size: 10.00px;">ajax</a><a href="/tags/automating/" style="font-size: 10.00px;">automating</a><a href="/tags/background/" style="font-size: 10.00px;">background</a><a href="/tags/blog/" style="font-size: 14.00px;">blog</a><a href="/tags/cleaver/" style="font-size: 10.00px;">cleaver</a><a href="/tags/codepen/" style="font-size: 10.00px;">codepen</a><a href="/tags/css/" style="font-size: 18.00px;">css</a><a href="/tags/game/" style="font-size: 10.00px;">game</a><a href="/tags/git/" style="font-size: 12.00px;">git</a><a href="/tags/hexo/" style="font-size: 14.00px;">hexo</a><a href="/tags/html5/" style="font-size: 10.00px;">html5</a><a href="/tags/javascript/" style="font-size: 16.00px;">javascript</a><a href="/tags/lists/" style="font-size: 10.00px;">lists</a><a href="/tags/markdown/" style="font-size: 10.00px;">markdown</a><a href="/tags/ppt/" style="font-size: 10.00px;">ppt</a><a href="/tags/slider/" style="font-size: 10.00px;">slider</a><a href="/tags/text/" style="font-size: 10.00px;">text</a><a href="/tags/web-安全/" style="font-size: 12.00px;">web 安全</a><a href="/tags/事件/" style="font-size: 10.00px;">事件</a><a href="/tags/前端/" style="font-size: 20.00px;">前端</a><a href="/tags/幻灯片/" style="font-size: 10.00px;">幻灯片</a><a href="/tags/版本/" style="font-size: 12.00px;">版本</a><a href="/tags/跨域/" style="font-size: 12.00px;">跨域</a>
+    </div>
+  </div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml## RSS address." target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+      <li><a href="http://www.cnblogs.com/xuntu/" target="_blank" title="寻图-博客园">寻图-博客园</a></li>
+      <li><a href="http://hexo.io" target="_blank" title="Hexo">Hexo</a></li>
+    </ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello,I&#39;m Bruce cai.I graduated from Wuhan University.Now,I&#39;m A front-end developer In Xnet. <br/>
+			Only people with great inner strength will pursuit equity and justice, enjoy both result and process.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		<a href="https://github.com/letshare" target="_blank" title="github"></a>
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2014 
+		
+		<a href="http://www.xuntuu.com" target="_blank" title="bruce">bruce</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"xuntuu"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<div style="display:none">
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F898f1edef336abc9b9fd81a6e1144a65' type='text/javascript'%3E%3C/script%3E"));
+</script>
+</div>
+
+  </body>
+</html>

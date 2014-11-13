@@ -1,0 +1,186 @@
+
+  <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Tag: Zen coding | xuntuu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="bruce">
+    
+    <meta name="description" content="xuntuu的博客 | 寻图的博客 | javascript | css | html | nodejs | java | php | 前端分享 | 前端学习">
+    
+    
+    
+    
+    <link rel="alternate" href="/atom.xml## RSS address." title="xuntuu" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+</head>
+
+    <body>
+      <header>
+        <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="xuntuu" title="xuntuu"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="xuntuu">xuntuu</a></h1>
+				<h2 class="blog-motto">程序猿、全栈工程师</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/board">留言</a></li>
+					
+					<li>
+									
+					<form class="search" method="get" target="_blank" action="http://www.baidu.com/baidu" accept-charset="utf-8">       
+				        <input name="word" id="search" autocomplete="off" size="30" maxlength="30" placeholder="搜索" />
+				        <input type="submit" value="Baidu Search" style="display:none;"/>					       
+				        <input name="tn" type="hidden" value="bds" />
+				        <input name="cl" type="hidden" value="3" />
+				        <input name="si" type="hidden" value="www.xuntuu.com" />
+				        <input name=ie type=hidden value=utf-8>
+				        <input name="ct" type="hidden" value="2097152" />
+				        <label for="s">Search</label>
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+      </header>
+      <div id="container">
+        
+
+<div class="archive-title" >
+  <h2 class="tag-icon">Zen coding</h2>
+  
+</div>
+<div id="main" class="archive-part clearfix">
+  <div id="archive-page">
+
+  <section class="post" itemscope itemprop="blogPost">
+  
+    <a href="/2013/01/18/emmet-use/" title="Emmet简明用法" itemprop="url">
+  
+    <h1 itemprop="name">Emmet简明用法</h1>
+    
+    <time datetime="2013-01-18T15:58:00.000Z" itemprop="datePublished">1月 18 2013</time>
+  </a>
+</section>
+
+
+  </div>
+</div>
+
+      </div>
+      <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello,I&#39;m Bruce cai.I graduated from Wuhan University.Now,I&#39;m A front-end developer In Xnet. <br/>
+			Only people with great inner strength will pursuit equity and justice, enjoy both result and process.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		<a href="https://github.com/letshare" target="_blank" title="github"></a>
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2014 
+		
+		<a href="http://www.xuntuu.com" target="_blank" title="bruce">bruce</a>
+		
+		</p>
+</div>
+</footer>
+      <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+
+
+
+<div style="display:none">
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F898f1edef336abc9b9fd81a6e1144a65' type='text/javascript'%3E%3C/script%3E"));
+</script>
+</div>
+
+    </body>
+   </html>

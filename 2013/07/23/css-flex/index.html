@@ -1,0 +1,587 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>css之flex | xuntuu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="bruce">
+    
+    <meta name="description" content="flex
+flex是css3新增的display值，它是为了更加复杂的web布局而生的。一般中文翻译为伸缩布局。长期以来人们都是使用表格、浮动、行内块元素和其他 CSS 属性来布局网站内容。要实现在使用了居左对齐、居右对齐、两端对齐、居中对齐、顶端对齐、底部对齐常常比较麻烦，处理项目之间的空白和项目">
+    
+    
+    
+    
+    <link rel="alternate" href="/atom.xml## RSS address." title="xuntuu" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="xuntuu" title="xuntuu"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="xuntuu">xuntuu</a></h1>
+				<h2 class="blog-motto">程序猿、全栈工程师</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/board">留言</a></li>
+					
+					<li>
+									
+					<form class="search" method="get" target="_blank" action="http://www.baidu.com/baidu" accept-charset="utf-8">       
+				        <input name="word" id="search" autocomplete="off" size="30" maxlength="30" placeholder="搜索" />
+				        <input type="submit" value="Baidu Search" style="display:none;"/>					       
+				        <input name="tn" type="hidden" value="bds" />
+				        <input name="cl" type="hidden" value="3" />
+				        <input name="si" type="hidden" value="www.xuntuu.com" />
+				        <input name=ie type=hidden value=utf-8>
+				        <input name="ct" type="hidden" value="2097152" />
+				        <label for="s">Search</label>
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2013/07/23/css-flex/" title="css之flex" itemprop="url">css之flex</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://www.xuntuu.com" title="bruce">bruce</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2013-07-23T11:10:00.000Z" itemprop="datePublished">7月 23 2013</time>
+    更新日期:<time datetime="2013-07-23T11:10:00.000Z" itemprop="dateModified">7月 23 2013</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#flex"><span class="toc-number">1.</span> <span class="toc-text">flex</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#概念和术语"><span class="toc-number">2.</span> <span class="toc-text">概念和术语</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#伸缩容器"><span class="toc-number">3.</span> <span class="toc-text">伸缩容器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#flex-direction"><span class="toc-number">3.1.</span> <span class="toc-text">flex-direction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flex-wrap"><span class="toc-number">3.2.</span> <span class="toc-text">flex-wrap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flex-flow"><span class="toc-number">3.3.</span> <span class="toc-text">flex-flow</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#justify-content"><span class="toc-number">3.4.</span> <span class="toc-text">justify-content</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#align-items"><span class="toc-number">3.5.</span> <span class="toc-text">align-items</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#align-content"><span class="toc-number">3.6.</span> <span class="toc-text">align-content</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#items"><span class="toc-number">4.</span> <span class="toc-text">items</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#order"><span class="toc-number">4.1.</span> <span class="toc-text">order</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flex-grow"><span class="toc-number">4.2.</span> <span class="toc-text">flex-grow</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flex-shrink"><span class="toc-number">4.3.</span> <span class="toc-text">flex-shrink</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flex-basis"><span class="toc-number">4.4.</span> <span class="toc-text">flex-basis</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flex-1"><span class="toc-number">4.5.</span> <span class="toc-text">flex</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#flex的常见值"><span class="toc-number">4.5.1.</span> <span class="toc-text">flex的常见值</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#align-self"><span class="toc-number">4.6.</span> <span class="toc-text">align-self</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#浏览器的支持情况如下："><span class="toc-number">5.</span> <span class="toc-text">浏览器的支持情况如下：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#示例"><span class="toc-number">6.</span> <span class="toc-text">示例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#参考"><span class="toc-number">6.1.</span> <span class="toc-text">参考</span></a></li></ol></li></ol>
+		</div>
+		
+		<h2 id="flex">flex</h2>
+<p>flex是css3新增的display值，它是为了更加复杂的web布局而生的。一般中文翻译为伸缩布局。长期以来人们都是使用表格、浮动、行内块元素和其他 CSS 属性来布局网站内容。要实现在使用了居左对齐、居右对齐、两端对齐、居中对齐、顶端对齐、底部对齐常常比较麻烦，处理项目之间的空白和项目宽度、高度的伸缩也很让人头疼。而使用flex属性之后，这些都可以简单的设置到。</p>
+<p>w3组织提到flex让我们轻易地可以实现这些：</p>
+<ul>
+<li>可以以任何伸缩方向（向左、向右、向下，甚至是向上！）配置</li>
+<li>可以在样式层（也就是视觉顺序可以跟源码、语音顺序无关）调换、重排显示顺序</li>
+<li>可以沿着单一（主）轴线性配置或是沿着第二（侧）轴折行</li>
+<li>可以因为可用空间的存在扩展内容的尺寸</li>
+<li>可以沿着容器或彼此对齐</li>
+<li>可以在保持侧轴长度不变之下动态折叠或反折叠</li>
+</ul>
+<h2 id="概念和术语">概念和术语</h2>
+<p>一个设有「display:flex」或「display:inline-flex」的元素是一个伸缩容器，伸缩容器的子元素被称为伸缩项目，这些子元素使用伸缩布局模型来排版。</p>
+<p>与布局计算偏向使用书写模式方向的块布局与行内布局不同，伸缩布局偏向使用伸缩流的方向。为了让描述伸缩布局变得更容易，本章节定义一系列相对于伸缩流的术语。「flex-flow」的值决定了这些术语如何对应到物理方向（上／右／下／左）、物理轴（垂直／水平）、物理大小（宽度／高度）。
+<img src="/img/201307/flex-intro.png" alt="一个row伸缩容器中各种方向与大小术语的示意图。"></p>
+<p><strong>主轴、主轴方向</strong><br>    浏览器沿着一个伸缩容器的主轴渲染伸缩项目，主轴是主轴方向的延伸。</p>
+<p><strong>主轴起点、主轴终点</strong><br>    伸缩项目的配置从容器的主轴起点边开始，往主轴终点边结束。</p>
+<p><strong>主轴长度、主轴长度属性</strong><br>    伸缩项目的在主轴方向的宽度或高度就是项目的主轴长度，伸缩项目的主轴长度属性是「width」或「height」属性，由哪一个对着主轴方向决定。</p>
+<p><strong>侧轴、侧轴方向</strong><br>    与主轴垂直的轴称作侧轴，是侧轴方向的延伸。</p>
+<p><strong>侧轴起点、侧轴终点</strong><br>    填满项目的伸缩行的配置从容器的侧轴起点边开始，往侧轴终点边结束。</p>
+<p><strong>侧轴长度、侧轴长度属性</strong><br>    伸缩项目的在侧轴方向的宽度或高度就是项目的侧轴长度，伸缩项目的侧轴长度属性是「width」或「height」属性，由哪一个对着侧轴方向决定。</p>
+<h2 id="伸缩容器">伸缩容器</h2>
+<figure class="highlight css"><pre><div class="line"><span class="class">.container</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">display</span>:<span class="value"> flex</span></span>; <span class="comment">/* 或 inline-flex */</span></div><div class="line"><span class="rule">}</span></div></pre></figure>
+
+<p>这定义了一个伸缩容器。</p>
+<p>伸缩容器会为其内容建立新的伸缩格式化上下文(flex formatting context)。除了使用伸缩排版而不块排版以外，伸缩格式化上下文与块级格式化上下文(block formatting context)根元素相同 ― 浮动不会闯入伸缩容器，且伸缩容器的边界不与其内容的边界叠加。</p>
+<p>伸缩容器不是块容器，因此有些设计用来控制块布局的属性，在伸缩布局中不适用。column-*、float、clear、vertical-align在伸缩布局中不适用。</p>
+<h3 id="flex-direction">flex-direction</h3>
+<p><img src="/img/201307/flex-direction1.svg" alt="">
+这个主要用来创建主轴，从而定义了伸缩项目放置在伸缩容器的方向。</p>
+<figure class="highlight css"><pre><div class="line"><span class="class">.container</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">flex-direction</span>:<span class="value"> row | row-reverse | column | column-reverse</span></span>;</div><div class="line"><span class="rule">}</span></div></pre></figure>
+
+<ul>
+<li><code>row</code>(默认值)：在<code>ltr</code>排版方式下从左向右排列；在<code>rtl</code>排版方式下从右向左排列。</li>
+<li><code>row-reverse</code>：与<code>row</code>排列方向相反，在<code>ltr</code>排版方式下从右向左排列；在<code>rtl</code>排版方式下从左向右排列。</li>
+<li><code>column</code>：类似 于<code>row</code>，不过是从上到下排列</li>
+<li><code>column-reverse</code>：类似于<code>row-reverse</code>，不过是从下到上排列。</li>
+</ul>
+<h3 id="flex-wrap">flex-wrap</h3>
+<p><img src="/img/201307/flex-wrap.svg" alt="">
+默认伸缩容器是单行显示，你可以这个定义属性决定伸缩容器里是单行还是多行显示，侧轴的方向决定了新行堆放的方向。</p>
+<figure class="highlight css"><pre><div class="line"><span class="class">.container</span><span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">flex-wrap</span>:<span class="value"> nowrap | wrap | wrap-reverse</span></span>;</div><div class="line"><span class="rule">}</span></div></pre></figure>
+
+<ul>
+<li><code>nowrap</code>(默认值)：伸缩容器单行显示，<code>ltr</code>排版下，伸缩项目从左到右排列；<code>rtl</code>排版上伸缩项目从右向左排列。</li>
+<li><code>wrap</code>：伸缩容器多行显示，<code>ltr</code>排版下，伸缩项目从左到右排列；<code>rtl</code>排版上伸缩项目从右向左排列。</li>
+<li><code>wrap-reverse</code>：伸缩容器多行显示，<code>ltr</code>排版下，伸缩项目从右向左排列；<code>rtl</code>排版下，伸缩项目从左到右排列。（和<code>wrap</code>相反）</li>
+</ul>
+<h3 id="flex-flow">flex-flow</h3>
+<p>是flex-direction和flex-wrap的复合属性。</p>
+<figure class="highlight css"><pre><div class="line"><span class="class">.container</span><span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">flex-flow</span>:<span class="value"> &lt;‘flex-direction’&gt; || &lt;‘flex-wrap’&gt;</span></span></div><div class="line">}</div></pre></figure>
+
+<h3 id="justify-content">justify-content</h3>
+<p><img src="/img/201307/justify-content.svg" alt="">
+这个是用来定义伸缩项目沿着主轴线的对齐方式。当一行上的所有伸缩项目都不能伸缩或可伸缩但是已经达到其最大长度时，这一属性才会对多余的空间进行分配。当项目溢出某一行时，这一属性也会在项目的对齐上施加一些控制。</p>
+<figure class="highlight css"><pre><div class="line"><span class="class">.container</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">justify-content</span>:<span class="value"> flex-start | flex-end | center | space-between | space-around</span></span>;</div><div class="line"><span class="rule">}</span></div></pre></figure>
+
+<ul>
+<li><code>flex-start</code>(默认值)：伸缩项目向一行的起始位置靠齐。</li>
+<li><code>flex-end</code>：伸缩项目向一行的结束位置靠齐。</li>
+<li><code>center</code>：伸缩项目向一行的中间位置靠齐。</li>
+<li><code>space-between</code>：伸缩项目会平均地分布在行里。第一个伸缩项目一行中的最开始位置，最后一个伸缩项目在一行中最终点位置。</li>
+<li><code>space-around</code>：伸缩项目会平均地分布在行里，两端保留一半的空间。</li>
+</ul>
+<h3 id="align-items">align-items</h3>
+<p><img src="/img/201307/align-items.svg" alt="">
+这个主要用来定义伸缩项目可以在伸缩容器的当前行的侧轴上对齐方式。可以把他想像成侧轴（垂直于主轴）的“justify-content”。</p>
+<figure class="highlight css"><pre><div class="line"><span class="class">.container</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">align-items</span>:<span class="value"> flex-start | flex-end | center | baseline | stretch</span></span>;</div><div class="line"><span class="rule">}</span></div></pre></figure>
+
+<ul>
+<li><code>flex-start</code>：伸缩项目在侧轴起点边的外边距紧靠住该行在侧轴起始的边。</li>
+<li><code>flex-end</code>：伸缩项目在侧轴终点边的外边距靠住该行在侧轴终点的边 。</li>
+<li><code>center</code>：伸缩项目的外边距盒在该行的侧轴上居中放置。</li>
+<li><code>baseline</code>：伸缩项目根据他们的基线对齐。</li>
+<li><code>stretch</code>（默认值）：伸缩项目拉伸填充整个伸缩容器。此值会使项目的外边距盒的尺寸在遵照「min/max-width/height」属性的限制下尽可能接近所在行的尺寸。</li>
+</ul>
+<h3 id="align-content">align-content</h3>
+<p><img src="/img/201307/align-content.svg" alt="">
+这个属性主要用来调准伸缩行在伸缩容器里的对齐方式。类似于伸缩项目在主轴上使用“justify-content”一样。</p>
+<blockquote>
+<p><strong>注</strong>：请注意本属性在只有一行的伸缩容器上没有效果。</p>
+</blockquote>
+<ul>
+<li><code>flex-start</code>：各行向伸缩容器的起点位置堆叠。</li>
+<li><code>flex-end</code>：各行向伸缩容器的结束位置堆叠。</li>
+<li><code>center</code>：各行向伸缩容器的中间位置堆叠。</li>
+<li><code>space-between</code>：各行在伸缩容器中平均分布。</li>
+<li><code>space-around</code>：各行在伸缩容器中平均分布，在两边各有一半的空间。</li>
+<li><code>stretch</code>（默认值）：各行将会伸展以占用剩余的空间。</li>
+</ul>
+<h2 id="items">items</h2>
+<p>上一个章节介绍都是伸缩容器的属性，下面介绍一些伸缩项目的属性。</p>
+<h3 id="order">order</h3>
+<p>默认情况下，伸缩项目是按照文档流出现先后顺序排列。然而，“order”属性可以控制伸缩项目在他们的伸缩容器出现的顺序。</p>
+<figure class="highlight css"><pre><div class="line"><span class="class">.item</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">order</span>:<span class="value"> &lt;integer&gt;</span></span>;</div><div class="line"><span class="rule">}</span></div></pre></figure>
+
+<h3 id="flex-grow">flex-grow</h3>
+<p>剩余空间是正值的时候此伸缩项目相对于伸缩容器里其他伸缩项目能分配到空间比例。</p>
+<p>如果所有伸缩项目的<code>flex-grow</code>设置了”1”，那么每个伸缩项目将设置为一个大小相等的剩余空间。如果你给其中一个伸缩项目设置了<code>flex-grow</code>值为”2”，那么这个伸缩项目所占的剩余空间是其他伸缩项目所占剩余空间的两倍。</p>
+<figure class="highlight css"><pre><div class="line"><span class="class">.item</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">flex-grow</span>:<span class="value"> &lt;number&gt;</span></span>; <span class="comment">/* default 0 */</span></div><div class="line"><span class="rule">}</span></div></pre></figure>
+
+<p>负值同样生效。</p>
+<h3 id="flex-shrink">flex-shrink</h3>
+<p>剩余空间是负值的时候此伸缩项目相对于伸缩容器里其他伸缩项目能收缩的空间比例。</p>
+<figure class="highlight css"><pre><div class="line"><span class="class">.item</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">flex-shrink</span>:<span class="value"> &lt;number&gt;</span></span>; <span class="comment">/* default 1 */</span></div><div class="line"><span class="rule">}</span></div></pre></figure>
+
+<p>负值同样生效。</p>
+<h3 id="flex-basis">flex-basis</h3>
+<p>这个用来设置伸缩基准值，在分配剩余空间前，决定伸缩项的默认尺寸。负长度不合法</p>
+<figure class="highlight css"><pre><div class="line"><span class="class">.item</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">flex-basis</span>:<span class="value"> &lt;length&gt; | auto</span></span>; <span class="comment">/* default auto */</span></div><div class="line"><span class="rule">}</span></div></pre></figure>
+
+<h3 id="flex-1">flex</h3>
+<p>这是<code>flex-grow</code>、<code>flex-shrink</code>和<code>flex-basis</code>三个属性的缩写。其中第二个和第三个参数（<code>flex-shrink</code>、<code>flex-basis</code>）是可选参数。默认值为”0 1 auto”。</p>
+<figure class="highlight css"><pre><div class="line"><span class="class">.item</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">flex</span>:<span class="value"> none | [ &lt;<span class="string">'flex-grow'</span>&gt; &lt;<span class="string">'flex-shrink'</span>&gt;? || &lt;<span class="string">'flex-basis'</span>&gt; ]</span></span></div><div class="line">}</div></pre></figure>
+
+<h4 id="flex的常见值">flex的常见值</h4>
+<ol>
+<li>「flex: 0 auto」「flex: initial」<br>与「flex: 0 1 auto」相同。（这也就是初始值。）根据「width」／「height」属性决定元素的尺寸。（如果项目的主轴长度属性的计算值为「auto」，则会根据其内容来决定元素尺寸。）当剩余空间为正值时，伸缩项目无法伸缩，但当空间不足时，伸缩项目可收缩至其最小值。网页作者可以用对齐相关的属性以及「margin」属性的「auto」值控制伸缩项目沿着主轴的对齐方式。</li>
+<li>「flex: auto」<br>与「flex: 1 1 auto」相同。根据「width」／「height」属性决定元素的尺寸，但是完全可以伸缩，会吸收主轴上剩下的空间。如果所有项目均为「flex: auto」、「flex: initial」或「flex: none」，则在项目尺寸决定后，剩余的正空间会被平分给是「flex: auto」的项目。</li>
+<li>「flex: none」<br>与「flex: 0 0 auto」相同。根据「width」／「height」属性决定元素的尺寸，但是完全不可伸缩。其效果与「initial」类似，但即使在空间不够而溢出的情况下，伸缩项目也不能收缩。</li>
+<li>「flex: <code>&lt;positive-number&gt;</code>」<br>与「flex: <positive-number> 1 0px」相同。该值使元素可伸缩，并将伸缩基准值设置为零，导致该项目会根据设置的比率占用伸缩容器的剩余空间。如果一个伸缩容器里的所有项目都使用此模式，则它们的尺寸会正比于指定的伸缩比率。</positive-number></li>
+</ol>
+<p>默认状态下，伸缩项目不会收缩至比其最小内容尺寸（最长的英文词或是固定尺寸元素的长度）更小。网页作者可以靠设置「min-width」或「min-height」属性来改变这个默认状态。</p>
+<h3 id="align-self">align-self</h3>
+<p>用来在单独的伸缩项目上覆写默认的对齐方式。<br>属性值的介绍请参阅“align-items”的属性值。</p>
+<figure class="highlight css"><pre><div class="line"><span class="class">.item</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">align-self</span>:<span class="value"> auto | flex-start | flex-end | center | baseline | stretch</span></span>;</div><div class="line"><span class="rule">}</span></div></pre></figure>
+
+<h2 id="浏览器的支持情况如下：">浏览器的支持情况如下：</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Chrome</th>
+            <th>Safari</th>
+            <th>Firefox</th>
+            <th>Opera</th>
+            <th>IE</th>
+            <th>Android</th>
+            <th>iOS</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>20- (old)<br>21+ (new)</td>
+            <td>3.1+ (old)<br>6.1+ (new)</td>
+            <td>2-21 (old)<br>22+ (new)</td>
+            <td>12.1+ (new)</td>
+            <td>10 (tweener)<br>11+ (new)</td>
+            <td>2.1+ (old)<br>4.4+ (new)</td>
+            <td>3.2+ (old)<br>7.1+ (new)</td>
+        </tr>
+    </tbody>
+</table>
+
+<ul>
+<li>(new) 意味着使用最新的语法 ( 例如：display: flex;)</li>
+<li>(tweener)意味着使用自2011年的老的非官方的语法 (例如：display: flexbox;)</li>
+<li>(old) 意味着使用自2009年的老的语法 (例如：display: box;)</li>
+</ul>
+<h2 id="示例">示例</h2>
+<p>考虑使用6个列表项，并且为了视觉审美给他设置了一个固定大小尺寸，但他们也有可能可以自动获取尺寸大小。我们希望他们能均匀的、很好的分布在水平轴上，就算当我们调整浏览器，他们也依然显示得很好（不使用媒体查询）。</p>
+<figure class="highlight css"><pre><div class="line"><span class="class">.flex-container</span> <span class="rules">{</span></div><div class="line">  <span class="comment">/* 我们第一步要创建一个flex文档流（创建伸缩容器） */</span></div><div class="line">  <span class="rule"><span class="attribute">display</span>:<span class="value"> flex</span></span>;</div><div class="line">  </div><div class="line">  <span class="comment">/* 然后我们定义伸缩流方向，并且可以换行</span></div><div class="line">   * 记得我们要这样设置:</div><div class="line">   * flex-direction: row;</div><div class="line">   * flex-wrap: wrap;</div><div class="line">   */</div><div class="line">  <span class="rule"><span class="attribute">flex-flow</span>:<span class="value"> row wrap</span></span>;</div><div class="line">  </div><div class="line">  <span class="comment">/* 然后我们定义了如何分配伸缩容器的剩余空间 */</span></div><div class="line">  <span class="rule"><span class="attribute">justify-content</span>:<span class="value"> space-around</span></span>;</div><div class="line"><span class="rule">}</span></div></pre></figure>
+
+<p>完成。其他的一切都不过是一些美化外观样式。下面是在codepen上展示的一个例子。到codepen上查看，并试着调整你浏览器窗口去看发生什么事？</p>
+<p></p><p data-height="268" data-theme-id="0" data-slug-hash="LklCv" data-default-tab="result" data-user="HugoGiraudel" class="codepen">See the Pen <a href="http://codepen.io/HugoGiraudel/pen/LklCv/" target="_blank" rel="external">Demo Flexbox 1</a> by Hugo Giraudel (<a href="http://codepen.io/HugoGiraudel" target="_blank" rel="external">@HugoGiraudel</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//codepen.io/assets/embed/ei.js"></script>
+
+<p>让我们试试别的。假设我们网站顶部有一个右对齐的导航，但是我们希望它在小屏幕和小型设备中能单列居中显示。非常简单。</p>
+<figure class="highlight css"><pre><div class="line"><span class="comment">/* Large */</span></div><div class="line"><span class="class">.navigation</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">display</span>:<span class="value"> flex</span></span>;</div><div class="line">  <span class="rule"><span class="attribute">flex-flow</span>:<span class="value"> row wrap</span></span>;</div><div class="line">  <span class="comment">/* 所有列面向主轴终点位置靠齐 */</span></div><div class="line">  <span class="rule"><span class="attribute">justify-content</span>:<span class="value"> flex-end</span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"></div><div class="line"><span class="comment">/* Medium screens */</span></div><div class="line"><span class="at_rule">@<span class="keyword">media</span> all and (max-width: <span class="number">800px</span>) </span>{</div><div class="line">  <span class="class">.navigation</span> <span class="rules">{</span></div><div class="line">    <span class="comment">/* 当在中等屏幕中, 导航项目居中显示，并且剩余空间平均分布在列表之间 */</span></div><div class="line">    <span class="rule"><span class="attribute">justify-content</span>:<span class="value"> space-around</span></span>;</div><div class="line">  <span class="rule">}</span></div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment">/* Small screens */</span></div><div class="line"><span class="at_rule">@<span class="keyword">media</span> all and (max-width: <span class="number">500px</span>) </span>{</div><div class="line">  <span class="class">.navigation</span> <span class="rules">{</span></div><div class="line">    <span class="comment">/* 在小屏幕下, 我们没有足够空间行排列，但我们可以换成列排列 */</span></div><div class="line">    <span class="rule"><span class="attribute">flex-direction</span>:<span class="value"> column</span></span>;</div><div class="line">  <span class="rule">}</span></div><div class="line">}</div></pre></figure>
+
+<p></p><p data-height="268" data-theme-id="0" data-slug-hash="pkwqH" data-default-tab="result" data-user="HugoGiraudel" class="codepen">See the Pen <a href="http://codepen.io/HugoGiraudel/pen/pkwqH/" target="_blank" rel="external">Demo Flexbox 2</a> by Hugo Giraudel (<a href="http://codepen.io/HugoGiraudel" target="_blank" rel="external">@HugoGiraudel</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//codepen.io/assets/embed/ei.js"></script>
+
+<p>让我们尝试一些更灵活性的伸缩项目！关于移动先行，3列布局与页眉页脚全屏。和独立的文档顺序。</p>
+<figure class="highlight css"><pre><div class="line"><span class="class">.wrapper</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">display</span>:<span class="value"> flex</span></span>;</div><div class="line">  <span class="rule"><span class="attribute">flex-flow</span>:<span class="value"> row wrap</span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"></div><div class="line"><span class="comment">/* 设置所有标签宽度为100% */</span></div><div class="line"><span class="class">.header</span>, </div><div class="line"><span class="class">.main</span>, </div><div class="line"><span class="class">.nav</span>, </div><div class="line"><span class="class">.aside</span>, </div><div class="line"><span class="class">.footer</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">flex</span>:<span class="value"> <span class="number">1</span> <span class="number">100%</span></span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"></div><div class="line"><span class="comment">/* 我们利用文档流顺序，考虑移动端先行</span></div><div class="line"> * 在这个例子中的顺序:</div><div class="line"> * 1. header</div><div class="line"> * 2. nav</div><div class="line"> * 3. main</div><div class="line"> * 4. aside</div><div class="line"> * 5. footer</div><div class="line"> */</div><div class="line"></div><div class="line"><span class="comment">/* Medium screens */</span></div><div class="line"><span class="at_rule">@<span class="keyword">media</span> all and (min-width: <span class="number">600px</span>) </span>{</div><div class="line">  <span class="comment">/* 两个边栏在同一行 */</span></div><div class="line">  <span class="class">.aside</span> <span class="rules">{ <span class="rule"><span class="attribute">flex</span>:<span class="value"> <span class="number">1</span> auto</span></span>; <span class="rule">}</span></span></div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment">/* Large screens */</span></div><div class="line"><span class="at_rule">@<span class="keyword">media</span> all and (min-width: <span class="number">800px</span>) </span>{</div><div class="line">  <span class="comment">/* 设置左边栏在主内容左边</span></div><div class="line">   * 设置主内容区域宽度是其他两个侧边栏宽度的两倍</div><div class="line">   */</div><div class="line">  <span class="class">.main</span> <span class="rules">{ <span class="rule"><span class="attribute">flex</span>:<span class="value"> <span class="number">2</span> <span class="number">0px</span></span></span>; <span class="rule">}</span></span></div><div class="line">  </div><div class="line">  <span class="class">.aside-1</span> <span class="rules">{ <span class="rule"><span class="attribute">order</span>:<span class="value"> <span class="number">1</span></span></span>; <span class="rule">}</span></span></div><div class="line">  <span class="class">.main</span>    <span class="rules">{ <span class="rule"><span class="attribute">order</span>:<span class="value"> <span class="number">2</span></span></span>; <span class="rule">}</span></span></div><div class="line">  <span class="class">.aside-2</span> <span class="rules">{ <span class="rule"><span class="attribute">order</span>:<span class="value"> <span class="number">3</span></span></span>; <span class="rule">}</span></span></div><div class="line">  <span class="class">.footer</span>  <span class="rules">{ <span class="rule"><span class="attribute">order</span>:<span class="value"> <span class="number">4</span></span></span>; <span class="rule">}</span></span></div><div class="line">}</div></pre></figure>
+
+<p></p><p data-height="268" data-theme-id="0" data-slug-hash="qIAwr" data-default-tab="result" data-user="HugoGiraudel" class="codepen">See the Pen <a href="http://codepen.io/HugoGiraudel/pen/qIAwr/" target="_blank" rel="external">Demo Flexbox 3</a> by Hugo Giraudel (<a href="http://codepen.io/HugoGiraudel" target="_blank" rel="external">@HugoGiraudel</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//codepen.io/assets/embed/ei.js"></script>
+
+<h3 id="参考">参考</h3>
+<ul>
+<li><a href="http://css-tricks.com/using-flexbox/" target="_blank" rel="external">http://css-tricks.com/using-flexbox/</a></li>
+<li><a href="http://css-tricks.com/snippets/css/a-guide-to-flexbox/" target="_blank" rel="external">http://css-tricks.com/snippets/css/a-guide-to-flexbox/</a></li>
+<li><a href="http://www.w3cplus.com/css3/a-guide-to-flexbox.html" target="_blank" rel="external">http://www.w3cplus.com/css3/a-guide-to-flexbox.html</a></li>
+<li><a href="http://www.w3.org/html/ig/zh/wiki/Css3-flexbox/zh-hans" target="_blank" rel="external">http://www.w3.org/html/ig/zh/wiki/Css3-flexbox/zh-hans</a></li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/前端/">前端</a><a href="/tags/css/">css</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/css/">css</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://www.xuntuu.com/2013/07/23/css-flex/" data-title="css之flex | xuntuu" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2013/09/22/web-safe/" title="web安全要点">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  web安全要点</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2013/07/14/git-use-2/"  title="git简易使用指南-2">
+ <strong>NEXT:</strong><br/> 
+ <span>git简易使用指南-2
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#flex"><span class="toc-number">1.</span> <span class="toc-text">flex</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#概念和术语"><span class="toc-number">2.</span> <span class="toc-text">概念和术语</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#伸缩容器"><span class="toc-number">3.</span> <span class="toc-text">伸缩容器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#flex-direction"><span class="toc-number">3.1.</span> <span class="toc-text">flex-direction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flex-wrap"><span class="toc-number">3.2.</span> <span class="toc-text">flex-wrap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flex-flow"><span class="toc-number">3.3.</span> <span class="toc-text">flex-flow</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#justify-content"><span class="toc-number">3.4.</span> <span class="toc-text">justify-content</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#align-items"><span class="toc-number">3.5.</span> <span class="toc-text">align-items</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#align-content"><span class="toc-number">3.6.</span> <span class="toc-text">align-content</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#items"><span class="toc-number">4.</span> <span class="toc-text">items</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#order"><span class="toc-number">4.1.</span> <span class="toc-text">order</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flex-grow"><span class="toc-number">4.2.</span> <span class="toc-text">flex-grow</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flex-shrink"><span class="toc-number">4.3.</span> <span class="toc-text">flex-shrink</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flex-basis"><span class="toc-number">4.4.</span> <span class="toc-text">flex-basis</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flex-1"><span class="toc-number">4.5.</span> <span class="toc-text">flex</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#flex的常见值"><span class="toc-number">4.5.1.</span> <span class="toc-text">flex的常见值</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#align-self"><span class="toc-number">4.6.</span> <span class="toc-text">align-self</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#浏览器的支持情况如下："><span class="toc-number">5.</span> <span class="toc-text">浏览器的支持情况如下：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#示例"><span class="toc-number">6.</span> <span class="toc-text">示例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#参考"><span class="toc-number">6.1.</span> <span class="toc-text">参考</span></a></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/categories/css/" title="css">css<sup>11</sup></a></li>
+		
+			<li><a href="/categories/javascript/" title="javascript">javascript<sup>8</sup></a></li>
+		
+			<li><a href="/categories/web/" title="web">web<sup>3</sup></a></li>
+		
+			<li><a href="/categories/安全/" title="安全">安全<sup>2</sup></a></li>
+		
+			<li><a href="/categories/工具/" title="工具">工具<sup>4</sup></a></li>
+		
+			<li><a href="/categories/效率/" title="效率">效率<sup>3</sup></a></li>
+		
+			<li><a href="/categories/算法/" title="算法">算法<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">归档</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/03/">March 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/01/">January 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/07/">July 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/06/">June 2012</a><span class="archive-list-count">13</span></li></ul>
+  </div>
+
+
+  
+  <div class="tagcloudlist">
+    <p class="asidetitle">标签云</p>
+    <div class="tagcloudlist clearfix">
+       <a href="/tags/A-Pathfinding/" style="font-size: 10.00px;">A* Pathfinding</a><a href="/tags/DOM/" style="font-size: 10.00px;">DOM</a><a href="/tags/Emmet/" style="font-size: 10.00px;">Emmet</a><a href="/tags/Zen-coding/" style="font-size: 10.00px;">Zen coding</a><a href="/tags/ajax/" style="font-size: 10.00px;">ajax</a><a href="/tags/automating/" style="font-size: 10.00px;">automating</a><a href="/tags/background/" style="font-size: 10.00px;">background</a><a href="/tags/blog/" style="font-size: 14.00px;">blog</a><a href="/tags/cleaver/" style="font-size: 10.00px;">cleaver</a><a href="/tags/codepen/" style="font-size: 10.00px;">codepen</a><a href="/tags/css/" style="font-size: 18.00px;">css</a><a href="/tags/game/" style="font-size: 10.00px;">game</a><a href="/tags/git/" style="font-size: 12.00px;">git</a><a href="/tags/hexo/" style="font-size: 14.00px;">hexo</a><a href="/tags/html5/" style="font-size: 10.00px;">html5</a><a href="/tags/javascript/" style="font-size: 16.00px;">javascript</a><a href="/tags/lists/" style="font-size: 10.00px;">lists</a><a href="/tags/markdown/" style="font-size: 10.00px;">markdown</a><a href="/tags/ppt/" style="font-size: 10.00px;">ppt</a><a href="/tags/slider/" style="font-size: 10.00px;">slider</a><a href="/tags/text/" style="font-size: 10.00px;">text</a><a href="/tags/web-安全/" style="font-size: 12.00px;">web 安全</a><a href="/tags/事件/" style="font-size: 10.00px;">事件</a><a href="/tags/前端/" style="font-size: 20.00px;">前端</a><a href="/tags/幻灯片/" style="font-size: 10.00px;">幻灯片</a><a href="/tags/版本/" style="font-size: 12.00px;">版本</a><a href="/tags/跨域/" style="font-size: 12.00px;">跨域</a>
+    </div>
+  </div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml## RSS address." target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+      <li><a href="http://www.cnblogs.com/xuntu/" target="_blank" title="寻图-博客园">寻图-博客园</a></li>
+      <li><a href="http://hexo.io" target="_blank" title="Hexo">Hexo</a></li>
+    </ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello,I&#39;m Bruce cai.I graduated from Wuhan University.Now,I&#39;m A front-end developer In Xnet. <br/>
+			Only people with great inner strength will pursuit equity and justice, enjoy both result and process.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		<a href="https://github.com/letshare" target="_blank" title="github"></a>
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2014 
+		
+		<a href="http://www.xuntuu.com" target="_blank" title="bruce">bruce</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"xuntuu"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<div style="display:none">
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F898f1edef336abc9b9fd81a6e1144a65' type='text/javascript'%3E%3C/script%3E"));
+</script>
+</div>
+
+  </body>
+</html>

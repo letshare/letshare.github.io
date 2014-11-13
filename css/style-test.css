@@ -1,0 +1,21 @@
+p.oblique{
+	font-style:oblique;
+}
+p.inline{
+	display: inline-block;
+}
+table{
+	empty-cells:hide;
+	border-collapse: collapse;
+	border-style: inset;
+	border-width: 10px;
+	border-color: yellow;
+	width: 100%;
+}
+th,td{
+	border-style: ridge;
+	border-width: 1px;
+	border-color: blue;
+	height: 40px;
+	text-align: center;
+}

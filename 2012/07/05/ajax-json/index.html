@@ -1,0 +1,526 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>javascript的ajax技术 | xuntuu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="bruce">
+    
+    <meta name="description" content="跨域
+什么是跨域？
+简单地理解就是因为JavaScript同源策略的限制，a.com 域名下的js无法操作b.com或是c.a.com域名下的对象。更详细的说明可以看下表：
+
+
+Ajax
+什么是AJAX?
+即“Asynchronous Javascript And XML[1] ”（异步JavaSc">
+    
+    
+    
+    
+    <link rel="alternate" href="/atom.xml## RSS address." title="xuntuu" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="xuntuu" title="xuntuu"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="xuntuu">xuntuu</a></h1>
+				<h2 class="blog-motto">程序猿、全栈工程师</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/board">留言</a></li>
+					
+					<li>
+									
+					<form class="search" method="get" target="_blank" action="http://www.baidu.com/baidu" accept-charset="utf-8">       
+				        <input name="word" id="search" autocomplete="off" size="30" maxlength="30" placeholder="搜索" />
+				        <input type="submit" value="Baidu Search" style="display:none;"/>					       
+				        <input name="tn" type="hidden" value="bds" />
+				        <input name="cl" type="hidden" value="3" />
+				        <input name="si" type="hidden" value="www.xuntuu.com" />
+				        <input name=ie type=hidden value=utf-8>
+				        <input name="ct" type="hidden" value="2097152" />
+				        <label for="s">Search</label>
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2012/07/05/ajax-json/" title="javascript的ajax技术" itemprop="url">javascript的ajax技术</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://www.xuntuu.com" title="bruce">bruce</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2012-07-05T12:45:18.000Z" itemprop="datePublished">7月 5 2012</time>
+    更新日期:<time datetime="2012-07-05T12:45:18.000Z" itemprop="dateModified">7月 5 2012</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#跨域"><span class="toc-number">1.</span> <span class="toc-text">跨域</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是跨域？"><span class="toc-number">1.1.</span> <span class="toc-text">什么是跨域？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ajax"><span class="toc-number">2.</span> <span class="toc-text">Ajax</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是AJAX?"><span class="toc-number">2.1.</span> <span class="toc-text">什么是AJAX?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XHR"><span class="toc-number">2.2.</span> <span class="toc-text">XHR</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#发送请求"><span class="toc-number">2.3.</span> <span class="toc-text">发送请求</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#onreadystatechange事件"><span class="toc-number">2.3.1.</span> <span class="toc-text">onreadystatechange事件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HTTP头部信息"><span class="toc-number">2.3.2.</span> <span class="toc-text">HTTP头部信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#浏览器差异"><span class="toc-number">2.3.3.</span> <span class="toc-text">浏览器差异</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#跨域请求"><span class="toc-number">3.</span> <span class="toc-text">跨域请求</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CORS"><span class="toc-number">3.1.</span> <span class="toc-text">CORS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Preflighted请求"><span class="toc-number">3.2.</span> <span class="toc-text">Preflighted请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Credentialed请求"><span class="toc-number">3.3.</span> <span class="toc-text">Credentialed请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对比"><span class="toc-number">3.4.</span> <span class="toc-text">对比</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考阅读"><span class="toc-number">4.</span> <span class="toc-text">参考阅读</span></a></li></ol>
+		</div>
+		
+		<h2 id="跨域">跨域</h2>
+<h3 id="什么是跨域？">什么是跨域？</h3>
+<p>简单地理解就是因为JavaScript同源策略的限制，a.com 域名下的js无法操作b.com或是c.a.com域名下的对象。更详细的说明可以看下表：
+<img src="/img/201206/cross-domain.jpg" alt="跨域图示"></p>
+<hr>
+<h2 id="Ajax">Ajax</h2>
+<h3 id="什么是AJAX?">什么是AJAX?</h3>
+<p>即“Asynchronous Javascript And XML[1] ”（异步JavaScript和XML[1] ），是指一种创建交互式网页应用的网页开发技术。通过在后台与服务器进行少量数据交换，AJAX 可以使网页实现异步更新。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。</p>
+<h3 id="XHR">XHR</h3>
+<p>Ajax技术的核心是XMLHttpRequest对象（简称XHR）。IE7+和现代浏览器都支持，IE6及早期的IE用的是XMLHttp 的对象。我们可以这样来创建一个兼容的XHR。</p>
+<figure class="highlight javascript"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">createXHR</span><span class="params">()</span></span>{</div><div class="line">	<span class="keyword">if</span> (<span class="keyword">typeof</span> XMLHttpRequest != <span class="string">"undefined"</span>) {</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">    } <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">window</span>.ActiveXObject) {</div><div class="line">    <span class="comment">//XMLHttp版本越新，性能越好，所以我们优先选用最新的</span></div><div class="line">      <span class="keyword">var</span> aVersions = [ <span class="string">"MSXML2.XMLHttp.5.0"</span>,</div><div class="line">        <span class="string">"MSXML2.XMLHttp.4.0"</span>,<span class="string">"MSXML2.XMLHttp.3.0"</span>,</div><div class="line">        <span class="string">"MSXML2.XMLHttp"</span>,<span class="string">"Microsoft.XMLHttp"</span></div><div class="line">      ];</div><div class="line"></div><div class="line">      <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; aVersions.length; i++) {</div><div class="line">        <span class="keyword">try</span> {</div><div class="line">            <span class="keyword">var</span> oXmlHttp = <span class="keyword">new</span> ActiveXObject(aVersions[i]);</div><div class="line">            <span class="keyword">return</span> oXmlHttp;</div><div class="line">        } <span class="keyword">catch</span> (oError) {</div><div class="line">            <span class="comment">//Do nothing</span></div><div class="line">        }</div><div class="line">      }</div><div class="line">    }</div><div class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"XMLHttp object could be created."</span>);</div><div class="line">}</div></pre></figure>
+
+<h3 id="发送请求">发送请求</h3>
+<p>创建xhr后我们就可以用来向服务器发送请求了。</p>
+<figure class="highlight javascript"><pre><div class="line"><span class="keyword">var</span> xhr = createXHR();</div><div class="line">xhr.open(<span class="string">"get"</span>,<span class="string">"example.php"</span>,<span class="literal">false</span>);</div><div class="line">xhr.send(<span class="literal">null</span>);</div></pre></figure>
+
+<p>open(method,url,async)方法有三个参数：</p>
+<ul>
+<li>method：请求的类型；GET 或 POST</li>
+<li>url：请求地址</li>
+<li>async：true（异步）或 false（同步）</li>
+</ul>
+<p>GET 和 POST发送请求的时候都可以带上参数，主要的区别的是，GET带数据参数的时候数据量受限于浏览器对URL长度的限制，而POST没有数据量的限制。</p>
+<p>异步和同步的区别在于是否会阻塞代码的执行，同步的情况下，代码会等到服务器响应之后再继续执行。在收到响应之后，响应的数据会自动填充XHR对象的属性。而异步的情况下不会阻塞代码执行，通过事件监听去获得响应情况，在收到响应后数据会自动填充XHR对象的属性。响应数据的属性有：
+responseText、responseXML，如果响应的内容类型是“text/xml”或“text/application”，这个属性中将保存包含着响应数据的XML DOM文档。如果响应内容是字符串则会填充到responseText中。</p>
+<h4 id="onreadystatechange事件">onreadystatechange事件</h4>
+<p>这个事件对异步有作用，每当 readyState 改变时，就会触发 onreadystatechange 事件。readyState 属性存有 XMLHttpRequest 的状态信息。从 0 到 4 发生变化。</p>
+<ul>
+<li>0: 请求未初始化</li>
+<li>1: 服务器连接已建立</li>
+<li>2: 请求已接收</li>
+<li>3: 请求处理中</li>
+<li>4: 请求已完成，且响应已就绪
+你的代码中应该少涉及到状态0-2的使用，因为有些浏览器并不支持。</li>
+</ul>
+<p>另外还有一个属性表示响应码status，比如：</p>
+<ul>
+<li>200: “OK”</li>
+<li>404: 未找到页面</li>
+</ul>
+<p>于是结合readyState == 4 &amp;&amp; status==200，我们可以得知请求得到了正确响应，可以获取响应内容。</p>
+<figure class="highlight javascript"><pre><div class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">	<span class="keyword">if</span>(xmlhttp.readyState==<span class="number">4</span> && xmlhttp.status==<span class="number">200</span>){</div><div class="line">    	<span class="built_in">document</span>.getElementById(<span class="string">"myDiv"</span>).innerHTML=xmlhttp.responseText;</div><div class="line">    }</div><div class="line">}</div></pre></figure>
+
+<h4 id="HTTP头部信息">HTTP头部信息</h4>
+<p>默认情况下，发送XHR请求的同时，会发送以下头部：
+<code>Accept 、Accept-Charset 、 Accept-Encoding 、 Accept-Language 、Connection 、Cookie 、Host、 Referer 、User-Agent</code>
+xhr.setRequestHeader(header,value)可以修改头部信息
+xhr.getResponseHeader(header)可以取得响应头部信息
+xhr.getAllResponseHeaders()可以取得一个包含所有头部信息的长字符串</p>
+<h4 id="浏览器差异">浏览器差异</h4>
+<p>ie8有ontimeout事件，可以处理超时，xhr.timeout设置超时。</p>
+<p>在firefox某些版本利用onreadystatechange事件监听readystate==4会有一定概率fail，这是它的一个bug
+<a href="http://www.nczonline.net/blog/2009/07/09/firefox-35firebug-xmlhttprequest-and-readystatechange-bug/" target="_blank" rel="external">Firefox 3.5/Firebug XMLHttpRequest and readystatechange bug</a>
+但是它支持W3C的事件比如load、error、abort 、progress，所以可以用onload替换</p>
+<figure class="highlight javascript"><pre><div class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line"><span class="keyword">if</span> (firefox3_5){</div><div class="line">    xhr.onload = xhr.onerror = xhr.onabort = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        processResponse(xhr);</div><div class="line">    };</div><div class="line">} <span class="keyword">else</span> {</div><div class="line">    xhr.onreadystatechange = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        <span class="keyword">if</span> (xhr.readyState == <span class="number">4</span>){</div><div class="line">            processResponse(xhr);</div><div class="line">        }</div><div class="line">    };</div><div class="line">}</div><div class="line">xhr.open(<span class="string">"get"</span>, <span class="string">"/url"</span>, <span class="literal">true</span>);</div><div class="line">xhr.send(<span class="literal">null</span>);</div></pre></figure>
+
+<p>onload事件，相当于readystate==4的 onreadystatechange事件，还有个onprogress事件，获取接收数据进度，event对象的position表示已经接收到的字节数，totalSize表示根据Content-Length响应头部确定的预期字节数。</p>
+<hr>
+<h2 id="跨域请求">跨域请求</h2>
+<h3 id="CORS">CORS</h3>
+<p>当前几乎所有的浏览器（Internet Explorer 8+， Firefox 3.5+， Safari 4+和 Chrome）都可通过名为Cross-Origin Resource Sharing（CORS）的协议支持ajax跨域调用。</p>
+<p>对一个简单的请求，没有自定义头部，要么使用GET，要么使用POST，它的主体是text/plain,请求用一个名叫Orgin的额外的头部发送。Origin头部包含请求页面的头部（协议，域名，端口），这样服务器可以很容易的决定它是否应该提供响应。</p>
+<p>Origin: <a href="http://www.nczonline.net" target="_blank" rel="external">http://www.nczonline.net</a></p>
+<p>如果服务器确定请求被通过，它将发送一个Access-Control-Allow-Origin头部响应发送请求的同一个源，如果是一个公共资源，则返回“*”。如：</p>
+<p>Access-Control-Allow-Origin: <a href="http://www.nczonline.net" target="_blank" rel="external">http://www.nczonline.net</a></p>
+<p>先前提到的所有浏览器都支持这些简单的请求。FF3.5 +，Safari 4和chrome以及IE9+通过使用XMLHttpRequest对象支持其使用。当尝试在不同域打开一个资源时，不需任何代码，这个行为会自动触发。如：</p>
+<figure class="highlight javascript"><pre><div class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">xhr.open(<span class="string">"get"</span>, <span class="string">"http://www.nczonline.net/some_resource/"</span>, <span class="literal">true</span>);</div><div class="line">xhr.onload = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{  <span class="comment">//instead of onreadystatechange</span></div><div class="line">    <span class="comment">//do something</span></div><div class="line">};</div><div class="line">xhr.send(<span class="literal">null</span>);</div></pre></figure>
+
+<p>在IE8你需要用到XDomainRequest，所以一个通用的代码可以这样：</p>
+<figure class="highlight javascript"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">createCORSRequest</span><span class="params">(method, url)</span></span>{</div><div class="line">    <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">    <span class="keyword">if</span> (<span class="string">"withCredentials"</span> <span class="keyword">in</span> xhr){</div><div class="line">        xhr.open(method, url, <span class="literal">true</span>);</div><div class="line">    } <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> XDomainRequest != <span class="string">"undefined"</span>){</div><div class="line">        xhr = <span class="keyword">new</span> XDomainRequest();</div><div class="line">        xhr.open(method, url);</div><div class="line">    } <span class="keyword">else</span> {</div><div class="line">        xhr = <span class="literal">null</span>;</div><div class="line">    }</div><div class="line">    <span class="keyword">return</span> xhr;</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">var</span> request = createCORSRequest(<span class="string">"get"</span>, <span class="string">"http://www.nczonline.net/"</span>);</div><div class="line"><span class="keyword">if</span> (request){</div><div class="line">    request.onload = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        <span class="comment">//do something with request.responseText</span></div><div class="line">    };</div><div class="line">    request.send();</div><div class="line">}</div></pre></figure>
+
+<p>我们需要用到“withCredentials”去检测 XMLHttpRequest 对象是否支持跨域请求。Firefox, Safari, and Chrome和IE8+通用的属性和方法有：</p>
+<ul>
+<li>abort()——用来终止已在进程中请求。</li>
+<li>onerror()——替代onreadystatechange方法来探测错误。</li>
+<li>onload()——替代onreadystatechange方法来探测成功。</li>
+<li>responseText——用来取得响应地文本。</li>
+<li>send()——用来发送请求。</li>
+</ul>
+<h3 id="Preflighted请求">Preflighted请求</h3>
+<p>除了GET或POST，通过一种称之为preflighted请求的服务器透明验证机制，CORS允许使用自定义的头部和方法，以及不同主体内容类型。当你尝试使用高级选项中的一个来试着建立一个请求时，这时就建立了一个preflighted请求。该请求使用可选的方法，并发送如下头部：</p>
+<ul>
+<li>Origin——与简单请求相同。</li>
+<li>Access-Control-Request-Method   ——请求将要使用的方法。</li>
+<li>Access-Control-Request-Headers  ——（可选）一个逗号分开的正被使用的自定义头部列表。</li>
+</ul>
+<p>在请求期间，服务器能决定是否允许这类请求。服务器通过在响应中发送以下头部来与浏览器通信。</p>
+<ul>
+<li>Access-Control-Allow-Origin  ——与简单请求相同。</li>
+<li>Access-Control-Allow-Methods ——用逗号分开的可接受的方法列表。</li>
+<li>Access-Control-Allow-Headers ——用逗号分开的服务器可接受的头部列表。</li>
+<li>Access-Control-Max-Age  ——preflighted 请求应该被缓存的时间。</li>
+</ul>
+<p><strong>IE8不支持</strong></p>
+<h3 id="Credentialed请求">Credentialed请求</h3>
+<p>默认状态下，跨域请求不提供证书（cookie、HTTP身份验证、客户端SSL证书）。你可以规定一个请求应该通过设置withCredentials属性为true来发送证书。如果服务器允许credentialed请求，那么它将用下面的头部作出响应：</p>
+<blockquote>
+<p>Access-Control-Allow-Credentials: true</p>
+</blockquote>
+<p>如果一个credentialed请求被发送，这个头部不会作为响应地一部分被发送。浏览器不会将响应传递给JavaScript(responseText是一个空字符串，状态为 0，onerror()被调用)。注意，服务器也能发送这个HTTP头部作为preflight响应的一部分，以此来表明该源允许发送 credentialed请求。</p>
+<p><strong>IE8不支持</strong></p>
+<h3 id="对比">对比</h3>
+<p>ie8的XDomainRequest与同域XHR的不同之处：</p>
+<ol>
+<li>cookie不会随着请求发送，也不会随响应返回</li>
+<li>只能设置请求头部信息中的Content-Type字段，xhr.contentType = xxx，设置Content-Type字段</li>
+<li>不能访问响应头部信息</li>
+<li>只支持GET和POST请求</li>
+<li>XDR只能访问Access-Control-Allow-Origin头部字段设置为*资源。</li>
+<li>用onload事件和onerror事件代替onreadystatechange事件</li>
+</ol>
+<p>XMLHttpRequest的跨域请求，与同域XHR的不同之处：</p>
+<ol>
+<li>不能使用setRequestHeader()设置自定义头部，只能请求contentType为”text/plain”的资源</li>
+<li>不会发送也不会接收cookie</li>
+<li>getAllResponseHeaders()方法只能返回空字符串</li>
+<li>要求远程资源设置Access-Control-Allow-Origin决定此域是否可以访问远程资源，但不限于”*”</li>
+</ol>
+<h2 id="参考阅读">参考阅读</h2>
+<ul>
+<li><a href="http://www.wrox.com/WileyCDA/Section/id-291289.html" target="_blank" rel="external">XMLHttp Requests for Ajax</a>  </li>
+<li><a href="http://www.weste.net/2011/4-27/75028.html" target="_blank" rel="external">利用跨域资源共享（CORS）实现ajax跨域调用</a></li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/javascript/">javascript</a><a href="/tags/ajax/">ajax</a><a href="/tags/跨域/">跨域</a>
+  </div>
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://www.xuntuu.com/2012/07/05/ajax-json/" data-title="javascript的ajax技术 | xuntuu" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2012/07/18/js-event/" title="魔法javascript之事件">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  魔法javascript之事件</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2012/07/03/dom-must-know/"  title="DOM必知">
+ <strong>NEXT:</strong><br/> 
+ <span>DOM必知
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#跨域"><span class="toc-number">1.</span> <span class="toc-text">跨域</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是跨域？"><span class="toc-number">1.1.</span> <span class="toc-text">什么是跨域？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ajax"><span class="toc-number">2.</span> <span class="toc-text">Ajax</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是AJAX?"><span class="toc-number">2.1.</span> <span class="toc-text">什么是AJAX?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XHR"><span class="toc-number">2.2.</span> <span class="toc-text">XHR</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#发送请求"><span class="toc-number">2.3.</span> <span class="toc-text">发送请求</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#onreadystatechange事件"><span class="toc-number">2.3.1.</span> <span class="toc-text">onreadystatechange事件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HTTP头部信息"><span class="toc-number">2.3.2.</span> <span class="toc-text">HTTP头部信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#浏览器差异"><span class="toc-number">2.3.3.</span> <span class="toc-text">浏览器差异</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#跨域请求"><span class="toc-number">3.</span> <span class="toc-text">跨域请求</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CORS"><span class="toc-number">3.1.</span> <span class="toc-text">CORS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Preflighted请求"><span class="toc-number">3.2.</span> <span class="toc-text">Preflighted请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Credentialed请求"><span class="toc-number">3.3.</span> <span class="toc-text">Credentialed请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对比"><span class="toc-number">3.4.</span> <span class="toc-text">对比</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考阅读"><span class="toc-number">4.</span> <span class="toc-text">参考阅读</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/categories/css/" title="css">css<sup>11</sup></a></li>
+		
+			<li><a href="/categories/javascript/" title="javascript">javascript<sup>8</sup></a></li>
+		
+			<li><a href="/categories/web/" title="web">web<sup>3</sup></a></li>
+		
+			<li><a href="/categories/安全/" title="安全">安全<sup>2</sup></a></li>
+		
+			<li><a href="/categories/工具/" title="工具">工具<sup>4</sup></a></li>
+		
+			<li><a href="/categories/效率/" title="效率">效率<sup>3</sup></a></li>
+		
+			<li><a href="/categories/算法/" title="算法">算法<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">归档</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/03/">March 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/01/">January 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/07/">July 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/06/">June 2012</a><span class="archive-list-count">13</span></li></ul>
+  </div>
+
+
+  
+  <div class="tagcloudlist">
+    <p class="asidetitle">标签云</p>
+    <div class="tagcloudlist clearfix">
+       <a href="/tags/A-Pathfinding/" style="font-size: 10.00px;">A* Pathfinding</a><a href="/tags/DOM/" style="font-size: 10.00px;">DOM</a><a href="/tags/Emmet/" style="font-size: 10.00px;">Emmet</a><a href="/tags/Zen-coding/" style="font-size: 10.00px;">Zen coding</a><a href="/tags/ajax/" style="font-size: 10.00px;">ajax</a><a href="/tags/automating/" style="font-size: 10.00px;">automating</a><a href="/tags/background/" style="font-size: 10.00px;">background</a><a href="/tags/blog/" style="font-size: 14.00px;">blog</a><a href="/tags/cleaver/" style="font-size: 10.00px;">cleaver</a><a href="/tags/codepen/" style="font-size: 10.00px;">codepen</a><a href="/tags/css/" style="font-size: 18.00px;">css</a><a href="/tags/game/" style="font-size: 10.00px;">game</a><a href="/tags/git/" style="font-size: 12.00px;">git</a><a href="/tags/hexo/" style="font-size: 14.00px;">hexo</a><a href="/tags/html5/" style="font-size: 10.00px;">html5</a><a href="/tags/javascript/" style="font-size: 16.00px;">javascript</a><a href="/tags/lists/" style="font-size: 10.00px;">lists</a><a href="/tags/markdown/" style="font-size: 10.00px;">markdown</a><a href="/tags/ppt/" style="font-size: 10.00px;">ppt</a><a href="/tags/slider/" style="font-size: 10.00px;">slider</a><a href="/tags/text/" style="font-size: 10.00px;">text</a><a href="/tags/web-安全/" style="font-size: 12.00px;">web 安全</a><a href="/tags/事件/" style="font-size: 10.00px;">事件</a><a href="/tags/前端/" style="font-size: 20.00px;">前端</a><a href="/tags/幻灯片/" style="font-size: 10.00px;">幻灯片</a><a href="/tags/版本/" style="font-size: 12.00px;">版本</a><a href="/tags/跨域/" style="font-size: 12.00px;">跨域</a>
+    </div>
+  </div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml## RSS address." target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+      <li><a href="http://www.cnblogs.com/xuntu/" target="_blank" title="寻图-博客园">寻图-博客园</a></li>
+      <li><a href="http://hexo.io" target="_blank" title="Hexo">Hexo</a></li>
+    </ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello,I&#39;m Bruce cai.I graduated from Wuhan University.Now,I&#39;m A front-end developer In Xnet. <br/>
+			Only people with great inner strength will pursuit equity and justice, enjoy both result and process.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		<a href="https://github.com/letshare" target="_blank" title="github"></a>
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2014 
+		
+		<a href="http://www.xuntuu.com" target="_blank" title="bruce">bruce</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"xuntuu"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<div style="display:none">
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F898f1edef336abc9b9fd81a6e1144a65' type='text/javascript'%3E%3C/script%3E"));
+</script>
+</div>
+
+  </body>
+</html>

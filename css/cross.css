@@ -1,0 +1,33 @@
+.container{
+	position: absolute;
+	top:50%;
+	left:50%;
+	margin: -75px 0 0 -75px;
+}
+
+.flex {
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+  -webkit-flex-flow: row wrap;
+  justify-content:center;
+  align-items:center;
+  height: 150px;
+  width: 150px;
+  box-sizing:content-box;
+}
+.flex div{
+	height: 50px;
+	width: 50px;
+	background: red;
+}
+.item1{
+	margin: 0 50px 0 50px;
+	
+}
+.item5{
+	margin: 0 50px 0 50px;
+	
+}

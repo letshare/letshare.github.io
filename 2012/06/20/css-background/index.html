@@ -1,0 +1,523 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>css之background | xuntuu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="bruce">
+    
+    <meta name="description" content="background
+background属性用于指定一个元素的background效果。
+background包括一个元素的内容+内边距(padding)+边框(border)，不包括外边距(margin)
+主要的background效果有：
+
+background-color
+backgroun">
+    
+    
+    
+    
+    <link rel="alternate" href="/atom.xml## RSS address." title="xuntuu" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="xuntuu" title="xuntuu"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="xuntuu">xuntuu</a></h1>
+				<h2 class="blog-motto">程序猿、全栈工程师</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/board">留言</a></li>
+					
+					<li>
+									
+					<form class="search" method="get" target="_blank" action="http://www.baidu.com/baidu" accept-charset="utf-8">       
+				        <input name="word" id="search" autocomplete="off" size="30" maxlength="30" placeholder="搜索" />
+				        <input type="submit" value="Baidu Search" style="display:none;"/>					       
+				        <input name="tn" type="hidden" value="bds" />
+				        <input name="cl" type="hidden" value="3" />
+				        <input name="si" type="hidden" value="www.xuntuu.com" />
+				        <input name=ie type=hidden value=utf-8>
+				        <input name="ct" type="hidden" value="2097152" />
+				        <label for="s">Search</label>
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2012/06/20/css-background/" title="css之background" itemprop="url">css之background</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://www.xuntuu.com" title="bruce">bruce</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2012-06-20T11:10:00.000Z" itemprop="datePublished">6月 20 2012</time>
+    更新日期:<time datetime="2012-06-20T11:10:00.000Z" itemprop="dateModified">6月 20 2012</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#background"><span class="toc-number">1.</span> <span class="toc-text">background</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#background-color"><span class="toc-number">1.1.</span> <span class="toc-text">background-color</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#background-image"><span class="toc-number">1.2.</span> <span class="toc-text">background-image</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#background-repeat"><span class="toc-number">1.3.</span> <span class="toc-text">background-repeat</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#background-position"><span class="toc-number">1.4.</span> <span class="toc-text">background-position</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#background-attachment"><span class="toc-number">1.5.</span> <span class="toc-text">background-attachment</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#简写形式"><span class="toc-number">1.6.</span> <span class="toc-text">简写形式</span></a></li></ol></li></ol>
+		</div>
+		
+		<h2 id="background">background</h2>
+<p>background属性用于指定一个元素的background效果。
+background包括一个元素的内容+内边距(padding)+边框(border)，不包括外边距(margin)
+主要的background效果有：</p>
+<ul>
+<li>background-color</li>
+<li>background-image</li>
+<li>background-repeat</li>
+<li>background-attachment</li>
+<li>background-position</li>
+</ul>
+<h3 id="background-color">background-color</h3>
+<p>用于指定一个元素的背景颜色，颜色的设置有6中：</p>
+<p>1.16进制，指定方法为：#RRGGBB ，比如：</p>
+<figure class="highlight css"><pre><div class="line">#p1 {background-color: #ff0000;} / * red */</div></pre></figure>
+
+<p>2.RGB，指定方法为：rgb(red, green, blue),比如：</p>
+<figure class="highlight css"><pre><div class="line">#p1 {background-color: rgb(255,0,0);} / * red */</div></pre></figure>
+
+<p>3.RGBA,IE9+才支持，指定方法为: rgba(red, green, blue, alpha),比如：</p>
+<figure class="highlight css"><pre><div class="line">#p1 {background-color: rgba(255,0,0,0.3);} / * red with 0.3opacity */</div></pre></figure>
+
+<p>4.HSL,IE9+才支持，指定方法为: hsl(hue, saturation, lightness),比如：</p>
+<figure class="highlight css"><pre><div class="line"><span class="id">#p1</span> <span class="rules">{<span class="rule"><span class="attribute">background-color</span>:<span class="value"> <span class="function">rgba</span>(<span class="number">255</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.3</span>)</span></span>;<span class="rule">}</span></span> <span class="comment">/* red with 0.3opacity */</span></div></pre></figure>
+
+<p>5.HSLA,IE9+才支持，指定方法为：hsla(hue, saturation, lightness, alpha),比如：</p>
+<figure class="highlight css"><pre><div class="line">#p1 {background-color: rgba(255,0,0,0.3);} / * red with 0.3opacity */</div></pre></figure>
+
+<p>6.颜色名，比如：’red’,’blue’</p>
+<figure class="highlight css"><pre><div class="line"><span class="id">#p1</span> <span class="rules">{<span class="rule"><span class="attribute">background-color</span>:<span class="value"> red</span></span>;<span class="rule">}</span></span></div></pre></figure>
+
+<h3 id="background-image">background-image</h3>
+<p>指定一个元素的背景图片,默认情况下图片是铺满整个元素的，即在垂直和水平方向上重复背景。</p>
+<figure class="highlight css"><pre><div class="line"><span class="tag">body</span> <span class="rules">{<span class="rule"><span class="attribute">background-image</span>:<span class="value"><span class="function">url</span>(<span class="string">'paper.gif'</span>)</span></span>;<span class="rule">}</span></span></div></pre></figure>
+
+<h3 id="background-repeat">background-repeat</h3>
+<p>指定背景图片的重复方式,语法为：</p>
+<figure class="highlight css"><pre><div class="line">background-repeat: repeat|repeat-x|repeat-y|no-repeat|initial|inherit;</div></pre></figure>
+
+<p>repeat和initial 都是垂直和水平重复。
+repeat-x —&gt; 水平重复
+repeat-y —&gt; 垂直重复
+no-repeat —&gt; 不重复</p>
+<h3 id="background-position">background-position</h3>
+<p>指定背景图片在元素的开始位置，默认情况下从左上角开始。值的形式如下表:</p>
+<table>
+  <thead>
+      <tr>
+      <th style="width:18%">值</th>
+      <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>left top<br>left center<br>left bottom<br>right top<br>right center<br>right bottom<br>center top<br>center center<br>center bottom<br></td>
+    <td>如果只指定一个，另一个默认为”center”</td><br>  </tr>
+  <tr>
+    <td><i>x% y%</i></td>
+    <td>以百分比的形式指定位置，左上角是(0% 0%),右下角是(100% 100%),如果只指定x%，y%默认为50%</td>
+  </tr>
+  <tr>
+    <td><i>xpos ypos</i></td>
+    <td>xpos指定水平位置，ypos指定垂直位置，左上角的坐标为(0px 0px),xpos、ypos使用单位值，也可以使用其他<a href="css_units.asp">CSS units</a>可以跟其他指定位置的方式混合使用，如果只有xpos，ypos默认为50%</td>
+  </tr>
+    <tr>
+    <td>initial</td>
+    <td>默认值 <a href="css_initial.asp">Read about <em>initial</em></a></td>
+    </tr>
+    <tr>
+    <td>inherit</td> 
+    <td>从它的父元素继承<a href="css_inherit.asp">Read about <em>inherit</em></a></td> </tr> </tbody>
+</table>
+
+<h3 id="background-attachment">background-attachment</h3>
+<p>设置页面滚动的时候，背景图片是否跟着移动。有以下几种值:</p>
+<table>
+  <thead>
+      <tr>
+      <th style="width:18%">值</th>
+      <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>scroll</td>
+    <td>背景图跟着元素滚动，这是默认值</td><br>  </tr>
+  <tr>
+    <td>fixed</td>
+    <td>背景图固定在是否位置</td>
+  </tr>
+  <tr>
+    <td>local</td>
+    <td>背景图跟着元素内容滚动</td>
+  </tr>
+    <tr>
+    <td>initial</td>
+    <td>默认值 <a href="css_initial.asp">Read about <em>initial</em></a></td>
+    </tr>
+    <tr>
+    <td>inherit</td> 
+    <td>从它的父元素继承<a href="css_inherit.asp">Read about <em>inherit</em></a></td> </tr> </tbody>
+</table>
+
+<p>IE8及更早版本的浏览器不支持这个属性。</p>
+<h3 id="简写形式">简写形式</h3>
+<p>这些background的属性可以简写到一个名称为background的属性中。比如：</p>
+<figure class="highlight css"><pre><div class="line"><span class="tag">body</span> <span class="rules">{</span></div><div class="line">    <span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="hexcolor">#ffffff</span> <span class="function">url</span>(<span class="string">"img_tree.png"</span>) no-repeat right top</span></span>;</div><div class="line"><span class="rule">}</span></div></pre></figure>
+
+<p>这些属性是否缺了一个不重要，重要的是要保持这样的顺序：</p>
+<ol>
+<li>background-color</li>
+<li>background-image</li>
+<li>background-repeat</li>
+<li>background-attachment</li>
+<li>background-position</li>
+</ol>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/前端/">前端</a><a href="/tags/css/">css</a><a href="/tags/background/">background</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/css/">css</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://www.xuntuu.com/2012/06/20/css-background/" data-title="css之background | xuntuu" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2012/06/20/css-font/" title="css之font">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  css之font</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2012/06/19/js-this/"  title="javascript与this">
+ <strong>NEXT:</strong><br/> 
+ <span>javascript与this
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#background"><span class="toc-number">1.</span> <span class="toc-text">background</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#background-color"><span class="toc-number">1.1.</span> <span class="toc-text">background-color</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#background-image"><span class="toc-number">1.2.</span> <span class="toc-text">background-image</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#background-repeat"><span class="toc-number">1.3.</span> <span class="toc-text">background-repeat</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#background-position"><span class="toc-number">1.4.</span> <span class="toc-text">background-position</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#background-attachment"><span class="toc-number">1.5.</span> <span class="toc-text">background-attachment</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#简写形式"><span class="toc-number">1.6.</span> <span class="toc-text">简写形式</span></a></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/categories/css/" title="css">css<sup>11</sup></a></li>
+		
+			<li><a href="/categories/javascript/" title="javascript">javascript<sup>8</sup></a></li>
+		
+			<li><a href="/categories/web/" title="web">web<sup>3</sup></a></li>
+		
+			<li><a href="/categories/安全/" title="安全">安全<sup>2</sup></a></li>
+		
+			<li><a href="/categories/工具/" title="工具">工具<sup>4</sup></a></li>
+		
+			<li><a href="/categories/效率/" title="效率">效率<sup>3</sup></a></li>
+		
+			<li><a href="/categories/算法/" title="算法">算法<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">归档</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/03/">March 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/01/">January 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/07/">July 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/06/">June 2012</a><span class="archive-list-count">13</span></li></ul>
+  </div>
+
+
+  
+  <div class="tagcloudlist">
+    <p class="asidetitle">标签云</p>
+    <div class="tagcloudlist clearfix">
+       <a href="/tags/A-Pathfinding/" style="font-size: 10.00px;">A* Pathfinding</a><a href="/tags/DOM/" style="font-size: 10.00px;">DOM</a><a href="/tags/Emmet/" style="font-size: 10.00px;">Emmet</a><a href="/tags/Zen-coding/" style="font-size: 10.00px;">Zen coding</a><a href="/tags/ajax/" style="font-size: 10.00px;">ajax</a><a href="/tags/automating/" style="font-size: 10.00px;">automating</a><a href="/tags/background/" style="font-size: 10.00px;">background</a><a href="/tags/blog/" style="font-size: 14.00px;">blog</a><a href="/tags/cleaver/" style="font-size: 10.00px;">cleaver</a><a href="/tags/codepen/" style="font-size: 10.00px;">codepen</a><a href="/tags/css/" style="font-size: 18.00px;">css</a><a href="/tags/game/" style="font-size: 10.00px;">game</a><a href="/tags/git/" style="font-size: 12.00px;">git</a><a href="/tags/hexo/" style="font-size: 14.00px;">hexo</a><a href="/tags/html5/" style="font-size: 10.00px;">html5</a><a href="/tags/javascript/" style="font-size: 16.00px;">javascript</a><a href="/tags/lists/" style="font-size: 10.00px;">lists</a><a href="/tags/markdown/" style="font-size: 10.00px;">markdown</a><a href="/tags/ppt/" style="font-size: 10.00px;">ppt</a><a href="/tags/slider/" style="font-size: 10.00px;">slider</a><a href="/tags/text/" style="font-size: 10.00px;">text</a><a href="/tags/web-安全/" style="font-size: 12.00px;">web 安全</a><a href="/tags/事件/" style="font-size: 10.00px;">事件</a><a href="/tags/前端/" style="font-size: 20.00px;">前端</a><a href="/tags/幻灯片/" style="font-size: 10.00px;">幻灯片</a><a href="/tags/版本/" style="font-size: 12.00px;">版本</a><a href="/tags/跨域/" style="font-size: 12.00px;">跨域</a>
+    </div>
+  </div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml## RSS address." target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+      <li><a href="http://www.cnblogs.com/xuntu/" target="_blank" title="寻图-博客园">寻图-博客园</a></li>
+      <li><a href="http://hexo.io" target="_blank" title="Hexo">Hexo</a></li>
+    </ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello,I&#39;m Bruce cai.I graduated from Wuhan University.Now,I&#39;m A front-end developer In Xnet. <br/>
+			Only people with great inner strength will pursuit equity and justice, enjoy both result and process.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		<a href="https://github.com/letshare" target="_blank" title="github"></a>
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2014 
+		
+		<a href="http://www.xuntuu.com" target="_blank" title="bruce">bruce</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"xuntuu"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<div style="display:none">
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F898f1edef336abc9b9fd81a6e1144a65' type='text/javascript'%3E%3C/script%3E"));
+</script>
+</div>
+
+  </body>
+</html>

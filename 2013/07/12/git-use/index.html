@@ -1,0 +1,477 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>git简易使用指南 | xuntuu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="bruce">
+    
+    <meta name="description" content="安装
+下载 git OSX 版
+下载 git Windows 版
+下载 git Linux 版
+git基础
+直接记录快照，而非差异比较
+文件的三种状态：已提交（committed），已修改（modified）和已暂存（staged）。用git管理项目的时候，文件在三个地方流转：Git 的工作目录，暂">
+    
+    
+    
+    
+    <link rel="alternate" href="/atom.xml## RSS address." title="xuntuu" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="xuntuu" title="xuntuu"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="xuntuu">xuntuu</a></h1>
+				<h2 class="blog-motto">程序猿、全栈工程师</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/board">留言</a></li>
+					
+					<li>
+									
+					<form class="search" method="get" target="_blank" action="http://www.baidu.com/baidu" accept-charset="utf-8">       
+				        <input name="word" id="search" autocomplete="off" size="30" maxlength="30" placeholder="搜索" />
+				        <input type="submit" value="Baidu Search" style="display:none;"/>					       
+				        <input name="tn" type="hidden" value="bds" />
+				        <input name="cl" type="hidden" value="3" />
+				        <input name="si" type="hidden" value="www.xuntuu.com" />
+				        <input name=ie type=hidden value=utf-8>
+				        <input name="ct" type="hidden" value="2097152" />
+				        <label for="s">Search</label>
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2013/07/12/git-use/" title="git简易使用指南" itemprop="url">git简易使用指南</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://www.xuntuu.com" title="bruce">bruce</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2013-07-12T11:20:00.000Z" itemprop="datePublished">7月 12 2013</time>
+    更新日期:<time datetime="2013-07-12T11:20:00.000Z" itemprop="dateModified">7月 12 2013</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-number">1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git基础"><span class="toc-number">2.</span> <span class="toc-text">git基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用命令"><span class="toc-number">3.</span> <span class="toc-text">常用命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#命令详解"><span class="toc-number">4.</span> <span class="toc-text">命令详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#git_checkout"><span class="toc-number">4.1.</span> <span class="toc-text">git checkout</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git_reset"><span class="toc-number">4.2.</span> <span class="toc-text">git reset</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git_merge"><span class="toc-number">4.3.</span> <span class="toc-text">git merge</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git_cherry-pick"><span class="toc-number">4.4.</span> <span class="toc-text">git cherry-pick</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git_rebase"><span class="toc-number">4.5.</span> <span class="toc-text">git rebase</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他命令"><span class="toc-number">4.6.</span> <span class="toc-text">其他命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">5.</span> <span class="toc-text">参考</span></a></li></ol>
+		</div>
+		
+		<h2 id="安装">安装</h2>
+<p><a href="http://code.google.com/p/git-osx-installer/downloads/list?can=3" target="_blank" rel="external">下载 git OSX 版</a></p>
+<p><a href="http://code.google.com/p/msysgit/downloads/list?can=3" target="_blank" rel="external">下载 git Windows 版</a></p>
+<p><a href="http://book.git-scm.com/2_installing_git.html" target="_blank" rel="external">下载 git Linux 版</a></p>
+<h2 id="git基础">git基础</h2>
+<p>直接记录快照，而非差异比较</p>
+<p><strong>文件的三种状态：</strong>已提交（committed），已修改（modified）和已暂存（staged）。用git管理项目的时候，文件在三个地方流转：Git 的工作目录，暂存区域，以及本地仓库。
+<img src="/img/201307/3spaces.jpg" alt="git三种文件流转区"></p>
+<p>如果是 Git 目录中保存着的特定版本文件，就属于已提交状态；如果作了修改并已放入暂存区域，就属于已暂存状态；如果自上次取出后，作了修改但还没有放到暂存区域，就是已修改状态。</p>
+<h2 id="常用命令">常用命令</h2>
+<p>创建新仓库  <code>git init</code></p>
+<p>检出仓库   <code>git clone url</code></p>
+<p>添加修改 <code>git add &lt;filename&gt;</code></p>
+<p>提交修改  <code>git commit - &quot;代码提交信息&quot;</code></p>
+<p>连接远程  <code>git add remote &lt;a name&gt; &lt;server&gt;</code></p>
+<p>更新远程  <code>git pull</code></p>
+<p>合并远程  <code>git merge</code></p>
+<p>推送远程  <code>git push &lt;server name&gt; &lt;branch&gt;</code></p>
+<p>分支管理  <code>git checkout</code> 和 <code>git branch</code></p>
+<blockquote>
+<p>关于命令的用法，强烈推荐一个<a href="http://www.bootcss.com/p/git-guide/" target="_blank" rel="external">简明教程</a>，可以让你快速掌握日常的用法。</p>
+</blockquote>
+<h2 id="命令详解">命令详解</h2>
+<p>有些命令比较容易混淆，稍不注意就用错了。要特别注意那些命令对三个区域操作的方向性。</p>
+<p>文件如何在三个区域流转呢？就要用到这几个命令git add commit reset checkout 
+<img src="/img/201307/1step-operations.png" alt="文件流转"></p>
+<blockquote>
+<p><code>--</code>参数的作用是区分分支名还是文件名，加了<code>--</code>参数命令就知道后面的是文件名而不是分支名
+<code>git add -A</code>将工作目录所有修改提交
+<code>git checkout -- files</code> 把文件从暂存区域复制到工作目录，用来丢弃本地修改。files不能少，不然会无效</p>
+</blockquote>
+<p>上面的图是分步操作，也可以一条命令同时对暂存区和工作目录操作。
+<img src="/img/201307/2step-operations.png" alt="文件流转2"></p>
+<h3 id="git_checkout">git checkout</h3>
+<p>checkout命令用于分支切换及文件签回。切换的时候会进行HEAD跟分支绑定，如果是存在的分支，那么所有暂存区和工作目录的文件将会变成跟仓库一样，如果是新分支会匿名分支，文件不会变。如果分支后面还带有文件参数，则不会切换分支，只是把另一个分支的文件签过来。如果不带分支名，则是从暂存区签回文件。签回就是复制，不存在于两个当前分支仓库和要切换分支仓库的文件将不会改变。举三个例子：</p>
+<figure class="highlight bash"><pre><div class="line">$ git checkout master              <span class="comment">#(1) 切换到分支master</span></div><div class="line">$ git checkout master~<span class="number">2</span> Makefile   <span class="comment">#(2) 并不切换到另一个分支，只是签回文件</span></div><div class="line">$ rm <span class="operator">-f</span> hello.c</div><div class="line">$ git checkout hello.c             <span class="comment">#(3) 从暂存区签回hello.c</span></div></pre></figure>
+
+<p>关于HEAD指针，它指向一个分支头部，比如如果指向分支master，<code>HEAD^</code>就是master的上一个版本， <code>HEAD^^</code>上上个版本，<code>HEAD^100</code> 上100个版本。<code>HEAD~</code>相反对应的是master的下一个版本。</p>
+<h3 id="git_reset">git reset</h3>
+<p>reset命令把当前分支指向另一个位置，并且有选择的变动工作目录和暂存区。也用来在从历史仓库中复制文件到暂存区，而不动工作目录。</p>
+<p>如果不给选项，那么当前分支指向到那个提交。如果用<code>--hard</code>选项，那么工作目录也更新，如果用<code>--soft</code>选项，那么都不变。
+<img src="/img/201307/git-reset.png" alt="git reset">
+如果没有给出提交点的版本号，那么默认用HEAD。这样，分支指向不变，但是索引会回滚到最后一次提交，如果用—hard选项，工作目录也同样。</p>
+<h3 id="git_merge">git merge</h3>
+<p>merge 命令把不同分支合并起来。合并前，索引必须和当前提交相同。作用是将仓库中其他分支的跟索引更新的地方，down到暂存区和工作目录中。</p>
+<p>也就是说如果另一个分支是当前提交的祖父节点，那么合并命令将什么也不做，因为没有更新的内容，而如果当前提交是另一个分支的祖父节点，就导致fast-forward合并。指向只是简单的移动，工作目录和暂存区的文件会改变但并不会生成一个新的提交。</p>
+<p>如果当前分支和另外一个分支有共同的祖先节点而不是直接线性节点关系的话，将会进行一个文件的合并，并创建一个新的提交。如果当前分支合并的时候出现了冲突了，只要重新编辑冲突的文件，在解决了所有文件里的所有冲突后，运行 git add 将把它们标记为已解决状态（实际上就是来一次快照保存到暂存区域。）。因为一旦暂存，就表示冲突已经解决。或者使用<code>git merge --abort</code>放弃合并，工作目录和暂存区会回退。
+<img src="/img/201307/true-merge.png" alt="git merge"></p>
+<h3 id="git_cherry-pick">git cherry-pick</h3>
+<p>cherry-pick命令”复制”一个提交节点并在当前分支做一次完全一样的新提交。
+<img src="/img/201307/cherry-pick.png" alt="git cherry-pick"></p>
+<h3 id="git_rebase">git rebase</h3>
+<p>rebase衍合是合并命令的另一种选择。合并把两个父分支合并进行一次提交，提交历史不是线性的。衍合在当前分支上重演另一个分支的历史，提交历史是线性的。 本质上，这是线性化的自动的 cherry-pick。
+<img src="/img/201307/git-rebase.png" alt="git rebase"></p>
+<p>上面的命令都在topic分支中进行，而不是master分支，在master分支上重演，并且把分支指向新的节点。注意旧提交没有被引用，将被回收。要限制回滚范围，使用<code>--onto</code>选项。下面的命令在master分支上重演当前分支从169a6以来的最近几个提交，即2c33a。
+<img src="/img/201307/rebase-onto.png" alt="git rebase onto"></p>
+<h3 id="其他命令">其他命令</h3>
+<p><code>git rm file</code> 用于删除已提交到暂存区的文件，从此这个文件不会出现在版本管理。</p>
+<p><code>git mv file1 file2</code>用于工作目录和暂存区的文件更名，相当于执行了三个命令，</p>
+<figure class="highlight bash"><pre><div class="line">$ mv file1 file2</div><div class="line">$ git rm file1</div><div class="line">$ git add file2</div></pre></figure>
+
+<p><code>git status</code>,用于查看工作目录的状态</p>
+<p><code>git diff</code>,用于比较工作目录和暂存区</p>
+<p><code>git diff --staged</code>,用于比较暂存区和仓库</p>
+<h2 id="参考">参考</h2>
+<ul>
+<li><a href="https://help.github.com/" target="_blank" rel="external">https://help.github.com</a></li>
+<li><a href="http://www.bootcss.com/p/git-guide/" target="_blank" rel="external">git简明教程</a></li>
+<li><a href="http://git-scm.com/docs/" target="_blank" rel="external">git手册</a></li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/git/">git</a><a href="/tags/版本/">版本</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/工具/">工具</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://www.xuntuu.com/2013/07/12/git-use/" data-title="git简易使用指南 | xuntuu" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2013/07/14/git-use-2/" title="git简易使用指南-2">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  git简易使用指南-2</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2013/05/13/markdown-use/"  title="markdown简明使用">
+ <strong>NEXT:</strong><br/> 
+ <span>markdown简明使用
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-number">1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git基础"><span class="toc-number">2.</span> <span class="toc-text">git基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用命令"><span class="toc-number">3.</span> <span class="toc-text">常用命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#命令详解"><span class="toc-number">4.</span> <span class="toc-text">命令详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#git_checkout"><span class="toc-number">4.1.</span> <span class="toc-text">git checkout</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git_reset"><span class="toc-number">4.2.</span> <span class="toc-text">git reset</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git_merge"><span class="toc-number">4.3.</span> <span class="toc-text">git merge</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git_cherry-pick"><span class="toc-number">4.4.</span> <span class="toc-text">git cherry-pick</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git_rebase"><span class="toc-number">4.5.</span> <span class="toc-text">git rebase</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他命令"><span class="toc-number">4.6.</span> <span class="toc-text">其他命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">5.</span> <span class="toc-text">参考</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/categories/css/" title="css">css<sup>11</sup></a></li>
+		
+			<li><a href="/categories/javascript/" title="javascript">javascript<sup>8</sup></a></li>
+		
+			<li><a href="/categories/web/" title="web">web<sup>3</sup></a></li>
+		
+			<li><a href="/categories/安全/" title="安全">安全<sup>2</sup></a></li>
+		
+			<li><a href="/categories/工具/" title="工具">工具<sup>4</sup></a></li>
+		
+			<li><a href="/categories/效率/" title="效率">效率<sup>3</sup></a></li>
+		
+			<li><a href="/categories/算法/" title="算法">算法<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">归档</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/03/">March 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/01/">January 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/07/">July 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/06/">June 2012</a><span class="archive-list-count">13</span></li></ul>
+  </div>
+
+
+  
+  <div class="tagcloudlist">
+    <p class="asidetitle">标签云</p>
+    <div class="tagcloudlist clearfix">
+       <a href="/tags/A-Pathfinding/" style="font-size: 10.00px;">A* Pathfinding</a><a href="/tags/DOM/" style="font-size: 10.00px;">DOM</a><a href="/tags/Emmet/" style="font-size: 10.00px;">Emmet</a><a href="/tags/Zen-coding/" style="font-size: 10.00px;">Zen coding</a><a href="/tags/ajax/" style="font-size: 10.00px;">ajax</a><a href="/tags/automating/" style="font-size: 10.00px;">automating</a><a href="/tags/background/" style="font-size: 10.00px;">background</a><a href="/tags/blog/" style="font-size: 14.00px;">blog</a><a href="/tags/cleaver/" style="font-size: 10.00px;">cleaver</a><a href="/tags/codepen/" style="font-size: 10.00px;">codepen</a><a href="/tags/css/" style="font-size: 18.00px;">css</a><a href="/tags/game/" style="font-size: 10.00px;">game</a><a href="/tags/git/" style="font-size: 12.00px;">git</a><a href="/tags/hexo/" style="font-size: 14.00px;">hexo</a><a href="/tags/html5/" style="font-size: 10.00px;">html5</a><a href="/tags/javascript/" style="font-size: 16.00px;">javascript</a><a href="/tags/lists/" style="font-size: 10.00px;">lists</a><a href="/tags/markdown/" style="font-size: 10.00px;">markdown</a><a href="/tags/ppt/" style="font-size: 10.00px;">ppt</a><a href="/tags/slider/" style="font-size: 10.00px;">slider</a><a href="/tags/text/" style="font-size: 10.00px;">text</a><a href="/tags/web-安全/" style="font-size: 12.00px;">web 安全</a><a href="/tags/事件/" style="font-size: 10.00px;">事件</a><a href="/tags/前端/" style="font-size: 20.00px;">前端</a><a href="/tags/幻灯片/" style="font-size: 10.00px;">幻灯片</a><a href="/tags/版本/" style="font-size: 12.00px;">版本</a><a href="/tags/跨域/" style="font-size: 12.00px;">跨域</a>
+    </div>
+  </div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml## RSS address." target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+      <li><a href="http://www.cnblogs.com/xuntu/" target="_blank" title="寻图-博客园">寻图-博客园</a></li>
+      <li><a href="http://hexo.io" target="_blank" title="Hexo">Hexo</a></li>
+    </ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello,I&#39;m Bruce cai.I graduated from Wuhan University.Now,I&#39;m A front-end developer In Xnet. <br/>
+			Only people with great inner strength will pursuit equity and justice, enjoy both result and process.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		<a href="https://github.com/letshare" target="_blank" title="github"></a>
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2014 
+		
+		<a href="http://www.xuntuu.com" target="_blank" title="bruce">bruce</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"xuntuu"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<div style="display:none">
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F898f1edef336abc9b9fd81a6e1144a65' type='text/javascript'%3E%3C/script%3E"));
+</script>
+</div>
+
+  </body>
+</html>

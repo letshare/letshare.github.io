@@ -1,0 +1,1903 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[xuntuu]]></title>
+  <subtitle><![CDATA[程序猿、全栈工程师]]></subtitle>
+  <link href="/atom.xml" rel="self"/>
+  <link href="http://www.xuntuu.com/"/>
+  <updated>2014-11-13T12:11:17.895Z</updated>
+  <id>http://www.xuntuu.com/</id>
+  
+  <author>
+    <name><![CDATA[bruce]]></name>
+    <email><![CDATA[brucecai2012@gmail.com]]></email>
+  </author>
+  
+  <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[SSO及oauth机制]]></title>
+    <link href="http://www.xuntuu.com/2014/09/22/sso-oauth/"/>
+    <id>http://www.xuntuu.com/2014/09/22/sso-oauth/</id>
+    <published>2014-09-22T14:14:10.000Z</published>
+    <updated>2014-09-25T06:19:53.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="介绍">介绍</h2>
+<p>OAUTH协议为用户资源的授权提供了一个安全的、开放而又简易的标准。与以往的授权方式不同之处是OAUTH的授权不会使第三方触及到用户的帐号信息（如用户名与密码），即第三方无需使用用户的用户名与密码就可以申请获得该用户资源的授权，因此OAUTH是安全的。oAuth是Open Authorization的简写。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="介绍">介绍</h2>
+<p>OAUTH协议为用户资源的授权提供了一个安全的、开放而又简易的标准。与以往的授权方式不同之处是OAUTH的授权不会使第三方触及到用户的帐号信息（如用户名与密码），即第三方无需使用用户的用户名与密码就可以申请获得该用户资源的授权，因此O]]>
+    </summary>
+    
+      <category term="web 安全" scheme="http://www.xuntuu.com/tags/web-%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="安全" scheme="http://www.xuntuu.com/categories/%E5%AE%89%E5%85%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[A寻路算法理解]]></title>
+    <link href="http://www.xuntuu.com/2014/09/22/a-pathfinding/"/>
+    <id>http://www.xuntuu.com/2014/09/22/a-pathfinding/</id>
+    <published>2014-09-22T14:14:10.000Z</published>
+    <updated>2014-09-22T16:31:29.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="概念">概念</h2>
+<p><img src="/img/game/aStarT1.jpg" alt="introduction"></p>
+<p>A*寻路算法解决的问题是寻找A点到B点的最短路径，不能碰到障碍，如图中所示，绿色块为出发点A点，红色块为目标B点，蓝色块为障碍。</p>
+<p>我们将问题简化为，路径区域为方格网络。因此可以将路径简化为二位数组表示，数组中的每项表示方格，它的值代表它能否走通（即是否障碍）。</p>
+<p>另外我们把走路的人，视为站在方格的中心上，一旦找到最短路径时，他是从一个方格的中心走到下一个方格的中心。这些方格中心，称为”节点”。我们就用这些”节点”表示方格。</p>
+<h2 id="开始查找">开始查找</h2>
+<p>一旦我们将路径简化为二位数组，通过上面讲把路径区域视为方格网络，那么下一步就是要实现搜索最短路径。我们把A点作为开始点，查找它可以联接的点，然后一直往外搜索直到我们的目标点。</p>
+<ol>
+<li>首先把A点加入一个待检查的列表”open list”。 “open list”就像一个购物清单。现在它只有一个节点，不过会越来越多，它包含那些你可能或不能走的路径，总之你需要检查的路径。</li>
+<li>查找所有的可以联接到开始点的非障碍方格，也把它们加入”open list”。对这些点，将A点保存为它们的父节点，方便我们回溯路径。</li>
+<li>将A方格从”open list”移除，加到”closed list”中，”closed list”中保存着不需要再考虑的方格。</li>
+</ol>
+<p>现在，我们需要做个说明，以方便后面的讲解。如下图，
+中间的深绿色方格是开始方格。它包围着浅蓝色轮廓表示它被加入了”closed list”，所有的联结点现在在”open list”中待检查，它们包围着浅绿的轮廓，不同颜色的轮廓指示了它们在不同的list。每个联结点都有一条灰线指向它的父节点。</p>
+<p><img src="/img/game/aStarT2.jpg" alt="illustration"></p>
+<p>下一步，我们选择其中一个”open list”的联结点，然后差不多是重复着上面的步骤。但是我们应该选择哪个节点呢？答案是，最小F值的那个。</p>
+<h2 id="路径值">路径值</h2>
+<p>决定选取哪些方格的关键，是要计算出路径的值，就是下面的等式！<br><code>F = G + H</code><br>其中，</p>
+<ul>
+<li>G —》从出发点到某点的路程，按照前面选取的一条路径</li>
+<li>H —》从给定点到某点的预估路程，因为还没产生某点到终点的路径，所以这个值是一个猜测的。</li>
+</ul>
+<p>我们选取路径的方式就是，不断的从”open list”取出节点，然后选择最小F值的方格。随后我们将更详细的讨论这个，先说下我们是怎么计算这个等式的。</p>
+<p>如上所述，G值是从开始点到某方格的路程。在这个例子中，我们指定一个水平或垂直的移动为路程10，以及一个对角移动为路程14。我们使用14，而不是10根号2的实际距离 ，是为了方便计算。</p>
+<p>开始点沿特定的路径到某方格的G值，等于某方格的父节点的G值加上10或14，这看它是沿父节点方格的对角还是非对角移动的。</p>
+<p>H值可用很多方法估算。我们在这里使用曼哈顿方法。具体说，就是计算水平或垂直方向从当前方格移动到目标方格的总方格数目，无视对角运动并忽略了可能碰到的任何障碍。然后，我们将总数乘以10（水平或垂直移动一格的成本）。这被称为曼哈顿方法，大概是因为它像计算城市街区的数量从一个地方到另一个地方，在那里你不能跨块切成斜。</p>
+<p>看上面的说明，你可能想这估算法仅仅是当前方格与目标方格的剩余距离的很粗略的估算。我们实际上试图估计沿路径的剩余距离（通常是更远）。我们的估计与实际剩余距离越接近，算法就更快。然后如果我们高估了这个距离，它并不能保证给我们的最短路径。在这种情况下，我们称为”不可接受的估算”。</p>
+<p>从技术上讲，在该例子中，曼哈顿方法是不可接受的，因为它稍高估了剩下的距离。但是，我们用用也无妨，因为它只是稍微高估了，而且可以更容易理解我们的目的。在那些所得到的路径不是最短路径的极少情况下，所得路径跟最短路径几乎一样短。想知道更多关于估算方法？<a href="http://www.policyalmanac.org/games/heuristics.htm" target="_blank" rel="external">可以参阅这里</a>。</p>
+<p>F由G加H所得。第一个步搜索路径的结果可以看下面的图示。F，G和H的值写在每个方格上面，F在左上角，G在左下角，H右下角。</p>
+<p><img src="/img/game/aStarT3.jpg" alt="first-step"></p>
+<p>我们可以看到开始点的上下左右方块的G值=10，因为它们是开始点水平或垂直方向移动过去的，而对角的4个方块的G值=14。</p>
+<p>H值是由开始点到红色目标块的曼哈顿距离，只是</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="概念">概念</h2>
+<p><img src="/img/game/aStarT1.jpg" alt="introduction"></p>
+<p>A*寻路算法解决的问题是寻找A点到B点的最短路径，不能碰到障碍，如图中所示，绿色块为出发点A点，红色块为目标B点，]]>
+    </summary>
+    
+      <category term="A* Pathfinding" scheme="http://www.xuntuu.com/tags/A-Pathfinding/"/>
+    
+      <category term="html5" scheme="http://www.xuntuu.com/tags/html5/"/>
+    
+      <category term="game" scheme="http://www.xuntuu.com/tags/game/"/>
+    
+      <category term="算法" scheme="http://www.xuntuu.com/categories/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[折腾hexo]]></title>
+    <link href="http://www.xuntuu.com/2014/09/01/work-hexo-more/"/>
+    <id>http://www.xuntuu.com/2014/09/01/work-hexo-more/</id>
+    <published>2014-09-01T11:50:12.000Z</published>
+    <updated>2014-09-19T11:57:26.000Z</updated>
+    <content type="html"><![CDATA[<p>要想让hexo博客更好，更符合我们自己的要求，就要弄清楚怎么配置hexo。先从hexo
+的目录说起。。。。</p>
+<h2 id="目录结构">目录结构</h2>
+<h3 id="目录">目录</h3>
+<figure class="highlight shell"><pre><div class="line">.</div><div class="line">├── .deploy</div><div class="line">├── <span class="keyword">public</span></div><div class="line">├── scaffolds</div><div class="line">├── scripts</div><div class="line">├── <span class="keyword">source</span></div><div class="line">|   ├── _drafts</div><div class="line">|   └── _posts</div><div class="line">├── themes</div><div class="line">├── _config.yml</div><div class="line">└── <span class="keyword">package</span>.json</div></pre></figure>
+
+<ul>
+<li>.deploy：执行hexo deploy命令部署到GitHub上的内容目录</li>
+<li>public：执行hexo generate命令，输出的静态网页内容目录</li>
+<li>scaffolds：layout模板文件目录，其中的md文件可以添加编辑</li>
+<li>scripts：扩展脚本目录，这里可以自定义一些javascript脚本</li>
+<li>source：文章源码目录，该目录下的markdown和html文件均会被hexo处理。该页面对应repo的根目录，404文件、favicon.ico文件，CNAME文件等都应该放这里，该目录下可新建页面目录。<ul>
+<li>_drafts：草稿文章</li>
+<li>_posts：发布文章</li>
+</ul>
+</li>
+<li>themes：主题文件目录</li>
+<li>_config.yml：全局配置文件，大多数的设置都在这里</li>
+<li>package.json：应用程序数据，指明hexo的版本等信息，类似于一般软件中的关于按钮</li>
+</ul>
+<hr>
+<h3 id="配置">配置</h3>
+<p>下面我们来看看全局配置文件，可以配置哪些东西。</p>
+<figure class="highlight shell"><pre><div class="line"><span class="preprocessor"># Site  #整站的基本信息</span></div><div class="line"><span class="label">title:</span> 寻图的博客 <span class="preprocessor">#网站标题</span></div><div class="line"><span class="label">subtitle:</span> 程序猿、全栈工程师 <span class="preprocessor">#网站副标题</span></div><div class="line"><span class="label">description:</span>  寻图的博客 | javascript | css | html | nodejs | java | php <span class="preprocessor">#网站描述，给搜索引擎用的，在生成html中的head-&gt;meta中可看到</span></div><div class="line"><span class="label">author:</span> bruce <span class="preprocessor">#网站作者，在下方显示</span></div><div class="line"><span class="label">email:</span> brucecai2012@gmail.com</div><div class="line"><span class="label">language:</span> <span class="built_in">zh</span>-CN</div><div class="line"></div><div class="line"><span class="preprocessor"># URL</span></div><div class="line"><span class="preprocessor">## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'</span></div><div class="line"><span class="label">url:</span> http://www.xuntuu.com</div><div class="line"><span class="label">root:</span> /</div><div class="line"><span class="label">permalink:</span> :year/:month/:day/:title/</div><div class="line"><span class="label">tag_dir:</span> tags</div><div class="line"><span class="label">archive_dir:</span> archives</div><div class="line"><span class="label">category_dir:</span> categories</div><div class="line"><span class="label">essay_dir:</span> essays</div><div class="line"><span class="label">code_dir:</span> downloads/code</div><div class="line"><span class="label">permalink_defaults:</span></div><div class="line"></div><div class="line"><span class="preprocessor"># Directory</span></div><div class="line"><span class="label">source_dir:</span> source</div><div class="line"><span class="label">public_dir:</span> public</div><div class="line"></div><div class="line"><span class="preprocessor"># Writing  #写文章选项</span></div><div class="line"><span class="label">new_post_name:</span> :title.md <span class="preprocessor"># File name of new posts</span></div><div class="line"><span class="label">default_layout:</span> post  <span class="preprocessor">#默认layout方式</span></div><div class="line"><span class="label">titlecase:</span> false <span class="preprocessor"># Transform title into titlecase</span></div><div class="line"><span class="label">external_link:</span> true <span class="preprocessor"># Open external links in new tab</span></div><div class="line"><span class="label">filename_case:</span> <span class="number">0</span></div><div class="line"><span class="label">render_drafts:</span> false</div><div class="line"><span class="label">post_asset_folder:</span> false</div><div class="line"><span class="label">relative_link:</span> false</div><div class="line"><span class="label">highlight:</span>  <span class="preprocessor">#代码高亮</span></div><div class="line">  enable: true  <span class="preprocessor">#是否启用</span></div><div class="line">  line_number: false  <span class="preprocessor">#是否显示行号</span></div><div class="line">  tab_replace: </div><div class="line"></div><div class="line"><span class="preprocessor"># Category & Tag   #分类与标签</span></div><div class="line"><span class="label">default_category:</span> uncategorized</div><div class="line"><span class="label">category_map:</span></div><div class="line"><span class="label">tag_map:</span></div><div class="line"></div><div class="line"><span class="preprocessor"># Archives  #存档，这里的说明好像不对。全部选择1，这个选项与主题中的选项有时候会有冲突</span></div><div class="line"><span class="preprocessor">## 2: Enable pagination</span></div><div class="line"><span class="preprocessor">## 1: Disable pagination</span></div><div class="line"><span class="preprocessor">## 0: Fully Disable</span></div><div class="line"><span class="label">archive:</span> <span class="number">2</span></div><div class="line"><span class="label">category:</span> <span class="number">2</span></div><div class="line"><span class="label">tag:</span> <span class="number">2</span></div><div class="line"></div><div class="line"><span class="preprocessor"># Server  #本地服务参数</span></div><div class="line"><span class="preprocessor">## Hexo uses Connect as a server</span></div><div class="line"><span class="preprocessor">## You can customize the logger format as defined in</span></div><div class="line"><span class="preprocessor">## http://www.senchalabs.org/connect/logger.html</span></div><div class="line"><span class="label">port:</span> <span class="number">4000</span></div><div class="line"><span class="label">server_ip:</span> localhost</div><div class="line"><span class="label">logger:</span> false</div><div class="line"><span class="label">logger_format:</span> dev</div><div class="line"></div><div class="line"><span class="preprocessor"># Date / Time format  #日期显示格式</span></div><div class="line"><span class="preprocessor">## Hexo uses Moment.js to parse and display date</span></div><div class="line"><span class="preprocessor">## You can customize the date format as defined in</span></div><div class="line"><span class="preprocessor">## http://momentjs.com/docs/#/displaying/format/</span></div><div class="line"><span class="label">date_format:</span> MMM D YYYY</div><div class="line"><span class="label">time_format:</span> H:mm:ss</div><div class="line"></div><div class="line"><span class="preprocessor"># Pagination #分页设置</span></div><div class="line"><span class="preprocessor">## Set per_page to 0 to disable pagination</span></div><div class="line"><span class="label">per_page:</span> <span class="number">10</span>  <span class="preprocessor">#每页10篇文章</span></div><div class="line"><span class="label">pagination_dir:</span> page</div><div class="line"></div><div class="line"><span class="preprocessor"># Disqus #社会化评论disqus，我使用多说，在主题中配置</span></div><div class="line"><span class="label">disqus_shortname:</span></div><div class="line"></div><div class="line"><span class="preprocessor"># Extensions</span></div><div class="line"><span class="preprocessor">## Plugins: https://github.com/hexojs/hexo/wiki/Plugins</span></div><div class="line"><span class="preprocessor">## Themes: https://github.com/hexojs/hexo/wiki/Themes</span></div><div class="line"><span class="label">theme:</span> pacman</div><div class="line"><span class="label">exclude_generator:</span></div><div class="line"></div><div class="line"><span class="preprocessor"># Deployment</span></div><div class="line"><span class="preprocessor">## Docs: http://hexo.io/docs/deployment.html</span></div><div class="line"><span class="label">deploy:</span></div><div class="line">  type: github</div><div class="line">  repository: git@github.com:letshare/letshare.github.io.git  <span class="preprocessor">#你的GitHub Pages仓库</span></div></pre></figure>
+
+<hr>
+<h2 id="修改局部页面">修改局部页面</h2>
+<p>页面展现的全部逻辑都在每个主题中控制，源代码在hexo\themes\你使用的主题\中，以pacman主题为例：</p>
+<figure class="highlight css"><pre><div class="line">.</div><div class="line">├── languages          #多语言</div><div class="line">|   ├── default.yml    #默认语言</div><div class="line">|   └── zh-CN.yml      #中文语言</div><div class="line">├── layout             #布局，根目录下的*.ejs文件是对主页，分页，存档等的控制</div><div class="line">|   ├── _partial       #局部的布局，此目录下的*.ejs是对头尾等局部的控制</div><div class="line">|   └── _widget        #小挂件的布局，页面下方小挂件的控制</div><div class="line">|── scripts            #脚本    </div><div class="line">├── source             #源码</div><div class="line">|   ├── css            #css源码 </div><div class="line">|   |   ├── _base      #*.styl基础css</div><div class="line">|   |   ├── _partial   #*.styl局部css</div><div class="line">|   |   └── style.styl #*.styl引入需要的css源码</div><div class="line">|   ├── fancybox       #fancybox效果源码</div><div class="line">|   ├── font           #字体</div><div class="line">|   ├── img            #图片</div><div class="line">|   └── js             #javascript源代码</div><div class="line">├── _config.yml        #主题配置文件</div><div class="line">└── README.md          #用GitHub的都知道</div></pre></figure>
+
+<p>如果你需要修改头部，直接修改hexo/themes/pacman/layout/_partial/header.ejs，比如搜索框替换成百度搜索：</p>
+<figure class="highlight ejs"><pre><div class="line">&lt;form <span class="variable">class=</span><span class="string">"search"</span> <span class="variable">method=</span><span class="string">"get"</span> <span class="variable">target=</span><span class="string">"_blank"</span> <span class="variable">action=</span><span class="string">"http://www.baidu.com/baidu"</span> <span class="variable">accept-charset=</span><span class="string">"utf-8"</span>&gt;       </div><div class="line">    &lt;input <span class="variable">name=</span><span class="string">"word"</span> <span class="variable">id=</span><span class="string">"search"</span> <span class="variable">autocomplete=</span><span class="string">"off"</span> <span class="variable">size=</span><span class="string">"30"</span> <span class="variable">maxlength=</span><span class="string">"30"</span> <span class="variable">placeholder=</span><span class="string">"&lt;%= __('search') %&gt;"</span> /&gt;</div><div class="line">    &lt;input <span class="variable">type=</span><span class="string">"submit"</span> <span class="variable">value=</span><span class="string">"Baidu Search"</span> <span class="variable">style=</span><span class="string">"display:none;"</span>/&gt;					       </div><div class="line">    &lt;input <span class="variable">name=</span><span class="string">"tn"</span> <span class="variable">type=</span><span class="string">"hidden"</span> <span class="variable">value=</span><span class="string">"bds"</span> /&gt;</div><div class="line">    &lt;input <span class="variable">name=</span><span class="string">"cl"</span> <span class="variable">type=</span><span class="string">"hidden"</span> <span class="variable">value=</span><span class="string">"3"</span> /&gt;</div><div class="line">    &lt;input <span class="variable">name=</span><span class="string">"si"</span> <span class="variable">type=</span><span class="string">"hidden"</span> <span class="variable">value=</span><span class="string">"www.xuntuu.com"</span> /&gt;</div><div class="line">    &lt;input <span class="variable">name=</span>ie <span class="variable">type=</span>hidden <span class="variable">value=</span>utf-<span class="number">8</span>&gt;</div><div class="line">    &lt;input <span class="variable">name=</span><span class="string">"ct"</span> <span class="variable">type=</span><span class="string">"hidden"</span> <span class="variable">value=</span><span class="string">"2097152"</span> /&gt;</div><div class="line">    &lt;label <span class="variable">for=</span><span class="string">"s"</span>&gt;Search&lt;/label&gt;</div><div class="line">&lt;/form&gt;</div></pre></figure>
+
+<p>将如上代码加入即可，您需要修改css以便这个搜索框比较美观或跟你的主题一致，我就是使用了主题中原来google的搜索框样式。</p>
+<hr>
+<h2 id="自定义404页面">自定义404页面</h2>
+<p>GitHub Pages 自定义404页面非常容易，直接在对应分支（个人主页是master分支，项目也是gh-pages分支）根目录下创建自己的404.html就可以。hexo是在source目录下创建一个404.html，发布的时候会发布到对应分支的根目录下。
+404页面其实可以一些不同寻常的事情，比如广告、宣传、公益，推荐几个公益404：</p>
+<ul>
+<li><a href="http://www.qq.com/404" target="_blank" rel="external">腾讯公益404</a></li>
+<li><a href="http://yibo.iyiyun.com/Index/web404" target="_blank" rel="external">404公益_益云(公益互联网)社会创新中心</a></li>
+<li><a href="http://404page.missingkids.org.tw/" target="_blank" rel="external">失蹤兒童少年資料管理中心404</a></li>
+</ul>
+<p>我接入的是腾讯404，你可以尝试下访问一个不存在的资源，比如：<a href="http://www.xuntuu.com/hello" target="_blank" rel="external">http://www.xuntuu.com/hello</a></p>
+<hr>
+<h2 id="统计">统计</h2>
+<p>因Google Analytics基本被墙，故用百度统计，以pacman主题为例，介绍如何添加。</p>
+<p>首先在/themes/pacman/_config.yml添加这段配置。</p>
+<figure class="highlight shell"><pre><div class="line">bd_analytics:</div><div class="line">  enable: <span class="literal">true</span></div></pre></figure>
+
+<p>新建 pacman/layout/_partial/bd_analytics.ejs,内容如下：</p>
+<figure class="highlight ejs"><pre><div class="line"><span class="vbscript">&lt;% <span class="keyword">if</span> (theme.bd_analytics.enable){ %&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="comment">//你的百度统计代码</span></div><div class="line"><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div><div class="line"><span class="vbscript">&lt;% } %&gt;</span></div></pre></figure>
+
+<blockquote>
+<p>注册并登录百度统计获取你的统计代码。</p>
+</blockquote>
+<p>编辑 pacman/layout/_partial/after_footer.ejs,在最后添加：</p>
+<figure class="highlight ejs"><pre><div class="line">&lt;<span class="variable">%-</span> partial(<span class="string">'bd_analytics'</span>) <span class="variable">%&gt;</span></div></pre></figure>
+
+<hr>
+<h2 id="自定义挂件">自定义挂件</h2>
+<p>除了默认已提供的挂件外，你还可以自定义自己的小挂件，在/themes/pacman/layout/_widget/下，新建自己的ejs文件，如myWidget.ejs，然后在配置文件/themes/pacman/_config.yml中配置。</p>
+<figure class="highlight shell"><pre><div class="line">widget<span class="variable">s:</span></div><div class="line">  - myWidget</div></pre></figure>
+
+<p>用上述方法可以添加新浪微博小挂件。</p>
+<ul>
+<li>生成自己的微博组件。</li>
+<li>添加/themes/pacman/layout/_widget/weibo.ejs文件。</li>
+<li>配置/themes/pacman/_config.yml。</li>
+</ul>
+<hr>
+<h2 id="分享和网站图标">分享和网站图标</h2>
+<p>pacman主题可以在配置中pacman/_config.yml配置图标：</p>
+<figure class="highlight shell"><pre><div class="line"><span class="attribute">favicon</span>: <span class="string">img/favicon.ico</span></div></pre></figure>
+
+<p>将你的favicon.ico放到工程根目录下的img即可，也就是hexo\source\img目录。可以在<a href="http://www.faviconer.com/" target="_blank" rel="external">Faviconer</a>制作你的ico图标，国内有<a href="http://www.bitbug.net/" target="_blank" rel="external">比特虫</a>。</p>
+<hr>
+<h2 id="插件">插件</h2>
+<p>安装插件：</p>
+<figure class="highlight shell"><pre><div class="line"><span class="input"><span class="prompt">npm install &lt;plugin-name&gt;</span> --save</span></div></pre></figure>
+
+<p>启用插件：在hexo/_config.yml文件添加：</p>
+<figure class="highlight shell"><pre><div class="line"><span class="input"><span class="prompt">plugins:</span></span></div><div class="line">- &lt;plugin-name&gt;  <span class="comment">#插件名</span></div></pre></figure>
+
+<p>升级插件：</p>
+<figure class="highlight shell"><pre><div class="line">npm <span class="keyword">update</span></div></pre></figure>
+
+<p>卸载插件：</p>
+<figure class="highlight shell"><pre><div class="line">npm <span class="operator"><span class="keyword">uninstall</span> &lt;<span class="keyword">plugin</span>-name&gt;</span></div></pre></figure>
+
+<h3 id="RSS插件">RSS插件</h3>
+<p>将上述命令中的『plugin-name』，替换为hexo-generator-feed。一旦安装完成，你可以在主题配置显示你站点的RSS，文件路径/atom.xml。</p>
+<p>你可以用rss作为迁移工具，用如下命令读取其他位置的rss：</p>
+<figure class="highlight shell"><pre><div class="line">hexo migrate rss &lt;<span class="built_in">source</span>&gt;</div></pre></figure>
+
+<blockquote>
+<p>『source』是本地或网络文件路径。</p>
+</blockquote>
+<h3 id="Sitemap插件">Sitemap插件</h3>
+<p>将上述命令中的『plugin-name』，替换为hexo-generator-sitemap。安装好插件后在 _config.yml配置：</p>
+<figure class="highlight shell"><pre><div class="line"><span class="label">sitemap:</span></div><div class="line">    path: sitemap.xml</div></pre></figure>
+
+<p>每次生成博客的时候都会重新生成 sitemap.xml。你可以将你sitemap.xml提交给搜索引擎。</p>
+<p>更多插件的安装方法，请参考<a href="https://github.com/hexojs/hexo/wiki/Plugins" target="_blank" rel="external">官方Wiki</a>。</p>
+<hr>
+<h2 id="工具推荐">工具推荐</h2>
+<h3 id="网站加速">网站加速</h3>
+<p><a href="http://www.webluker.com/" target="_blank" rel="external">Webluker-CDN 网站加速 免费CDN DNS解析</a><br><a href="http://blog.webluker.com/" target="_blank" rel="external">Webluker-FAQ索引</a></p>
+<h3 id="网站监控">网站监控</h3>
+<p><a href="http://www.jiankongbao.com/" target="_blank" rel="external">监控宝-网站监控 网页监控 服务器监控</a><br><a href="http://www.jiankongbao.com/faq" target="_blank" rel="external">监控宝-常见问题</a></p>
+<h3 id="站长工具">站长工具</h3>
+<p><a href="http://www.google.com/intl/zh-CN/webmasters" target="_blank" rel="external">谷歌站长工具</a><br><a href="http://zhanzhang.baidu.com/" target="_blank" rel="external">百度站长工具</a><br><a href="http://tool.chinaz.com/" target="_blank" rel="external">站长之家工具</a><br><a href="http://zhanzhang.so.com/" target="_blank" rel="external">360搜索站长平台</a><br><a href="http://webscan.360.cn/" target="_blank" rel="external">360网站安全检测</a><br><a href="http://ce.cloud.360.cn/index" target="_blank" rel="external">奇云测</a><br><a href="http://jk.cloud.360.cn/" target="_blank" rel="external">360云监控</a>  </p>
+<h3 id="SEO">SEO</h3>
+<p><a href="http://www.google.com/intl/zh-CN/webmasters/docs/search-engine-optimization-starter-guide-zh-cn.pdf" target="_blank" rel="external">谷歌搜索引擎优化初学者指南.PDF</a></p>
+<h3 id="数据统计">数据统计</h3>
+<p><a href="http://tongji.baidu.com/" target="_blank" rel="external">百度统计</a><br><a href="http://www.google.com/analytics/web/?hl=zh-CN" target="_blank" rel="external">Google Analytics</a></p>
+<h3 id="企业邮箱">企业邮箱</h3>
+<p><a href="http://exmail.qq.com/" target="_blank" rel="external">腾讯企业邮箱</a><br><a href="http://service.exmail.qq.com/cgi-bin/help?subtype=1&amp;&amp;id=20012&amp;&amp;no=1000931" target="_blank" rel="external">在DNSPod域名解析商处如何设置企业邮箱</a></p>
+<h3 id="图片生成">图片生成</h3>
+<p><a href="http://pic.sdodo.com/tool/mailpic" target="_blank" rel="external">邮箱地址生成图片</a><br><a href="http://www.makepic.com/email.php" target="_blank" rel="external">MakePic.com邮址图片生成</a></p>
+<h3 id="徽章生成">徽章生成</h3>
+<p><a href="http://creatr.cc/creatr" target="_blank" rel="external">Logo Creatr</a><br><a href="http://www.simwebsol.com/imagetool" target="_blank" rel="external">Web 2.0 Logo Creator</a> <em>(可能需翻墙)</em></p>
+<h3 id="文章推荐/猜你喜欢">文章推荐/猜你喜欢</h3>
+<p><a href="http://www.wumii.com/widget/relatedItems" target="_blank" rel="external">无觅关联推荐</a><br><a href="http://www.ujian.cc/" target="_blank" rel="external">友荐</a><br><a href="http://www.lezhi.me/" target="_blank" rel="external">乐知推荐</a><br><a href="http://tuijian.baidu.com/" target="_blank" rel="external">百度推荐</a>  </p>
+<h3 id="广告">广告</h3>
+<p><a href="http://union.baidu.com/" target="_blank" rel="external">百度联盟</a>  </p>
+<hr>
+<h2 id="常见问题">常见问题</h2>
+<p>配置文件缺少空格会报错，每项配置:后面一定要加个空格，不知道的童鞋可能会中招。比如我就在配置git的时候冒号后面没加空格，出错后一直以为是其他问题。</p>
+<figure class="highlight shell"><pre><div class="line">deploy:</div><div class="line">  <span class="built_in">type</span>: github</div><div class="line">  repository: git@github.com:youname/youname.github.<span class="built_in">io</span>.git</div></pre></figure>
+
+<hr>
+<h2 id="参考">参考</h2>
+<ul>
+<li><a href="http://ibruce.info/2013/11/22/hexo-your-blog/" target="_blank" rel="external">hexo你的博客</a></li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>要想让hexo博客更好，更符合我们自己的要求，就要弄清楚怎么配置hexo。先从hexo
+的目录说起。。。。</p>
+<h2 id="目录结构">目录结构</h2>
+<h3 id="目录">目录</h3>
+<figure class="highlight shell"><pr]]>
+    </summary>
+    
+      <category term="hexo" scheme="http://www.xuntuu.com/tags/hexo/"/>
+    
+      <category term="blog" scheme="http://www.xuntuu.com/tags/blog/"/>
+    
+      <category term="web" scheme="http://www.xuntuu.com/categories/web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[automating  workflow]]></title>
+    <link href="http://www.xuntuu.com/2014/08/20/automating/"/>
+    <id>http://www.xuntuu.com/2014/08/20/automating/</id>
+    <published>2014-08-20T14:14:10.000Z</published>
+    <updated>2014-09-21T06:39:44.000Z</updated>
+    <content type="html"><![CDATA[<p>开发一个web项目可能会。。。
+<img src="/img/automating/slide_2.jpg" alt="">
+需要掌握的知识越来越复杂。。。<br>boilerplate abstractions frameworks testing docs workflow dependency management performance   optimization build continuous integration<br>deployment version control   </p>
+<p>时间是保持效率的关键。。。</p>
+<p>怎么做节省你的时间？</p>
+<p>自动构建重复的任务让你的工作保持效率！</p>
+<p>自动化阐述的不是懒惰，而是效率！</p>
+<p><img src="/img/automating/slide_13.jpg" alt=""></p>
+<p>好的工具可以产生巨大的生产力，艺术家or泥瓦工？</p>
+<p><img src="/img/automating/slide_15.jpg" alt=""></p>
+<p>对前端攻城狮来说，一般的工作流程是这样的：</p>
+<p><strong>初始化一个项目</strong><br>搭建过程<br>下载 libraries<br>下载 templates<br>下载 frameworks  </p>
+<p><strong>开发过程</strong><br>Sass/Less/Stylus<br>CoffeeScript<br>Jade/Haml<br>LiveReload<br>JS/CSS Linting  </p>
+<p><strong>部署环节</strong><br>代码检查<br>单元测试<br>编译代码<br>压缩和合并<br>生成图片和图标<br>性能优化<br>HTTP服务<br>发布服务  </p>
+<p>你可能用到一些工具自动构建一些小项目</p>
+<p>codekit<br>hammar<br>prepros<br>koala-app<br>mixture<br>compass<br>scout  </p>
+<p>持续的提升<br>First Do it.<br>Then do it right.<br>Then do it better.  </p>
+<p>怎样才能更好呢？</p>
+<p>所有项目适用的自动化构建流程</p>
+<p><img src="/img/automating/slide_34.jpg" alt="YEOMAN"></p>
+<p>Yo 让搭建框架代码更少<br>Grunt 帮助部署、预览、测试<br>Brow 帮助管理依赖  </p>
+<p><img src="/img/automating/slide_36.jpg" alt=""></p>
+<p>根据你的要求弹性地自定义初始化工作<br>减少写模板的时间<br>增加开发过程的效率和乐趣  </p>
+<p><img src="/img/automating/slide_40.jpg" alt="Grunt"></p>
+<p>帮助运行重复的任务</p>
+<p>Linting<br>Compiling<br>Minification<br>Testing<br>Conversion<br>Documentation<br>Deployment<br>And More  </p>
+<p>你可能会选择其他的 Rake/Cake/Make/Ant</p>
+<p><img src="/img/automating/slide_44.jpg" alt="Grunt"></p>
+<p>Grunt 只需要配置好两个文件 package.json Gruntfile.js</p>
+<p>package.json指定插件和元信息。</p>
+<figure class="highlight javascript"><pre><div class="line">{</div><div class="line">	name:<span class="string">"awesome-app"</span>,</div><div class="line">	version:<span class="string">"0.0.1"</span>,</div><div class="line">	devDependencies:{</div><div class="line">		grunt:<span class="string">"~0.4.5"</span>,</div><div class="line">		grunt-contrib-jshint:<span class="string">"~0.10.0"</span>,</div><div class="line">		grunt-contrib-uglify:<span class="string">"~0.6.0"</span></div><div class="line">	}</div><div class="line">}</div></pre></figure>
+
+<p>Gruntfile.js配置任务和加载插件</p>
+<figure class="highlight javascript"><pre><div class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span><span class="params">(grunt)</span></span>{</div><div class="line">	grunt.initConfig({</div><div class="line">		uglify:{</div><div class="line">			build:{src:<span class="string">'app.js'</span>,dest:<span class="string">'build/app.min.js'</span>}</div><div class="line">		},</div><div class="line">		jshint:{</div><div class="line">			all:[<span class="string">'**/*.js'</span>]</div><div class="line">		}</div><div class="line">	});</div><div class="line"></div><div class="line">	grunt.loadNpmTasks(<span class="string">'grunt-contrib-uglify'</span>);</div><div class="line">	grunt.loadNpmTasks(<span class="string">'grunt-contrib-jshint'</span>);</div><div class="line">	grunt.registerTask(<span class="string">'default'</span>,[<span class="string">'uglify'</span>,<span class="string">'jshint'</span>]);</div><div class="line">};</div></pre></figure>
+
+
+
+<figure class="highlight shell"><pre><div class="line"><span class="variable">$ </span>npm install -g grunt-cli</div><div class="line"><span class="variable">$ </span>npm install</div><div class="line"><span class="variable">$ </span>grunt </div><div class="line"><span class="constant">Running</span> <span class="string">"uglify:build"</span>(uglify)task</div><div class="line"><span class="constant">Running</span> <span class="string">"jshint:all"</span>(jshint)task</div><div class="line"><span class="constant">Done</span>.</div></pre></figure>
+
+<p><img src="/img/automating/not-bad.jpg" alt=""></p>
+<figure class="highlight shell"><pre><div class="line"><span class="input"><span class="prompt">$ npm install grunt-&lt;taskname&gt;</span> --save-dev</span></div></pre></figure>
+
+<p>task tip<br><strong>grunt-responsive-images</strong><br>生成多种尺寸的图片  </p>
+<p>task tip<br><strong>grunt-contrib-imagemin</strong><br>优化图片可以让你的页面更”轻”  </p>
+<p>speed tip<br><strong>grunt-concurrent</strong><br>同时跑一些比较慢的任务Sass、Coffee，可以显著的提供你的构建速度。  </p>
+<p>speed tip<br><strong>grunt-newer</strong><br>只有原文件在上一次任务之后改动过才重新运行任务。  </p>
+<p>你是否遇到类似的情况，使用了bootstropUI框架，实际上你的页面只用了bootstrop不到了10%的css样式。<br>可以使用devTools分析页面。<br><img src="/img/automating/audits.png" alt=""></p>
+<p><strong>grunt-uncss</strong><br>可以在build的时候去除那些没用到的css。<br>then，那些几百k的css文件就可以精简为很小的css，提供页面的渲染性能。</p>
+<p><img src="/img/automating/slide_70.jpg" alt="Bower"></p>
+<p>web项目的包工具</p>
+<p>老旧的方式是怎么管理包的呢</p>
+<ol>
+<li>上一次升级包是6个月前，要升级下了</li>
+<li>打开网站</li>
+<li>下载包</li>
+<li>复制到自己的项目中</li>
+<li>然后拼命找项目中用到包的地方，改引用</li>
+</ol>
+<p>新的方式</p>
+<figure class="highlight shell"><pre><div class="line">$ npm install -<span class="keyword">g</span> bower</div><div class="line">$ bower <span class="built_in">search</span> angular</div><div class="line">$ bower install angular --save-dev</div><div class="line">bower not-cached    gi<span class="variable">t:</span>//github.<span class="keyword">com</span>/angular/bower-angular.git#*</div><div class="line">bower <span class="built_in">resolve</span>       gi<span class="variable">t:</span>//github.<span class="keyword">com</span>/angular/bower-angular.git#*</div><div class="line">bower download      http<span class="variable">s:</span>//github.<span class="keyword">com</span>/angular/bower-angular/archive/v1.<span class="number">2.25</span>.tar</div><div class="line">.gz</div><div class="line">bower progress      angular#* received <span class="number">0.4</span>MB of <span class="number">0.4</span>MB downloaded, <span class="number">97</span>%</div><div class="line">bower extract       angular#* archive.tar.gz</div><div class="line">bower invalid-meta  angular <span class="keyword">is</span> missing <span class="string">"ignore"</span> entry in bower.json</div><div class="line">bower resolved      gi<span class="variable">t:</span>//github.<span class="keyword">com</span>/angular/bower-angular.git#<span class="number">1.2</span>.<span class="number">25</span></div><div class="line">bower install       angular#<span class="number">1.2</span>.<span class="number">25</span></div><div class="line">bower <span class="keyword">no</span>-json       No bower.json <span class="keyword">file</span> <span class="keyword">to</span> save <span class="keyword">to</span>, use bower init <span class="keyword">to</span> create one</div></pre></figure>
+
+<p>包下载在当前目录/bower_components/包。</p>
+<p>安装命令有这几种：</p>
+<figure class="highlight shell"><pre><div class="line"><span class="variable">$ </span>bower install</div><div class="line"><span class="variable">$ </span>bower install &lt;package&gt;</div><div class="line"><span class="variable">$ </span>bower install &lt;package&gt;<span class="value">#&lt;version&gt;</span></div><div class="line"><span class="variable">$ </span>bower install &lt;name&gt;=&lt;package&gt;<span class="value">#&lt;version&gt;</span></div></pre></figure>
+
+
+
+<figure class="highlight shell"><pre><div class="line">$ bower list</div><div class="line">bower check-<span class="built_in">new</span>     Checking <span class="keyword">for</span> <span class="built_in">new</span> versions <span class="operator">of</span> <span class="operator">the</span> project dependencies..</div><div class="line">letshare.github.io d:\xuntuu\letshare.github.io</div><div class="line">└── angular<span class="comment">#1.2.25 extraneous (1.2.26-build.468+sha.a365152 available, latest</span></div><div class="line"> is <span class="number">1.3</span><span class="number">.0</span>-rc<span class="number">.2</span>)</div></pre></figure>
+
+<p>运行基于：</p>
+<ul>
+<li>Git</li>
+<li>HTTP(s)</li>
+<li>Zip</li>
+<li>npm</li>
+</ul>
+<p>嘿嘿，从此几行命令，就可以解决依赖问题了</p>
+<p><strong>grunt-bower-install</strong></p>
+<figure class="highlight shell"><pre><div class="line">$ npm <span class="operator"><span class="keyword">install</span> grunt-bower-<span class="keyword">install</span> <span class="comment">--save-dev</span></span></div></pre></figure>
+
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>开发一个web项目可能会。。。
+<img src="/img/automating/slide_2.jpg" alt="">
+需要掌握的知识越来越复杂。。。<br>boilerplate abstractions frameworks testing docs workfl]]>
+    </summary>
+    
+      <category term="automating" scheme="http://www.xuntuu.com/tags/automating/"/>
+    
+      <category term="效率" scheme="http://www.xuntuu.com/categories/%E6%95%88%E7%8E%87/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[玩转hexo]]></title>
+    <link href="http://www.xuntuu.com/2014/08/12/play-hexo/"/>
+    <id>http://www.xuntuu.com/2014/08/12/play-hexo/</id>
+    <published>2014-08-12T11:50:12.000Z</published>
+    <updated>2014-09-21T23:50:14.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="一些小玩意">一些小玩意</h2>
+<p><a id="more"></a></p>
+<h3 id="fancybox">fancybox</h3>
+<p>只要在markdown页头加上:</p>
+<figure class="highlight markdown"><pre><div class="line">title:  xxx</div><div class="line">date: xxx</div><div class="line">photos:</div><div class="line"><span class="bullet">- </span>/img/201307/angelababy.jpg</div><div class="line"><span class="bullet">- </span>/img/201307/july.jpg</div></pre></figure>
+
+<h3 id="文章摘要">文章摘要</h3>
+<p>在需要显示摘要的地方加入：</p>
+<figure class="highlight markdown"><pre><div class="line">//以上为摘要内容</div><div class="line"><span class="xml"><span class="comment">&lt;!-- more--&gt;</span></span></div><div class="line">//以下为详细内容</div></pre></figure>
+
+<p>那么在首页只会显示文章摘要，更多内容点击<code>Read More</code>跳到文章页。</p>
+<p>这个功能跟主题有关，比如我的pacman主题就没有，而默认的landscape主题是有这个功能的。</p>
+<h3 id="description">description</h3>
+<p>可以在页头加上description描述网页，会转换为<code>&lt;meta name=&quot;description&quot; content=&quot;&quot;&gt;</code>，有利于seo哦。</p>
+<h2 id="主题安装">主题安装</h2>
+<p>一个好的博客，除了内容优秀外，一个好的主题也重要，能传达一个博主的品味。<a href="http://github.com/tommy351/hexo/wiki/Themes" title="hexo thems list" target="_blank" rel="external">hexo thems</a>，个人比较喜欢pacman,简单大气小清新。</p>
+<p>安装方式：</p>
+<figure class="highlight bash"><pre><div class="line">$ git clone https://github.com/A-limon/pacman.git themes/pacman</div></pre></figure>
+
+<p>主题配置方式可以参阅它的主页<a href="https://github.com/A-limon/pacman" title="pacman github" target="_blank" rel="external">pacman</a>。</p>
+<h2 id="github_pages">github pages</h2>
+<p>github pages的发布有两种形式，一种是作为个人主页，访问链接为http(s)://username.github.io,
+另外一种是作为项目页,访问链接为http(s)://username.github.io/projectnam。</p>
+<p>个人主页需要建立一个名为username.github.io的repository，访问的页面发布在分支master下 ，而项目的的页面分支建在gh-pages分支下。</p>
+<p>你需要配置_config.yml的deploy选项，才可以用”hexo d”发布文章到github pages，说白了就是”hexo d”提交你的.deploy目录下的所有文件到你github pages对应的仓库中，</p>
+<figure class="highlight"><pre><div class="line">deploy:</div><div class="line">  <span class="keyword">type</span>: github</div><div class="line">  repo: &lt;repository url&gt;</div><div class="line">  branch: [branch]</div><div class="line">  <span class="keyword">message</span>: [<span class="keyword">message</span>]</div></pre></figure>
+
+<p>branch默认是master，message默认是<code>Site updated:</code>。</p>
+<h2 id="BitTorrent">BitTorrent</h2>
+<p>github pages是用hexo push到github仓库的，但我的文章源码并不想push到github仓库上。而我又想随处可以编辑我的文章，很多人说用dropdox，但被墙了，国内环境不好用。最终找到了<a href="http://www.bittorrent.com/" target="_blank" rel="external">BitTorrent</a>。这是个好东西，运用p2p技术，你的文件并不会传达某个云或服务器，安全私密性完全可以得到保障。通过二维码或密钥或链接的形式，将你的文件共享给别的节点。在BitTorrent中，各个同步的机器称为节点。据说Facebook就是运用BitTorrent协议技术在它的全球伺服器上同步代码。。</p>
+<p>BitTorrent像git的.gitignore一样可以配置让某些文件不同步，比如你并不想同步发布的目录.deploy以及public，那么找到BitTorrent的同步目录.sync下的IgnoreList文件，配置方法跟.gitignore一样。比如：</p>
+<figure class="highlight shell"><pre><div class="line"><span class="title">.DS_Store</span></div><div class="line"><span class="title">.Spotlight-V100</span></div><div class="line"><span class="title">.Trashes</span></div><div class="line">ehthumbs.db</div><div class="line">desktop.ini</div><div class="line">Thumbs.db</div><div class="line">db.json</div><div class="line">debug.log</div><div class="line">public</div><div class="line"><span class="title">.deploy</span></div><div class="line"><span class="title">.git</span></div></pre></figure>
+
+<p>BitTorrent有个bug，其他节点的IgnoreList是初始的IgnoreList，不是你同步出去的IgnoreList。比如hexo会生成public和.deploy目录，这两个目录是本地目录并不想同步给其他节点。经过我的测试找到了一个方法，我是输入密钥的方式同步源节点文件。</p>
+<ol>
+<li>第一次在别的机器同步文件后，马上断开链接。</li>
+<li>重新编辑这台机器的IgnoreList。</li>
+<li>还是输入那个密钥，还是把同步文件放在刚才的文件夹。
+第二次建立同步链接的时候，并不会覆盖IgnoreLis，于是解决了这个问题，本地的public和.deploy目录就不会同步给其他节点了。</li>
+</ol>
+<h2 id="参考">参考</h2>
+<ul>
+<li><a href="https://help.github.com/categories/20/articles" target="_blank" rel="external">https://help.github.com/categories/20/articles</a></li>
+<li><a href="https://help.github.com/articles/user-organization-and-project-pages" target="_blank" rel="external">https://help.github.com/articles/user-organization-and-project-pages</a></li>
+<li><a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">http://hexo.io/docs/deployment.html</a></li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="一些小玩意">一些小玩意</h2>
+<p>]]>
+    
+    </summary>
+    
+      <category term="hexo" scheme="http://www.xuntuu.com/tags/hexo/"/>
+    
+      <category term="blog" scheme="http://www.xuntuu.com/tags/blog/"/>
+    
+      <category term="web" scheme="http://www.xuntuu.com/categories/web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[用hexo建blog]]></title>
+    <link href="http://www.xuntuu.com/2014/08/02/build-hexo-blog/"/>
+    <id>http://www.xuntuu.com/2014/08/02/build-hexo-blog/</id>
+    <published>2014-08-02T12:08:20.000Z</published>
+    <updated>2014-09-19T11:57:03.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="why_hexo？">why hexo？</h2>
+<p>一直纠结该用什么写博客，wordpress、cnbolg、jekyll，直到遇到hexo。</p>
+<p>它是用nodejs写的，跨平台、性能优秀，当文档很多时生成速度是jekyll的几十倍。而又保留了jekyll的好处，它是静态博客系统可以托管在github，使用markdown文档作为中间文档。</p>
+<p>api简单好用：</p>
+<figure class="highlight shell"><pre><div class="line"><span class="variable">$ </span>hexo n <span class="comment">#写文章</span></div><div class="line"><span class="variable">$ </span>hexo g <span class="comment">#生成</span></div><div class="line"><span class="variable">$ </span>hexo d <span class="comment">#部署 # 可与hexo g合并为 hexo d -g</span></div></pre></figure>
+
+<p>下面介绍，如果搭建一个hexo博客。</p>
+<a id="more"></a>
+
+<h2 id="环境准备">环境准备</h2>
+<h3 id="安装nodejs">安装nodejs</h3>
+<p>去<a href="http://nodejs.org/" title="noejs home" target="_blank" rel="external">nodejs官网</a>下载最新稳定版的nodejs。</p>
+<h3 id="安装hexo">安装hexo</h3>
+<p>最新版的nodejs集成了npm，可以直接安装hexo。</p>
+<figure class="highlight shell"><pre><div class="line"><span class="variable">$ </span>npm install -g hexo</div></pre></figure>
+
+<h3 id="安装git客户端">安装git客户端</h3>
+<p>去<a href="https://github.com/" title="github home" target="_blank" rel="external">github官网</a>申请一个github账号。</p>
+<p>因为本屌丝用的是windows，就用了<a href="https://windows.github.com/" title="github client download" target="_blank" rel="external">github的客户端</a>，它附带了一个git的shell工具。</p>
+<h3 id="markdown">markdown</h3>
+<p>如果你不太熟悉markdown的使用，可以参考我的另外一篇文章<a href="/2013/05/13/markdown-use/">markdown用法</a></p>
+<h2 id="hexo你的博客">hexo你的博客</h2>
+<h3 id="init">init</h3>
+<p>将一个目录初始成hexo项目，初始化后目录下有个package.json记录了依赖的nodejs模块，运行<code>npm install</code>，会安装好那些模块。</p>
+<figure class="highlight shell"><pre><div class="line"><span class="variable">$ </span>hexo init [folder] <span class="comment">#如果不带folder，则默认为当前目录</span></div><div class="line"><span class="variable">$ </span>npm install</div></pre></figure>
+
+<h3 id="generate">generate</h3>
+<p>生成静态页面，是将\source_post\ 下的.md文件转换到\public\ 下的html文件</p>
+<figure class="highlight bash"><pre><div class="line">$ hexo g</div></pre></figure>
+
+<h3 id="write">write</h3>
+<p>执行new命令，生成指定名称的文章至\source_posts\postName.md。</p>
+<figure class="highlight bash"><pre><div class="line">hexo new [layout] <span class="string">"postName"</span> <span class="comment">#新建文章</span></div></pre></figure>
+
+<p>layout默认为\scaffolds\post.md，生成的postName.md会在头部包含post.md的内容。你可以书写自己的layout，这样生成文章的时候可以指定为你自己的layout。</p>
+<p>post.md的内容如下：</p>
+<figure class="highlight markdown"><pre><div class="line">title: 用hexo建blog</div><div class="line">date: Sat Aug 02 2014 20:08:20 GMT+0800 (HKT)</div><div class="line"><span class="header">tags:</span></div><div class="line">---</div></pre></figure>
+
+<p>生成的postName.md的内容如下：</p>
+<figure class="highlight markdown"><pre><div class="line">title: postName #文章页面上的显示名称，可以任意修改，不会出现在URL中</div><div class="line">date: 2013-06-01 18:40:26 #文章生成时间，一般不改，当然也可以任意修改</div><div class="line">categories: #文章分类目录，可以为空，注意:后面有个空格</div><div class="line"><span class="header">tags: #文章标签，可空，多标签请用格式[tag1,tag2,tag3]，注意:后面有个空格</span></div><div class="line">---</div><div class="line">这里开始使用markdown格式输入你的正文。</div></pre></figure>
+
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="why_hexo？">why hexo？</h2>
+<p>一直纠结该用什么写博客，wordpress、cnbolg、jekyll，直到遇到hexo。</p>
+<p>它是用nodejs写的，跨平台、性能优秀，当文档很多时生成速度是jekyll的几十倍。而又保留了jekyll的好处，它是静态博客系统可以托管在github，使用markdown文档作为中间文档。</p>
+<p>api简单好用：</p>
+<figure class="highlight shell"><pre><div class="line"><span class="variable">$ </span>hexo n <span class="comment">#写文章</span></div><div class="line"><span class="variable">$ </span>hexo g <span class="comment">#生成</span></div><div class="line"><span class="variable">$ </span>hexo d <span class="comment">#部署 # 可与hexo g合并为 hexo d -g</span></div></pre></figure>
+
+<p>下面介绍，如果搭建一个hexo博客。</p>
+]]>
+    
+    </summary>
+    
+      <category term="hexo" scheme="http://www.xuntuu.com/tags/hexo/"/>
+    
+      <category term="blog" scheme="http://www.xuntuu.com/tags/blog/"/>
+    
+      <category term="web" scheme="http://www.xuntuu.com/categories/web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[如何使用codepen]]></title>
+    <link href="http://www.xuntuu.com/2014/06/18/codepen-use/"/>
+    <id>http://www.xuntuu.com/2014/06/18/codepen-use/</id>
+    <published>2014-06-18T14:14:10.000Z</published>
+    <updated>2014-09-19T07:26:29.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="简介">简介</h2>
+<p>codepen是一个HTML, CSS和JavaScript的在线编辑器，可以所见即所得的看到代码的效果。而且它的作用不止代码的编辑，它可以用来分享代码，通过codepen可以更好的跟他人请教代码问题。</p>
+<p>codepen的官网是：<a href="https://codepen.io" target="_blank" rel="external">codepen.io</a>。</p>
+<h2 id="使用">使用</h2>
+<p>codepen中一个项目称为一个pen。</p>
+<p>使用codepen需要先到其官网注册账号，它有几种资费类型，免费账号已提供了比较多的功能。它的编辑器支持很多功能，比如：</p>
+<ul>
+<li>html的预处理，可以使用Markdown、Haml、Slim、Jade来编写html。</li>
+<li>css的预处理，可以使用SCSS、Sass、LESS、Stylus来编写css。</li>
+<li>javascript的预处理，可以使用CoffeeScript、LiveScript来编写javascript。</li>
+<li>支持的js库有JQuery、MooTools、Prototype、Angular。</li>
+</ul>
+<h3 id="分享别人的pen">分享别人的pen</h3>
+<p>在codepen首页展示一些共享的pen，并且可以按照被引用数、流行度、更新事件等排序。</p>
+<p>比如：打开一个pen
+<img src="/img/201401/pick-pen.png" alt="open public pen"></p>
+<p>打开一个pen的代码页面后，选择右下角的”embed”就可以打开一个窗口,这个窗口用来设置一些选项，规定将codepen嵌入一个网页时的主题。
+<img src="/img/201401/embed-pen.png" alt="embed this pen"></p>
+<p>然后将那段embed代码嵌入网页就可以引入一个codepen项目了。比如下面将引入一个codepen：</p>
+<figure class="highlight html"><pre><div class="line"><span class="tag">&lt;<span class="title">p</span> <span class="attribute">data-height</span>=<span class="value">"377"</span> <span class="attribute">data-theme-id</span>=<span class="value">"8440"</span> <span class="attribute">data-slug-hash</span>=<span class="value">"veshd"</span> <span class="attribute">data-default-tab</span>=<span class="value">"result"</span> <span class="attribute">data-user</span>=<span class="value">"amos"</span> <span class="attribute">class</span>=<span class="value">'codepen'</span>&gt;</span>See the Pen <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">'http://codepen.io/amos/pen/veshd/'</span>&gt;</span>veshd<span class="tag">&lt;/<span class="title">a</span>&gt;</span> by amos (<span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">'http://codepen.io/amos'</span>&gt;</span>@amos<span class="tag">&lt;/<span class="title">a</span>&gt;</span>) on <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">'http://codepen.io'</span>&gt;</span>CodePen<span class="tag">&lt;/<span class="title">a</span>&gt;</span>.<span class="tag">&lt;/<span class="title">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">async</span> <span class="attribute">src</span>=<span class="value">"//codepen.io/assets/embed/ei.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div></pre></figure>
+
+<p></p><p data-height="377" data-theme-id="8440" data-slug-hash="veshd" data-default-tab="result" data-user="amos" class="codepen">See the Pen <a href="http://codepen.io/amos/pen/veshd/" target="_blank" rel="external">veshd</a> by amos (<a href="http://codepen.io/amos" target="_blank" rel="external">@amos</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//codepen.io/assets/embed/ei.js"></script>]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="简介">简介</h2>
+<p>codepen是一个HTML, CSS和JavaScript的在线编辑器，可以所见即所得的看到代码的效果。而且它的作用不止代码的编辑，它可以用来分享代码，通过codepen可以更好的跟他人请教代码问题。</p>
+<p>codepen的]]>
+    </summary>
+    
+      <category term="codepen" scheme="http://www.xuntuu.com/tags/codepen/"/>
+    
+      <category term="工具" scheme="http://www.xuntuu.com/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[30秒用cleaver做一个幻灯片]]></title>
+    <link href="http://www.xuntuu.com/2014/05/18/cleaver-use/"/>
+    <id>http://www.xuntuu.com/2014/05/18/cleaver-use/</id>
+    <published>2014-05-18T14:14:10.000Z</published>
+    <updated>2014-09-21T06:34:12.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="大家好!">大家好!</h1>
+<h2 id="这是一个幻灯片演示">这是一个幻灯片演示</h2>
+<h4 id="幻灯片演示请狂点这里—》演示">幻灯片演示请狂点这里<a href="/demo/smart-slide.html">—》演示</a></h4>
+<p>—</p>
+<h3 id="简介">简介</h3>
+<p>cleaver是一个幻灯片制作工具，将markdown文档转化为html5的幻灯片，它只有非常简单的规定：</p>
+<ul>
+<li>markdown编写</li>
+<li>每页幻灯片用<code>--</code>分割</li>
+</ul>
+<p>默认生成的幻灯片就已经很简约大气，而且你可以任意修改幻灯片的主题和样式。</p>
+<style type="text/css">
+    .cleaver-cool{
+        color: #66D9EF;
+        background-image: url('../img/201401/cleaver-cool.jpg');
+    }
+</style>
+
+<p>— cleaver-cool</p>
+<h1 id="让你的">让你的</h1>
+<h2 id="幻灯片变得cool!">幻灯片变得cool!</h2>
+<p>—</p>
+<h3 id="简单使用">简单使用</h3>
+<p>npm安装</p>
+<p><code>npm install -g cleaver</code></p>
+<p>运行</p>
+<p><code>cleaver cleaver-use.md</code></p>
+<p>然后就在当前目录下生成了一个cleaver-use-cleaver.html，它就是html5幻灯片</p>
+<p>—</p>
+<h3 id="配置">配置</h3>
+<figure class="highlight markdown"><pre><div class="line">title: 30秒用cleaver做一个幻灯片            //标题</div><div class="line">author:									    //作者信息</div><div class="line"><span class="code">    name: Bruce Cai</span></div><div class="line"><span class="code">    url: http://xuntuu.com</span></div><div class="line">output: ../html/smart-slide.html            //输出路径</div><div class="line">style:                                      //自定义样式</div><div class="line">theme:                                      //主题</div></pre></figure>
+
+<p>配置信息放在页头</p>
+<p>更多介绍:<a href="https://github.com/jdan/cleaver/blob/master/docs/options.md#title" target="_blank" rel="external">title</a>, <a href="https://github.com/jdan/cleaver/blob/master/docs/options.md#author" target="_blank" rel="external">author</a>, <a href="https://github.com/jdan/cleaver/blob/master/docs/options.md#theme" target="_blank" rel="external">theme</a>, <a href="https://github.com/jdan/cleaver/blob/master/docs/options.md#style" target="_blank" rel="external">style</a>, <a href="https://github.com/jdan/cleaver/blob/master/docs/options.md#output" target="_blank" rel="external">output</a>, <a href="https://github.com/jdan/cleaver/blob/master/docs/options.md#controls" target="_blank" rel="external">controls</a>, <a href="https://github.com/jdan/cleaver/blob/master/docs/options.md#progress" target="_blank" rel="external">progress</a>, <a href="https://github.com/jdan/cleaver/blob/master/docs/options.md#encoding" target="_blank" rel="external">encoding</a>, <a href="https://github.com/jdan/cleaver/blob/master/docs/options.md#template" target="_blank" rel="external">template</a>, <a href="https://github.com/jdan/cleaver/blob/master/docs/options.md#layout" target="_blank" rel="external">layout</a></p>
+<p>—</p>
+<h3 id="主题">主题</h3>
+<p>一个包含stylesheet, template, layout, javascript的目录，指定你的幻灯片如何呈现</p>
+<p>它可以是url、本地目录、git地址</p>
+<p>在页头配置theme: url</p>
+<p>比如<code>theme: ../themes/reveal-cleaver-theme-master</code></p>
+<p>—</p>
+<h3 id="更多">更多</h3>
+<ul>
+<li><code>#</code>和<code>##</code>垂直居中，一个幻灯片只有<code>#</code>或<code>##</code>时会呈现为标题页</li>
+<li><code>###</code>时会呈现为内容页</li>
+<li><code>--</code>幻灯片分割符后面可以加class，作为这个幻灯页的特有样式</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="大家好!">大家好!</h1>
+<h2 id="这是一个幻灯片演示">这是一个幻灯片演示</h2>
+<h4 id="幻灯片演示请狂点这里—》演示">幻灯片演示请狂点这里<a href="/demo/smart-slide.html">—》演示</a></h4>
+<]]>
+    </summary>
+    
+      <category term="cleaver" scheme="http://www.xuntuu.com/tags/cleaver/"/>
+    
+      <category term="幻灯片" scheme="http://www.xuntuu.com/tags/%E5%B9%BB%E7%81%AF%E7%89%87/"/>
+    
+      <category term="ppt" scheme="http://www.xuntuu.com/tags/ppt/"/>
+    
+      <category term="slider" scheme="http://www.xuntuu.com/tags/slider/"/>
+    
+      <category term="工具" scheme="http://www.xuntuu.com/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[web安全要点]]></title>
+    <link href="http://www.xuntuu.com/2013/09/22/web-safe/"/>
+    <id>http://www.xuntuu.com/2013/09/22/web-safe/</id>
+    <published>2013-09-22T14:14:10.000Z</published>
+    <updated>2014-09-25T15:25:42.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="概述">概述</h2>
+<p>主要来说有三种类型的web攻击：</p>
+<ol>
+<li>XSS注入</li>
+<li>CSRF攻击</li>
+<li>界面操作劫持攻击</li>
+</ol>
+<h2 id="XSS">XSS</h2>
+<p>XSS，即跨站脚本，发生在目标网站中目标用户的浏览器层面上，当用户浏览器渲染整个HTML文档的过程中出现了不被预期的脚本指令并执行时，XSS就会发生。</p>
+<p>XSS概括的讲就是，想尽一切方法将你的脚本内容在目标网站中目标用户的浏览器上解析执行即可。</p>
+<h3 id="XSS类型">XSS类型</h3>
+<p>XSS主要有三种：反射型XSS，存储型XSS，DOM XSS</p>
+<ol>
+<li>反射型XSS发生的过程是，发出请求时，XSS代码出现在URL中，作为输入提交到服务端，服务端解析后响应，在响应内容中出现这段XSS代码，最后浏览器解析执行。发射型XSS发生的原因是由于服务器没有对输入做过滤，输入什么就是返回输出什么，使得攻击者可以利用这点构造一些恶意的脚本。比如qq的某个漏洞，qq昵称构造成特定时，当用户查看聊天记录显示此特定qq昵称会引发漏洞。</li>
+<li>存储型XSS是由于服务器不加过滤将输入存入了服务器的数据库文件系统内存等，当用户请求数据时，前端会显示这个恶意的输入。</li>
+<li>DOM XSS，跟反射型和存储型的区别在于不需用经过服务器端的解析，完全利用客户端的dom的输入输出。</li>
+</ol>
+<h2 id="CSRF">CSRF</h2>
+<p>CSRF，即跨站请求伪造。对于CSRF来说，它的请求有两个关键点：跨站点的请求与请求是伪造的。</p>
+<p>主要原因是服务器只识别了浏览器而没有识别发出的请求到底是不是用户发出的，使得攻击者可以假借用户的认证，执行请求。当用户先登录了合法网站后又登录恶意网站，恶意网站可以假借用户登录cookie进行CSRF攻击。请求是身份认证后发出的。</p>
+<p>一种解决方式是加token，另一个方式是加验证码。</p>
+<p>CSRF攻击过程的三个关键点：跨域发出了一个GET请求、可以无javascript参与、请求是身份认证后的。</p>
+<h3 id="CSRF类型">CSRF类型</h3>
+<p>按照攻击方式分类，CSRF可分为：HTML CSRF攻击、JSON HiJacking攻击和Flash CSRF攻击等。</p>
+<ol>
+<li>HTML CSRF攻击 指get请求由dom发出，post请求由form发出</li>
+<li>JSON HiJacking攻击  指目标站点api认证用户不足，使得恶意网站截取到了带有隐私的json数据</li>
+<li>使用flash发送请求</li>
+</ol>
+<h2 id="界面操作劫持">界面操作劫持</h2>
+<p>界面操作劫持攻击是一种基于视觉欺骗的Web会话劫持攻击，它通过在网页的可见输入控件上覆盖一个不可见的框，使得用户误以为在操作可见控件，而实际上用户的操作行为被其不可见的框所劫持，执行不可见框中的恶意劫持代码，从而完成在用户不知情的情况下窃取敏感信息、篡改数据等攻击。</p>
+<p>利用社工和美工学，将某个页面伪装，诱骗用户去点击，一般是将真正发送请求的按钮透明，底下加伪装的背景。分为点击劫持、拖放劫持、触屏劫持。
+技术上一般是透明层+iframe，透明层使用css样式实现，使用iframe来嵌入被劫持的页面。</p>
+<h2 id="防御">防御</h2>
+<p>web攻击防御主要围绕三个方面：</p>
+<ol>
+<li><p>浏览器厂商提供的安全策略，主要是w3c安全规范。跟http安全相关的头部:</p>
+<ol>
+<li>X-Frame-Options
+ 可能的为value:<code>DENY</code>、<code>SAMEORIGIN</code>, 设置能否被设置为frame</li>
+<li>X-XSS-Protection
+ 可能的value:  <code>0</code>、<code>1</code> 、<code>1;mode=block</code>,X-XSS-Protection只能防御反射型xss</li>
+<li>X-Content-Security-Policy
+ 又称CSP策略，chrome的头部为 X-WebKit-CSP 
+ CSP策略的格式：<code>X-Content-Security-Policy:[指令1] [指令值1] ; [指令2] [指令值2]</code></li>
+</ol>
+</li>
+<li><p>web厂商能做的</p>
+<ol>
+<li>严格的子域设计</li>
+<li>安全传输 ,使用https</li>
+<li>安全的cookie(HttpOnly)用于身份认证</li>
+<li>优秀的验证码,用于重要的页面</li>
+</ol>
+</li>
+<li><p>用户加强web安全意识，比如经常更新系统和浏览器。</p>
+</li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="概述">概述</h2>
+<p>主要来说有三种类型的web攻击：</p>
+<ol>
+<li>XSS注入</li>
+<li>CSRF攻击</li>
+<li>界面操作劫持攻击</li>
+</ol>
+<h2 id="XSS">XSS</h2>
+<p>XSS，即跨站脚本，发]]>
+    </summary>
+    
+      <category term="web 安全" scheme="http://www.xuntuu.com/tags/web-%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="安全" scheme="http://www.xuntuu.com/categories/%E5%AE%89%E5%85%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[css之flex]]></title>
+    <link href="http://www.xuntuu.com/2013/07/23/css-flex/"/>
+    <id>http://www.xuntuu.com/2013/07/23/css-flex/</id>
+    <published>2013-07-23T11:10:00.000Z</published>
+    <updated>2014-09-19T07:27:07.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="flex">flex</h2>
+<p>flex是css3新增的display值，它是为了更加复杂的web布局而生的。一般中文翻译为伸缩布局。长期以来人们都是使用表格、浮动、行内块元素和其他 CSS 属性来布局网站内容。要实现在使用了居左对齐、居右对齐、两端对齐、居中对齐、顶端对齐、底部对齐常常比较麻烦，处理项目之间的空白和项目宽度、高度的伸缩也很让人头疼。而使用flex属性之后，这些都可以简单的设置到。</p>
+<p>w3组织提到flex让我们轻易地可以实现这些：</p>
+<ul>
+<li>可以以任何伸缩方向（向左、向右、向下，甚至是向上！）配置</li>
+<li>可以在样式层（也就是视觉顺序可以跟源码、语音顺序无关）调换、重排显示顺序</li>
+<li>可以沿着单一（主）轴线性配置或是沿着第二（侧）轴折行</li>
+<li>可以因为可用空间的存在扩展内容的尺寸</li>
+<li>可以沿着容器或彼此对齐</li>
+<li>可以在保持侧轴长度不变之下动态折叠或反折叠</li>
+</ul>
+<h2 id="概念和术语">概念和术语</h2>
+<p>一个设有「display:flex」或「display:inline-flex」的元素是一个伸缩容器，伸缩容器的子元素被称为伸缩项目，这些子元素使用伸缩布局模型来排版。</p>
+<p>与布局计算偏向使用书写模式方向的块布局与行内布局不同，伸缩布局偏向使用伸缩流的方向。为了让描述伸缩布局变得更容易，本章节定义一系列相对于伸缩流的术语。「flex-flow」的值决定了这些术语如何对应到物理方向（上／右／下／左）、物理轴（垂直／水平）、物理大小（宽度／高度）。
+<img src="/img/201307/flex-intro.png" alt="一个row伸缩容器中各种方向与大小术语的示意图。"></p>
+<p><strong>主轴、主轴方向</strong><br>    浏览器沿着一个伸缩容器的主轴渲染伸缩项目，主轴是主轴方向的延伸。</p>
+<p><strong>主轴起点、主轴终点</strong><br>    伸缩项目的配置从容器的主轴起点边开始，往主轴终点边结束。</p>
+<p><strong>主轴长度、主轴长度属性</strong><br>    伸缩项目的在主轴方向的宽度或高度就是项目的主轴长度，伸缩项目的主轴长度属性是「width」或「height」属性，由哪一个对着主轴方向决定。</p>
+<p><strong>侧轴、侧轴方向</strong><br>    与主轴垂直的轴称作侧轴，是侧轴方向的延伸。</p>
+<p><strong>侧轴起点、侧轴终点</strong><br>    填满项目的伸缩行的配置从容器的侧轴起点边开始，往侧轴终点边结束。</p>
+<p><strong>侧轴长度、侧轴长度属性</strong><br>    伸缩项目的在侧轴方向的宽度或高度就是项目的侧轴长度，伸缩项目的侧轴长度属性是「width」或「height」属性，由哪一个对着侧轴方向决定。</p>
+<h2 id="伸缩容器">伸缩容器</h2>
+<figure class="highlight css"><pre><div class="line"><span class="class">.container</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">display</span>:<span class="value"> flex</span></span>; <span class="comment">/* 或 inline-flex */</span></div><div class="line"><span class="rule">}</span></div></pre></figure>
+
+<p>这定义了一个伸缩容器。</p>
+<p>伸缩容器会为其内容建立新的伸缩格式化上下文(flex formatting context)。除了使用伸缩排版而不块排版以外，伸缩格式化上下文与块级格式化上下文(block formatting context)根元素相同 ― 浮动不会闯入伸缩容器，且伸缩容器的边界不与其内容的边界叠加。</p>
+<p>伸缩容器不是块容器，因此有些设计用来控制块布局的属性，在伸缩布局中不适用。column-*、float、clear、vertical-align在伸缩布局中不适用。</p>
+<h3 id="flex-direction">flex-direction</h3>
+<p><img src="/img/201307/flex-direction1.svg" alt="">
+这个主要用来创建主轴，从而定义了伸缩项目放置在伸缩容器的方向。</p>
+<figure class="highlight css"><pre><div class="line"><span class="class">.container</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">flex-direction</span>:<span class="value"> row | row-reverse | column | column-reverse</span></span>;</div><div class="line"><span class="rule">}</span></div></pre></figure>
+
+<ul>
+<li><code>row</code>(默认值)：在<code>ltr</code>排版方式下从左向右排列；在<code>rtl</code>排版方式下从右向左排列。</li>
+<li><code>row-reverse</code>：与<code>row</code>排列方向相反，在<code>ltr</code>排版方式下从右向左排列；在<code>rtl</code>排版方式下从左向右排列。</li>
+<li><code>column</code>：类似 于<code>row</code>，不过是从上到下排列</li>
+<li><code>column-reverse</code>：类似于<code>row-reverse</code>，不过是从下到上排列。</li>
+</ul>
+<h3 id="flex-wrap">flex-wrap</h3>
+<p><img src="/img/201307/flex-wrap.svg" alt="">
+默认伸缩容器是单行显示，你可以这个定义属性决定伸缩容器里是单行还是多行显示，侧轴的方向决定了新行堆放的方向。</p>
+<figure class="highlight css"><pre><div class="line"><span class="class">.container</span><span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">flex-wrap</span>:<span class="value"> nowrap | wrap | wrap-reverse</span></span>;</div><div class="line"><span class="rule">}</span></div></pre></figure>
+
+<ul>
+<li><code>nowrap</code>(默认值)：伸缩容器单行显示，<code>ltr</code>排版下，伸缩项目从左到右排列；<code>rtl</code>排版上伸缩项目从右向左排列。</li>
+<li><code>wrap</code>：伸缩容器多行显示，<code>ltr</code>排版下，伸缩项目从左到右排列；<code>rtl</code>排版上伸缩项目从右向左排列。</li>
+<li><code>wrap-reverse</code>：伸缩容器多行显示，<code>ltr</code>排版下，伸缩项目从右向左排列；<code>rtl</code>排版下，伸缩项目从左到右排列。（和<code>wrap</code>相反）</li>
+</ul>
+<h3 id="flex-flow">flex-flow</h3>
+<p>是flex-direction和flex-wrap的复合属性。</p>
+<figure class="highlight css"><pre><div class="line"><span class="class">.container</span><span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">flex-flow</span>:<span class="value"> &lt;‘flex-direction’&gt; || &lt;‘flex-wrap’&gt;</span></span></div><div class="line">}</div></pre></figure>
+
+<h3 id="justify-content">justify-content</h3>
+<p><img src="/img/201307/justify-content.svg" alt="">
+这个是用来定义伸缩项目沿着主轴线的对齐方式。当一行上的所有伸缩项目都不能伸缩或可伸缩但是已经达到其最大长度时，这一属性才会对多余的空间进行分配。当项目溢出某一行时，这一属性也会在项目的对齐上施加一些控制。</p>
+<figure class="highlight css"><pre><div class="line"><span class="class">.container</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">justify-content</span>:<span class="value"> flex-start | flex-end | center | space-between | space-around</span></span>;</div><div class="line"><span class="rule">}</span></div></pre></figure>
+
+<ul>
+<li><code>flex-start</code>(默认值)：伸缩项目向一行的起始位置靠齐。</li>
+<li><code>flex-end</code>：伸缩项目向一行的结束位置靠齐。</li>
+<li><code>center</code>：伸缩项目向一行的中间位置靠齐。</li>
+<li><code>space-between</code>：伸缩项目会平均地分布在行里。第一个伸缩项目一行中的最开始位置，最后一个伸缩项目在一行中最终点位置。</li>
+<li><code>space-around</code>：伸缩项目会平均地分布在行里，两端保留一半的空间。</li>
+</ul>
+<h3 id="align-items">align-items</h3>
+<p><img src="/img/201307/align-items.svg" alt="">
+这个主要用来定义伸缩项目可以在伸缩容器的当前行的侧轴上对齐方式。可以把他想像成侧轴（垂直于主轴）的“justify-content”。</p>
+<figure class="highlight css"><pre><div class="line"><span class="class">.container</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">align-items</span>:<span class="value"> flex-start | flex-end | center | baseline | stretch</span></span>;</div><div class="line"><span class="rule">}</span></div></pre></figure>
+
+<ul>
+<li><code>flex-start</code>：伸缩项目在侧轴起点边的外边距紧靠住该行在侧轴起始的边。</li>
+<li><code>flex-end</code>：伸缩项目在侧轴终点边的外边距靠住该行在侧轴终点的边 。</li>
+<li><code>center</code>：伸缩项目的外边距盒在该行的侧轴上居中放置。</li>
+<li><code>baseline</code>：伸缩项目根据他们的基线对齐。</li>
+<li><code>stretch</code>（默认值）：伸缩项目拉伸填充整个伸缩容器。此值会使项目的外边距盒的尺寸在遵照「min/max-width/height」属性的限制下尽可能接近所在行的尺寸。</li>
+</ul>
+<h3 id="align-content">align-content</h3>
+<p><img src="/img/201307/align-content.svg" alt="">
+这个属性主要用来调准伸缩行在伸缩容器里的对齐方式。类似于伸缩项目在主轴上使用“justify-content”一样。</p>
+<blockquote>
+<p><strong>注</strong>：请注意本属性在只有一行的伸缩容器上没有效果。</p>
+</blockquote>
+<ul>
+<li><code>flex-start</code>：各行向伸缩容器的起点位置堆叠。</li>
+<li><code>flex-end</code>：各行向伸缩容器的结束位置堆叠。</li>
+<li><code>center</code>：各行向伸缩容器的中间位置堆叠。</li>
+<li><code>space-between</code>：各行在伸缩容器中平均分布。</li>
+<li><code>space-around</code>：各行在伸缩容器中平均分布，在两边各有一半的空间。</li>
+<li><code>stretch</code>（默认值）：各行将会伸展以占用剩余的空间。</li>
+</ul>
+<h2 id="items">items</h2>
+<p>上一个章节介绍都是伸缩容器的属性，下面介绍一些伸缩项目的属性。</p>
+<h3 id="order">order</h3>
+<p>默认情况下，伸缩项目是按照文档流出现先后顺序排列。然而，“order”属性可以控制伸缩项目在他们的伸缩容器出现的顺序。</p>
+<figure class="highlight css"><pre><div class="line"><span class="class">.item</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">order</span>:<span class="value"> &lt;integer&gt;</span></span>;</div><div class="line"><span class="rule">}</span></div></pre></figure>
+
+<h3 id="flex-grow">flex-grow</h3>
+<p>剩余空间是正值的时候此伸缩项目相对于伸缩容器里其他伸缩项目能分配到空间比例。</p>
+<p>如果所有伸缩项目的<code>flex-grow</code>设置了”1”，那么每个伸缩项目将设置为一个大小相等的剩余空间。如果你给其中一个伸缩项目设置了<code>flex-grow</code>值为”2”，那么这个伸缩项目所占的剩余空间是其他伸缩项目所占剩余空间的两倍。</p>
+<figure class="highlight css"><pre><div class="line"><span class="class">.item</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">flex-grow</span>:<span class="value"> &lt;number&gt;</span></span>; <span class="comment">/* default 0 */</span></div><div class="line"><span class="rule">}</span></div></pre></figure>
+
+<p>负值同样生效。</p>
+<h3 id="flex-shrink">flex-shrink</h3>
+<p>剩余空间是负值的时候此伸缩项目相对于伸缩容器里其他伸缩项目能收缩的空间比例。</p>
+<figure class="highlight css"><pre><div class="line"><span class="class">.item</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">flex-shrink</span>:<span class="value"> &lt;number&gt;</span></span>; <span class="comment">/* default 1 */</span></div><div class="line"><span class="rule">}</span></div></pre></figure>
+
+<p>负值同样生效。</p>
+<h3 id="flex-basis">flex-basis</h3>
+<p>这个用来设置伸缩基准值，在分配剩余空间前，决定伸缩项的默认尺寸。负长度不合法</p>
+<figure class="highlight css"><pre><div class="line"><span class="class">.item</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">flex-basis</span>:<span class="value"> &lt;length&gt; | auto</span></span>; <span class="comment">/* default auto */</span></div><div class="line"><span class="rule">}</span></div></pre></figure>
+
+<h3 id="flex-1">flex</h3>
+<p>这是<code>flex-grow</code>、<code>flex-shrink</code>和<code>flex-basis</code>三个属性的缩写。其中第二个和第三个参数（<code>flex-shrink</code>、<code>flex-basis</code>）是可选参数。默认值为”0 1 auto”。</p>
+<figure class="highlight css"><pre><div class="line"><span class="class">.item</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">flex</span>:<span class="value"> none | [ &lt;<span class="string">'flex-grow'</span>&gt; &lt;<span class="string">'flex-shrink'</span>&gt;? || &lt;<span class="string">'flex-basis'</span>&gt; ]</span></span></div><div class="line">}</div></pre></figure>
+
+<h4 id="flex的常见值">flex的常见值</h4>
+<ol>
+<li>「flex: 0 auto」「flex: initial」<br>与「flex: 0 1 auto」相同。（这也就是初始值。）根据「width」／「height」属性决定元素的尺寸。（如果项目的主轴长度属性的计算值为「auto」，则会根据其内容来决定元素尺寸。）当剩余空间为正值时，伸缩项目无法伸缩，但当空间不足时，伸缩项目可收缩至其最小值。网页作者可以用对齐相关的属性以及「margin」属性的「auto」值控制伸缩项目沿着主轴的对齐方式。</li>
+<li>「flex: auto」<br>与「flex: 1 1 auto」相同。根据「width」／「height」属性决定元素的尺寸，但是完全可以伸缩，会吸收主轴上剩下的空间。如果所有项目均为「flex: auto」、「flex: initial」或「flex: none」，则在项目尺寸决定后，剩余的正空间会被平分给是「flex: auto」的项目。</li>
+<li>「flex: none」<br>与「flex: 0 0 auto」相同。根据「width」／「height」属性决定元素的尺寸，但是完全不可伸缩。其效果与「initial」类似，但即使在空间不够而溢出的情况下，伸缩项目也不能收缩。</li>
+<li>「flex: <code>&lt;positive-number&gt;</code>」<br>与「flex: <positive-number> 1 0px」相同。该值使元素可伸缩，并将伸缩基准值设置为零，导致该项目会根据设置的比率占用伸缩容器的剩余空间。如果一个伸缩容器里的所有项目都使用此模式，则它们的尺寸会正比于指定的伸缩比率。</positive-number></li>
+</ol>
+<p>默认状态下，伸缩项目不会收缩至比其最小内容尺寸（最长的英文词或是固定尺寸元素的长度）更小。网页作者可以靠设置「min-width」或「min-height」属性来改变这个默认状态。</p>
+<h3 id="align-self">align-self</h3>
+<p>用来在单独的伸缩项目上覆写默认的对齐方式。<br>属性值的介绍请参阅“align-items”的属性值。</p>
+<figure class="highlight css"><pre><div class="line"><span class="class">.item</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">align-self</span>:<span class="value"> auto | flex-start | flex-end | center | baseline | stretch</span></span>;</div><div class="line"><span class="rule">}</span></div></pre></figure>
+
+<h2 id="浏览器的支持情况如下：">浏览器的支持情况如下：</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Chrome</th>
+            <th>Safari</th>
+            <th>Firefox</th>
+            <th>Opera</th>
+            <th>IE</th>
+            <th>Android</th>
+            <th>iOS</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>20- (old)<br>21+ (new)</td>
+            <td>3.1+ (old)<br>6.1+ (new)</td>
+            <td>2-21 (old)<br>22+ (new)</td>
+            <td>12.1+ (new)</td>
+            <td>10 (tweener)<br>11+ (new)</td>
+            <td>2.1+ (old)<br>4.4+ (new)</td>
+            <td>3.2+ (old)<br>7.1+ (new)</td>
+        </tr>
+    </tbody>
+</table>
+
+<ul>
+<li>(new) 意味着使用最新的语法 ( 例如：display: flex;)</li>
+<li>(tweener)意味着使用自2011年的老的非官方的语法 (例如：display: flexbox;)</li>
+<li>(old) 意味着使用自2009年的老的语法 (例如：display: box;)</li>
+</ul>
+<h2 id="示例">示例</h2>
+<p>考虑使用6个列表项，并且为了视觉审美给他设置了一个固定大小尺寸，但他们也有可能可以自动获取尺寸大小。我们希望他们能均匀的、很好的分布在水平轴上，就算当我们调整浏览器，他们也依然显示得很好（不使用媒体查询）。</p>
+<figure class="highlight css"><pre><div class="line"><span class="class">.flex-container</span> <span class="rules">{</span></div><div class="line">  <span class="comment">/* 我们第一步要创建一个flex文档流（创建伸缩容器） */</span></div><div class="line">  <span class="rule"><span class="attribute">display</span>:<span class="value"> flex</span></span>;</div><div class="line">  </div><div class="line">  <span class="comment">/* 然后我们定义伸缩流方向，并且可以换行</span></div><div class="line">   * 记得我们要这样设置:</div><div class="line">   * flex-direction: row;</div><div class="line">   * flex-wrap: wrap;</div><div class="line">   */</div><div class="line">  <span class="rule"><span class="attribute">flex-flow</span>:<span class="value"> row wrap</span></span>;</div><div class="line">  </div><div class="line">  <span class="comment">/* 然后我们定义了如何分配伸缩容器的剩余空间 */</span></div><div class="line">  <span class="rule"><span class="attribute">justify-content</span>:<span class="value"> space-around</span></span>;</div><div class="line"><span class="rule">}</span></div></pre></figure>
+
+<p>完成。其他的一切都不过是一些美化外观样式。下面是在codepen上展示的一个例子。到codepen上查看，并试着调整你浏览器窗口去看发生什么事？</p>
+<p></p><p data-height="268" data-theme-id="0" data-slug-hash="LklCv" data-default-tab="result" data-user="HugoGiraudel" class="codepen">See the Pen <a href="http://codepen.io/HugoGiraudel/pen/LklCv/" target="_blank" rel="external">Demo Flexbox 1</a> by Hugo Giraudel (<a href="http://codepen.io/HugoGiraudel" target="_blank" rel="external">@HugoGiraudel</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//codepen.io/assets/embed/ei.js"></script>
+
+<p>让我们试试别的。假设我们网站顶部有一个右对齐的导航，但是我们希望它在小屏幕和小型设备中能单列居中显示。非常简单。</p>
+<figure class="highlight css"><pre><div class="line"><span class="comment">/* Large */</span></div><div class="line"><span class="class">.navigation</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">display</span>:<span class="value"> flex</span></span>;</div><div class="line">  <span class="rule"><span class="attribute">flex-flow</span>:<span class="value"> row wrap</span></span>;</div><div class="line">  <span class="comment">/* 所有列面向主轴终点位置靠齐 */</span></div><div class="line">  <span class="rule"><span class="attribute">justify-content</span>:<span class="value"> flex-end</span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"></div><div class="line"><span class="comment">/* Medium screens */</span></div><div class="line"><span class="at_rule">@<span class="keyword">media</span> all and (max-width: <span class="number">800px</span>) </span>{</div><div class="line">  <span class="class">.navigation</span> <span class="rules">{</span></div><div class="line">    <span class="comment">/* 当在中等屏幕中, 导航项目居中显示，并且剩余空间平均分布在列表之间 */</span></div><div class="line">    <span class="rule"><span class="attribute">justify-content</span>:<span class="value"> space-around</span></span>;</div><div class="line">  <span class="rule">}</span></div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment">/* Small screens */</span></div><div class="line"><span class="at_rule">@<span class="keyword">media</span> all and (max-width: <span class="number">500px</span>) </span>{</div><div class="line">  <span class="class">.navigation</span> <span class="rules">{</span></div><div class="line">    <span class="comment">/* 在小屏幕下, 我们没有足够空间行排列，但我们可以换成列排列 */</span></div><div class="line">    <span class="rule"><span class="attribute">flex-direction</span>:<span class="value"> column</span></span>;</div><div class="line">  <span class="rule">}</span></div><div class="line">}</div></pre></figure>
+
+<p></p><p data-height="268" data-theme-id="0" data-slug-hash="pkwqH" data-default-tab="result" data-user="HugoGiraudel" class="codepen">See the Pen <a href="http://codepen.io/HugoGiraudel/pen/pkwqH/" target="_blank" rel="external">Demo Flexbox 2</a> by Hugo Giraudel (<a href="http://codepen.io/HugoGiraudel" target="_blank" rel="external">@HugoGiraudel</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//codepen.io/assets/embed/ei.js"></script>
+
+<p>让我们尝试一些更灵活性的伸缩项目！关于移动先行，3列布局与页眉页脚全屏。和独立的文档顺序。</p>
+<figure class="highlight css"><pre><div class="line"><span class="class">.wrapper</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">display</span>:<span class="value"> flex</span></span>;</div><div class="line">  <span class="rule"><span class="attribute">flex-flow</span>:<span class="value"> row wrap</span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"></div><div class="line"><span class="comment">/* 设置所有标签宽度为100% */</span></div><div class="line"><span class="class">.header</span>, </div><div class="line"><span class="class">.main</span>, </div><div class="line"><span class="class">.nav</span>, </div><div class="line"><span class="class">.aside</span>, </div><div class="line"><span class="class">.footer</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">flex</span>:<span class="value"> <span class="number">1</span> <span class="number">100%</span></span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"></div><div class="line"><span class="comment">/* 我们利用文档流顺序，考虑移动端先行</span></div><div class="line"> * 在这个例子中的顺序:</div><div class="line"> * 1. header</div><div class="line"> * 2. nav</div><div class="line"> * 3. main</div><div class="line"> * 4. aside</div><div class="line"> * 5. footer</div><div class="line"> */</div><div class="line"></div><div class="line"><span class="comment">/* Medium screens */</span></div><div class="line"><span class="at_rule">@<span class="keyword">media</span> all and (min-width: <span class="number">600px</span>) </span>{</div><div class="line">  <span class="comment">/* 两个边栏在同一行 */</span></div><div class="line">  <span class="class">.aside</span> <span class="rules">{ <span class="rule"><span class="attribute">flex</span>:<span class="value"> <span class="number">1</span> auto</span></span>; <span class="rule">}</span></span></div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment">/* Large screens */</span></div><div class="line"><span class="at_rule">@<span class="keyword">media</span> all and (min-width: <span class="number">800px</span>) </span>{</div><div class="line">  <span class="comment">/* 设置左边栏在主内容左边</span></div><div class="line">   * 设置主内容区域宽度是其他两个侧边栏宽度的两倍</div><div class="line">   */</div><div class="line">  <span class="class">.main</span> <span class="rules">{ <span class="rule"><span class="attribute">flex</span>:<span class="value"> <span class="number">2</span> <span class="number">0px</span></span></span>; <span class="rule">}</span></span></div><div class="line">  </div><div class="line">  <span class="class">.aside-1</span> <span class="rules">{ <span class="rule"><span class="attribute">order</span>:<span class="value"> <span class="number">1</span></span></span>; <span class="rule">}</span></span></div><div class="line">  <span class="class">.main</span>    <span class="rules">{ <span class="rule"><span class="attribute">order</span>:<span class="value"> <span class="number">2</span></span></span>; <span class="rule">}</span></span></div><div class="line">  <span class="class">.aside-2</span> <span class="rules">{ <span class="rule"><span class="attribute">order</span>:<span class="value"> <span class="number">3</span></span></span>; <span class="rule">}</span></span></div><div class="line">  <span class="class">.footer</span>  <span class="rules">{ <span class="rule"><span class="attribute">order</span>:<span class="value"> <span class="number">4</span></span></span>; <span class="rule">}</span></span></div><div class="line">}</div></pre></figure>
+
+<p></p><p data-height="268" data-theme-id="0" data-slug-hash="qIAwr" data-default-tab="result" data-user="HugoGiraudel" class="codepen">See the Pen <a href="http://codepen.io/HugoGiraudel/pen/qIAwr/" target="_blank" rel="external">Demo Flexbox 3</a> by Hugo Giraudel (<a href="http://codepen.io/HugoGiraudel" target="_blank" rel="external">@HugoGiraudel</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//codepen.io/assets/embed/ei.js"></script>
+
+<h3 id="参考">参考</h3>
+<ul>
+<li><a href="http://css-tricks.com/using-flexbox/" target="_blank" rel="external">http://css-tricks.com/using-flexbox/</a></li>
+<li><a href="http://css-tricks.com/snippets/css/a-guide-to-flexbox/" target="_blank" rel="external">http://css-tricks.com/snippets/css/a-guide-to-flexbox/</a></li>
+<li><a href="http://www.w3cplus.com/css3/a-guide-to-flexbox.html" target="_blank" rel="external">http://www.w3cplus.com/css3/a-guide-to-flexbox.html</a></li>
+<li><a href="http://www.w3.org/html/ig/zh/wiki/Css3-flexbox/zh-hans" target="_blank" rel="external">http://www.w3.org/html/ig/zh/wiki/Css3-flexbox/zh-hans</a></li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="flex">flex</h2>
+<p>flex是css3新增的display值，它是为了更加复杂的web布局而生的。一般中文翻译为伸缩布局。长期以来人们都是使用表格、浮动、行内块元素和其他 CSS 属性来布局网站内容。要实现在使用了居左对齐、居右对齐、两端对齐、居]]>
+    </summary>
+    
+      <category term="前端" scheme="http://www.xuntuu.com/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="css" scheme="http://www.xuntuu.com/tags/css/"/>
+    
+      <category term="css" scheme="http://www.xuntuu.com/categories/css/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[git简易使用指南-2]]></title>
+    <link href="http://www.xuntuu.com/2013/07/14/git-use-2/"/>
+    <id>http://www.xuntuu.com/2013/07/14/git-use-2/</id>
+    <published>2013-07-14T11:20:00.000Z</published>
+    <updated>2014-09-18T17:32:16.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="命令详解">命令详解</h2>
+<h3 id="git_remote">git remote</h3>
+<p><code>git remote</code>用于管理远程仓库</p>
+<figure class="highlight bash"><pre><div class="line">$ git remote add &lt;name&gt; &lt;url&gt;</div><div class="line"><span class="comment">#添加一个远程仓库</span></div><div class="line"><span class="comment">#添加后就可以使用git fetch 或git pull从远程仓库获取代码</span></div><div class="line"></div><div class="line"><span class="variable">$git</span> remote -v</div><div class="line"><span class="comment">#查看本地配置了哪些远程仓库</span></div><div class="line"></div><div class="line"><span class="variable">$git</span> remote show &lt;name&gt;</div><div class="line"><span class="comment">#查看远程仓库的详细信息</span></div><div class="line"></div><div class="line"><span class="variable">$git</span> remote rename &lt;newname&gt; &lt;oldname&gt;</div><div class="line"><span class="comment">#改变远程仓库名字</span></div><div class="line"></div><div class="line"><span class="variable">$git</span> remote <span class="keyword">set</span>-url<span class="string">' [--push] &lt;name&gt; &lt;newurl&gt; [&lt;oldurl&gt;]</span></div><div class="line">#改变远程仓库url</div></pre></figure>
+
+<h3 id="git_clone">git clone</h3>
+<p><code>git clone &lt;url&gt; [path]</code>克隆一个远程仓库到本地，这条命令其实是由多条命令组成的。与下面等效</p>
+<figure class="highlight bash"><pre><div class="line">$ mkdir path && <span class="built_in">cd</span> path</div><div class="line">$ git init      <span class="comment">#初始化一个本地仓库</span></div><div class="line">$ git remote add origin &lt;url&gt;</div><div class="line">$ git pull origin master</div></pre></figure>
+
+<h3 id="git_pull">git pull</h3>
+<figure class="highlight bash"><pre><div class="line"><span class="string">'git pull'</span> [options] [&lt;repository&gt; [&lt;refspec&gt;...]]</div></pre></figure>
+
+<p>合并远程仓库代码到本地分支 ，实际上它有两条命令复合而成，
+<code>git fetch</code>然后<code>git merge FETCH_HEAD</code>。git fetch是将代码down到FETCH_HEAD中。FETCH_HEAD一般来说, 存在两种情况:</p>
+<ol>
+<li>如果没有显式的指定远程分支, 则远程分支的master将作为默认的FETCH_HEAD.</li>
+<li>如果指定了远程分支, 就将这个远程分支作为FETCH_HEAD.</li>
+</ol>
+<h2 id="子树合并">子树合并</h2>
+<p>在项目中难免会引用到其他项目作为主项目的一个模块，但不能同时存在两个仓库，然后都提交。有一个解决文档是，将子项目作为子树提交，新建立一个分支作为子项目，然后跟踪更新。然后切换回主分支，主分支合并读取分支的树，这时在子目录下会有子项目的文件，子项目和主分支的更新和合并都通过子树作为桥梁。</p>
+<p>子树归并的思想是你拥有两个工程，其中一个项目映射到另外一个项目的子目录中，反过来也一样。当你指定一个子树归并，Git可以聪明地探知其中一个是另外一个的子树从而实现正确的归并——这相当神奇。</p>
+<p>比如想要嵌入一个rack项目。首先你将 Rack 项目加入到项目中。你将 Rack 项目当作你项目中的一个远程引用，然后将它检出到它自身的分支：</p>
+<figure class="highlight bash"><pre><div class="line">$ git remote add rack_remote git@github.com:schacon/rack.git</div><div class="line">$ git fetch rack_remote</div><div class="line">$ git checkout -b rack_branch rack_remote/master</div></pre></figure>
+
+<p>要将 Rack 项目当作子目录拉取到你的master项目中。你可以在 Git 中用git read-tree来实现。</p>
+<figure class="highlight bash"><pre><div class="line">$ git checkout master</div><div class="line">$ git <span class="built_in">read</span>-tree --prefix=rack/ -u rack_branch</div></pre></figure>
+
+<p>当你提交master的时候，会同时提交子目录下拥有Rack的文件。你可以比较容易地归并其中一个分支的变更到另外一个。因此，如果 Rack项目更新了，你可以通过切换到那个分支并执行拉取来获得上游的变更。然后又可以切换会主分支，合并那个分支的修改。</p>
+<figure class="highlight bash"><pre><div class="line">$ git checkout rack_branch</div><div class="line">$ git pull</div><div class="line">$ git checkout master</div><div class="line">$ git merge --squash <span class="operator">-s</span> subtree --no-commit rack_branch</div><div class="line">Squash commit -- not updating HEAD</div><div class="line">Automatic merge went well; stopped before committing as requested</div></pre></figure>
+
+<p>为了得到rack子目录和你rack_branch分支的区别——以决定你是否需要归并它们——你不能使用一般的diff命令。而是对你想比较的分支运行git diff-tree：</p>
+<figure class="highlight bash"><pre><div class="line">$ git diff-tree -p rack_branch</div></pre></figure>
+
+<h2 id="think_in_git">think in git</h2>
+<h3 id="git_对象">git 对象</h3>
+<p>Git 是一套内容寻址文件系统。Git 从核心上来看不过是简单地存储键值对（key-value）。它允许插入任意类型的内容，并会返回一个键值，通过该键值可以在任何时候再取出该内容。</p>
+<h2 id="参考">参考</h2>
+<ul>
+<li><a href="https://help.github.com/" target="_blank" rel="external">https://help.github.com</a></li>
+<li><a href="http://www.bootcss.com/p/git-guide/" target="_blank" rel="external">git简明教程</a></li>
+<li><a href="http://marklodato.github.io/visual-git-guide/index-zh-cn.html" target="_blank" rel="external">git图解</a></li>
+<li><a href="http://git-scm.com/docs/" target="_blank" rel="external">git手册</a></li>
+<li><a href="http://git-scm.com/book/zh/" target="_blank" rel="external">git中文手册</a></li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="命令详解">命令详解</h2>
+<h3 id="git_remote">git remote</h3>
+<p><code>git remote</code>用于管理远程仓库</p>
+<figure class="highlight bash"><pre><div ]]>
+    </summary>
+    
+      <category term="git" scheme="http://www.xuntuu.com/tags/git/"/>
+    
+      <category term="版本" scheme="http://www.xuntuu.com/tags/%E7%89%88%E6%9C%AC/"/>
+    
+      <category term="工具" scheme="http://www.xuntuu.com/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[git简易使用指南]]></title>
+    <link href="http://www.xuntuu.com/2013/07/12/git-use/"/>
+    <id>http://www.xuntuu.com/2013/07/12/git-use/</id>
+    <published>2013-07-12T11:20:00.000Z</published>
+    <updated>2014-09-19T07:28:20.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="安装">安装</h2>
+<p><a href="http://code.google.com/p/git-osx-installer/downloads/list?can=3" target="_blank" rel="external">下载 git OSX 版</a></p>
+<p><a href="http://code.google.com/p/msysgit/downloads/list?can=3" target="_blank" rel="external">下载 git Windows 版</a></p>
+<p><a href="http://book.git-scm.com/2_installing_git.html" target="_blank" rel="external">下载 git Linux 版</a></p>
+<h2 id="git基础">git基础</h2>
+<p>直接记录快照，而非差异比较</p>
+<p><strong>文件的三种状态：</strong>已提交（committed），已修改（modified）和已暂存（staged）。用git管理项目的时候，文件在三个地方流转：Git 的工作目录，暂存区域，以及本地仓库。
+<img src="/img/201307/3spaces.jpg" alt="git三种文件流转区"></p>
+<p>如果是 Git 目录中保存着的特定版本文件，就属于已提交状态；如果作了修改并已放入暂存区域，就属于已暂存状态；如果自上次取出后，作了修改但还没有放到暂存区域，就是已修改状态。</p>
+<h2 id="常用命令">常用命令</h2>
+<p>创建新仓库  <code>git init</code></p>
+<p>检出仓库   <code>git clone url</code></p>
+<p>添加修改 <code>git add &lt;filename&gt;</code></p>
+<p>提交修改  <code>git commit - &quot;代码提交信息&quot;</code></p>
+<p>连接远程  <code>git add remote &lt;a name&gt; &lt;server&gt;</code></p>
+<p>更新远程  <code>git pull</code></p>
+<p>合并远程  <code>git merge</code></p>
+<p>推送远程  <code>git push &lt;server name&gt; &lt;branch&gt;</code></p>
+<p>分支管理  <code>git checkout</code> 和 <code>git branch</code></p>
+<blockquote>
+<p>关于命令的用法，强烈推荐一个<a href="http://www.bootcss.com/p/git-guide/" target="_blank" rel="external">简明教程</a>，可以让你快速掌握日常的用法。</p>
+</blockquote>
+<h2 id="命令详解">命令详解</h2>
+<p>有些命令比较容易混淆，稍不注意就用错了。要特别注意那些命令对三个区域操作的方向性。</p>
+<p>文件如何在三个区域流转呢？就要用到这几个命令git add commit reset checkout 
+<img src="/img/201307/1step-operations.png" alt="文件流转"></p>
+<blockquote>
+<p><code>--</code>参数的作用是区分分支名还是文件名，加了<code>--</code>参数命令就知道后面的是文件名而不是分支名
+<code>git add -A</code>将工作目录所有修改提交
+<code>git checkout -- files</code> 把文件从暂存区域复制到工作目录，用来丢弃本地修改。files不能少，不然会无效</p>
+</blockquote>
+<p>上面的图是分步操作，也可以一条命令同时对暂存区和工作目录操作。
+<img src="/img/201307/2step-operations.png" alt="文件流转2"></p>
+<h3 id="git_checkout">git checkout</h3>
+<p>checkout命令用于分支切换及文件签回。切换的时候会进行HEAD跟分支绑定，如果是存在的分支，那么所有暂存区和工作目录的文件将会变成跟仓库一样，如果是新分支会匿名分支，文件不会变。如果分支后面还带有文件参数，则不会切换分支，只是把另一个分支的文件签过来。如果不带分支名，则是从暂存区签回文件。签回就是复制，不存在于两个当前分支仓库和要切换分支仓库的文件将不会改变。举三个例子：</p>
+<figure class="highlight bash"><pre><div class="line">$ git checkout master              <span class="comment">#(1) 切换到分支master</span></div><div class="line">$ git checkout master~<span class="number">2</span> Makefile   <span class="comment">#(2) 并不切换到另一个分支，只是签回文件</span></div><div class="line">$ rm <span class="operator">-f</span> hello.c</div><div class="line">$ git checkout hello.c             <span class="comment">#(3) 从暂存区签回hello.c</span></div></pre></figure>
+
+<p>关于HEAD指针，它指向一个分支头部，比如如果指向分支master，<code>HEAD^</code>就是master的上一个版本， <code>HEAD^^</code>上上个版本，<code>HEAD^100</code> 上100个版本。<code>HEAD~</code>相反对应的是master的下一个版本。</p>
+<h3 id="git_reset">git reset</h3>
+<p>reset命令把当前分支指向另一个位置，并且有选择的变动工作目录和暂存区。也用来在从历史仓库中复制文件到暂存区，而不动工作目录。</p>
+<p>如果不给选项，那么当前分支指向到那个提交。如果用<code>--hard</code>选项，那么工作目录也更新，如果用<code>--soft</code>选项，那么都不变。
+<img src="/img/201307/git-reset.png" alt="git reset">
+如果没有给出提交点的版本号，那么默认用HEAD。这样，分支指向不变，但是索引会回滚到最后一次提交，如果用—hard选项，工作目录也同样。</p>
+<h3 id="git_merge">git merge</h3>
+<p>merge 命令把不同分支合并起来。合并前，索引必须和当前提交相同。作用是将仓库中其他分支的跟索引更新的地方，down到暂存区和工作目录中。</p>
+<p>也就是说如果另一个分支是当前提交的祖父节点，那么合并命令将什么也不做，因为没有更新的内容，而如果当前提交是另一个分支的祖父节点，就导致fast-forward合并。指向只是简单的移动，工作目录和暂存区的文件会改变但并不会生成一个新的提交。</p>
+<p>如果当前分支和另外一个分支有共同的祖先节点而不是直接线性节点关系的话，将会进行一个文件的合并，并创建一个新的提交。如果当前分支合并的时候出现了冲突了，只要重新编辑冲突的文件，在解决了所有文件里的所有冲突后，运行 git add 将把它们标记为已解决状态（实际上就是来一次快照保存到暂存区域。）。因为一旦暂存，就表示冲突已经解决。或者使用<code>git merge --abort</code>放弃合并，工作目录和暂存区会回退。
+<img src="/img/201307/true-merge.png" alt="git merge"></p>
+<h3 id="git_cherry-pick">git cherry-pick</h3>
+<p>cherry-pick命令”复制”一个提交节点并在当前分支做一次完全一样的新提交。
+<img src="/img/201307/cherry-pick.png" alt="git cherry-pick"></p>
+<h3 id="git_rebase">git rebase</h3>
+<p>rebase衍合是合并命令的另一种选择。合并把两个父分支合并进行一次提交，提交历史不是线性的。衍合在当前分支上重演另一个分支的历史，提交历史是线性的。 本质上，这是线性化的自动的 cherry-pick。
+<img src="/img/201307/git-rebase.png" alt="git rebase"></p>
+<p>上面的命令都在topic分支中进行，而不是master分支，在master分支上重演，并且把分支指向新的节点。注意旧提交没有被引用，将被回收。要限制回滚范围，使用<code>--onto</code>选项。下面的命令在master分支上重演当前分支从169a6以来的最近几个提交，即2c33a。
+<img src="/img/201307/rebase-onto.png" alt="git rebase onto"></p>
+<h3 id="其他命令">其他命令</h3>
+<p><code>git rm file</code> 用于删除已提交到暂存区的文件，从此这个文件不会出现在版本管理。</p>
+<p><code>git mv file1 file2</code>用于工作目录和暂存区的文件更名，相当于执行了三个命令，</p>
+<figure class="highlight bash"><pre><div class="line">$ mv file1 file2</div><div class="line">$ git rm file1</div><div class="line">$ git add file2</div></pre></figure>
+
+<p><code>git status</code>,用于查看工作目录的状态</p>
+<p><code>git diff</code>,用于比较工作目录和暂存区</p>
+<p><code>git diff --staged</code>,用于比较暂存区和仓库</p>
+<h2 id="参考">参考</h2>
+<ul>
+<li><a href="https://help.github.com/" target="_blank" rel="external">https://help.github.com</a></li>
+<li><a href="http://www.bootcss.com/p/git-guide/" target="_blank" rel="external">git简明教程</a></li>
+<li><a href="http://git-scm.com/docs/" target="_blank" rel="external">git手册</a></li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="安装">安装</h2>
+<p><a href="http://code.google.com/p/git-osx-installer/downloads/list?can=3" target="_blank" rel="external">下载 git OSX 版]]>
+    </summary>
+    
+      <category term="git" scheme="http://www.xuntuu.com/tags/git/"/>
+    
+      <category term="版本" scheme="http://www.xuntuu.com/tags/%E7%89%88%E6%9C%AC/"/>
+    
+      <category term="工具" scheme="http://www.xuntuu.com/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[markdown简明使用]]></title>
+    <link href="http://www.xuntuu.com/2013/05/13/markdown-use/"/>
+    <id>http://www.xuntuu.com/2013/05/13/markdown-use/</id>
+    <published>2013-05-13T12:08:20.000Z</published>
+    <updated>2014-09-03T02:53:58.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="使用markdown的好处">使用markdown的好处</h2>
+<blockquote>
+<ol>
+<li>专心于写作，而不是排版</li>
+<li>语法简洁</li>
+<li>有github的支持</li>
+<li>逼格高，有个东东叫markdown+R，用于科技写作，RStudio</li>
+</ol>
+</blockquote>
+<hr>
+<a id="more"></a>
+
+<h2 id="语法特点">语法特点</h2>
+<h3 id="特殊符号">特殊符号</h3>
+<p>对特殊符号&amp;、&lt; 的处理是自动的。</p>
+<p>&amp;是html实体标签标识的时候不会被markdown处理，而作为普通字符的时候会被转换为<code>&amp;amp;</code>。</p>
+<p>&lt;是html标签起始符的时候不会被markdown出来，而作为普通字符的时候会被转换为<code>&amp;lt;</code>。</p>
+<h3 id="内嵌html">内嵌html</h3>
+<p>块元素前后有空行、第一个标签前不能有缩进和空格。</p>
+<figure class="highlight html"><pre><div class="line"><span class="tag">&lt;<span class="title">div</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="title">p</span>&gt;</span>我是块元素<span class="tag">&lt;/<span class="title">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div></pre></figure>
+
+<div>
+    <p>我是块元素</p>
+</div>
+
+<p>行元素随意嵌入。<a href="http://www.baidu.com" title="小心点会跳到百度" target="_blank" rel="external">弄个链接试试</a></p>
+<hr>
+<h2 id="区块元素">区块元素</h2>
+<h3 id="段落与换行">段落与换行</h3>
+<p>用空白行分割段落。markdown文档中的换行不会实际的插入<code>&lt;/br&gt;</code>，如果确实想的话，可以在插入的地方加入两个以上空格<br>然后换行</p>
+<h3 id="标题">标题</h3>
+<p>html中h1-h6表示，markdown中用#表示</p>
+<figure class="highlight html"><pre><div class="line">#h1</div><div class="line">##h2</div><div class="line">######h6</div><div class="line">还可以这样：</div><div class="line">一级标题</div><div class="line">==========</div><div class="line">二级标题</div><div class="line">----------</div></pre></figure>
+
+<h3 id="区块">区块</h3>
+<p>写好一段文本，断好行，然后在每行最前面加&gt;</p>
+<figure class="highlight"><pre><div class="line">&gt;<span class="variable">This</span> is a blockquote with two paragraphs.</div><div class="line"></div><div class="line">&gt;<span class="variable">Lorem</span> ipsum dolor sit amet, consectetuer adipiscing elit.</div><div class="line"></div><div class="line">&gt;<span class="variable">Aliquam</span> hendrerit mi posuere lectus.</div></pre></figure>
+
+<blockquote>
+<p>This is a blockquote with two paragraphs.</p>
+<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+<p>Aliquam hendrerit mi posuere lectus.</p>
+</blockquote>
+<h3 id="列表">列表</h3>
+<p>支持无序列表和有序列表</p>
+<p>无序列表在最前头加+、-或*，然后用空格隔开</p>
+<figure class="highlight"><pre><div class="line"><span class="bullet">+ </span>无</div><div class="line"><span class="bullet">- </span>序</div><div class="line"><span class="bullet">* </span>列</div><div class="line"><span class="bullet">+ </span>表</div></pre></figure>
+
+<ul>
+<li>无</li>
+</ul>
+<ul>
+<li>序</li>
+</ul>
+<ul>
+<li>列</li>
+</ul>
+<ul>
+<li>表</li>
+</ul>
+<p>无序列表在最前头加 数字及.</p>
+<figure class="highlight"><pre><div class="line"><span class="bullet">1. </span>有</div><div class="line"><span class="bullet">2. </span>序</div><div class="line"><span class="bullet">4. </span>列</div><div class="line"><span class="bullet">8. </span>表</div></pre></figure>
+
+<ol>
+<li>有</li>
+<li>序</li>
+<li>列</li>
+<li>表</li>
+</ol>
+<h3 id="代码块">代码块</h3>
+<p>一个空行隔开然后，开头4个空格或一个tab</p>
+<pre><code>这里有代码块
+</code></pre><h3 id="表格">表格</h3>
+<figure class="highlight html"><pre><div class="line">| Tables        | Are           | Cool  |</div><div class="line">| ------------- |:-------------:| -----:|</div><div class="line">| col 3 is      | right-aligned | $1600 |</div><div class="line">| col 2 is      | centered      |   $12 |</div><div class="line">| zebra stripes | are neat      |    $1 |</div><div class="line">不加冒号是左对齐，两边有冒号表示中间对齐，冒号在右边表示右对齐</div></pre></figure>
+
+<table>
+<thead>
+<tr>
+<th>Tables</th>
+<th style="text-align:center">Are</th>
+<th style="text-align:right">Cool</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>col 3 is</td>
+<td style="text-align:center">right-aligned</td>
+<td style="text-align:right">$1600</td>
+</tr>
+<tr>
+<td>col 2 is</td>
+<td style="text-align:center">centered</td>
+<td style="text-align:right">$12</td>
+</tr>
+<tr>
+<td>zebra stripes</td>
+<td style="text-align:center">are neat</td>
+<td style="text-align:right">$1</td>
+</tr>
+</tbody>
+</table>
+<h3 id="分割线">分割线</h3>
+<p>三个以上星号、减号或底号组成的行</p>
+<figure class="highlight"><pre><div class="line"><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span></div><div class="line"></div><div class="line">-------------</div><div class="line"></div><div class="line">________________</div></pre></figure>
+
+<h2 id="区段元素">区段元素</h2>
+<h3 id="链接">链接</h3>
+<figure class="highlight"><pre><div class="line">行内式：</div><div class="line">[<span class="link_label">链接文字</span>](<span class="link_url">链接  'title'</span>)</div><div class="line"></div><div class="line">参考式：</div><div class="line">[<span class="link_label">链接文字</span>][<span class="link_reference">标识</span>]</div><div class="line">然后在另外一个地方定义标识</div><div class="line">[<span class="link_reference">标识</span>]:<span class="link_url"> 链接 'title'</span></div></pre></figure>
+
+<h3 id="图片">图片</h3>
+<p>跟链接很相似只有一个区别，在前面加!</p>
+<h3 id="强调">强调</h3>
+<p>*或_隔开， <em>奇</em> 数个是<code>&lt;em&gt;</code>，<strong>偶</strong> 数个是<code>&lt;strong&gt;</code></p>
+<h3 id="行内代码">行内代码</h3>
+<p>反引号`隔开，<code>伪代码</code>。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="使用markdown的好处">使用markdown的好处</h2>
+<blockquote>
+<ol>
+<li>专心于写作，而不是排版</li>
+<li>语法简洁</li>
+<li>有github的支持</li>
+<li>逼格高，有个东东叫markdown+R，用于科技写作，RStudio</li>
+</ol>
+</blockquote>
+<hr>
+]]>
+    
+    </summary>
+    
+      <category term="markdown" scheme="http://www.xuntuu.com/tags/markdown/"/>
+    
+      <category term="效率" scheme="http://www.xuntuu.com/categories/%E6%95%88%E7%8E%87/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[高性能javascript编程]]></title>
+    <link href="http://www.xuntuu.com/2013/03/15/js-best-performance/"/>
+    <id>http://www.xuntuu.com/2013/03/15/js-best-performance/</id>
+    <published>2013-03-15T11:20:00.000Z</published>
+    <updated>2014-09-25T17:06:57.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="优化代码">优化代码</h2>
+<ol>
+<li>不用使用二次编译代码，即将字符串编译为代码，javascript中有4中方式可以使用字符串形式的代码：</li>
+<li><p>eval 2. Function 3. setTimeout 4. setInterval ,二次编译的时候会占用更多时间执行代码。</p>
+</li>
+<li><p>使用对象和数组直接量，就是说不要使用new Object 和 new Array 而直接使用{}和[] 。</p>
+</li>
+<li><p>不用做重复的工作，比如下面这段代码，</p>
+</li>
+</ol>
+<figure class="highlight javascript"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">addHandler</span><span class="params">(target, eventType, handler)</span></span>{ </div><div class="line">	<span class="keyword">if</span> (target.addEventListener){ <span class="comment">//DOM2 Events</span></div><div class="line">		target.addEventListener(eventType, handler, <span class="literal">false</span>); </div><div class="line">	} <span class="keyword">else</span> { <span class="comment">//IE </span></div><div class="line">		target.attachEvent(<span class="string">"on"</span> + eventType, handler); </div><div class="line">	} </div><div class="line">}</div></pre></figure>
+
+<p>每次调用的时候都会进行能力测试。我们可以通过以下两种方式改造：
+1.延迟加载
+延迟加载，简单来说就是需要的时候才加载：</p>
+<figure class="highlight javascript"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">addHandler</span><span class="params">(target, eventType, handler)</span></span>{ </div><div class="line">	<span class="comment">//overwrite the existing function </span></div><div class="line">	<span class="keyword">if</span> (target.addEventListener){ <span class="comment">//DOM2 Events </span></div><div class="line">		addHandler = <span class="function"><span class="keyword">function</span><span class="params">(target, eventType, handler)</span></span>{ </div><div class="line">			target.addEventListener(eventType, handler, <span class="literal">false</span>); </div><div class="line">		}; </div><div class="line">	} <span class="keyword">else</span> { <span class="comment">//IE </span></div><div class="line">	 	addHandler = <span class="function"><span class="keyword">function</span><span class="params">(target, eventType, handler)</span></span>{ </div><div class="line">	 		target.attachEvent(<span class="string">"on"</span> + eventType, handler); </div><div class="line">		}; </div><div class="line">	}</div><div class="line">	<span class="comment">//call the new function</span></div><div class="line"> 	removeHandler(target, eventType, handler); </div><div class="line">}</div></pre></figure>
+
+<p>2.条件预加载
+它在脚本加载之前提前进行检查，而不等待函数调用。</p>
+<figure class="highlight javascript"><pre><div class="line"><span class="keyword">var</span> addHandler = <span class="built_in">document</span>.body.addEventListener ? </div><div class="line"><span class="function"><span class="keyword">function</span><span class="params">(target, eventType, handler)</span></span>{ </div><div class="line">	target.addEventListener(eventType, handler, <span class="literal">false</span>); </div><div class="line">}: </div><div class="line"><span class="function"><span class="keyword">function</span><span class="params">(target, eventType, handler)</span></span>{ </div><div class="line">	target.attachEvent(<span class="string">"on"</span> + eventType, handler); </div><div class="line">};</div></pre></figure>
+
+<ol>
+<li><p>数学运算的时候，优先考虑使用位操作，提高速度。位操作有： <code>&amp;</code>、<code>|</code> 、<code>^</code>、 <code>~</code>。比如某些情况下可以用 <code>i&amp;1</code>代替<code>i%1</code>。</p>
+</li>
+<li><p>原生方法总是比JavaScript写的东西要快。尽量使用原生方法。</p>
+</li>
+</ol>
+<h2 id="优化web项目">优化web项目</h2>
+<ol>
+<li><p>合理利用缓存，包括这个地方出现的缓存，浏览器、服务端、数据库。</p>
+</li>
+<li><p>合并资源，比如小的javascript文件合并为大的javascript文件，这样可以减少HTTP请求数，发起HTTP请求是有损耗的，特别是在移动端。</p>
+</li>
+<li><p>jsmin ，压缩js文件，去除不必要的空格换行以及将局部变量名变短等，使得不改变js的功能下将js文件大小减小。</p>
+</li>
+<li><p>开启gzip压缩，如果不能开启，大部分是有请求报文中缺少<code>Accept-Encoding</code>的HTTP头。</p>
+</li>
+<li><p>使用CDN优化你的静态文件访问速度</p>
+</li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="优化代码">优化代码</h2>
+<ol>
+<li>不用使用二次编译代码，即将字符串编译为代码，javascript中有4中方式可以使用字符串形式的代码：</li>
+<li><p>eval 2. Function 3. setTimeout 4. setInterv]]>
+    </summary>
+    
+      <category term="前端" scheme="http://www.xuntuu.com/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="javascript" scheme="http://www.xuntuu.com/tags/javascript/"/>
+    
+      <category term="javascript" scheme="http://www.xuntuu.com/categories/javascript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Emmet简明用法]]></title>
+    <link href="http://www.xuntuu.com/2013/01/18/emmet-use/"/>
+    <id>http://www.xuntuu.com/2013/01/18/emmet-use/</id>
+    <published>2013-01-18T15:58:00.000Z</published>
+    <updated>2014-09-19T07:28:05.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="简介">简介</h2>
+<p>Emmet的前身是大名鼎鼎的Zen coding，如果你从事Web前端开发的话，对该插件一定不会陌生。它使用仿CSS选择器的语法来生成代码，大大提高了HTML/CSS代码编写的速度，比如下面的演示：
+<img src="/img/201401/emmet-demo.gif" alt="Emmet演示"></p>
+<h3 id="sublime下安装">sublime下安装</h3>
+<p><code>shift+ctrl+p</code>调出全局设置框，输入’install’，选择’package control:install package’,搜索’emmet’,选中后回车就会开始安装。</p>
+<p>看状态条，装好后，就可以使用了，如果不能使用请重启sublime。</p>
+<h3 id="使用">使用</h3>
+<p>在编辑html文件的时候有两种方式：</p>
+<ol>
+<li><code>ctrl+alt+ENTER</code>调出一个abbreviation的交互命令窗口</li>
+<li>输入一段abbreviation后，按TAB键，前面的abbreviation就会扩展为完整的html片段</li>
+</ol>
+<hr>
+<h2 id="编写HTML代码">编写HTML代码</h2>
+<h3 id="初始一个html文档">初始一个html文档</h3>
+<p>HTML文档需要包含一些固定的标签，比如<code>&lt;html&gt;、&lt;head&gt;、&lt;body&gt;</code>等，现在你只需要1秒钟就可以输入这些标签。比如输入<code>!</code>或<code>html:5</code>，扩展后为：</p>
+<figure class="highlight html"><pre><div class="line"><span class="doctype">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">html</span> <span class="attribute">lang</span>=<span class="value">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">head</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"UTF-8"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="title">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="title">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span></div><div class="line">	</div><div class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></div></pre></figure>
+
+<p>html:5 或!：用于HTML5文档类型
+html:xt：用于XHTML过渡文档类型
+html:4s：用于HTML4严格文档类型</p>
+<p>这些都是snippets，snippets是片段生成器。其他snippets比如：<code>c、cc、 cc:ie6、 cc:ie、 cc:noie</code></p>
+<h3 id="添加类、id、文本和属性">添加类、id、文本和属性</h3>
+<p>连续输入元素名称和ID，Emmet会自动为你补全，比如<code>p.bar#foo</code>扩展为： </p>
+<figure class="highlight html"><pre><div class="line"><span class="tag">&lt;<span class="title">p</span> <span class="attribute">class</span>=<span class="value">"bar"</span> <span class="attribute">id</span>=<span class="value">"foo"</span>&gt;</span><span class="tag">&lt;/<span class="title">p</span>&gt;</span></div></pre></figure>
+
+<p>下面来看看如何定义HTML元素的内容和属性。你可以输入<code>h1{foo}+a[href=#]</code>，然后扩展为：</p>
+<figure class="highlight html"><pre><div class="line"><span class="tag">&lt;<span class="title">h1</span>&gt;</span>foo<span class="tag">&lt;/<span class="title">h1</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#"</span>&gt;</span><span class="tag">&lt;/<span class="title">a</span>&gt;</span></div></pre></figure>
+
+<p>内容用<code>{}</code>、属性用<code>[]</code>包起来</p>
+<h3 id="嵌套">嵌套</h3>
+<p>现在你只需要1行代码就可以实现标签的嵌套。 </p>
+<ul>
+<li><code>&gt;</code>：子元素符号，表示嵌套的元素</li>
+<li><code>+</code>：同级标签符号</li>
+<li><code>^</code>：使标签提升一级</li>
+</ul>
+<p>比如<code>p&gt;span+div^div</code> 扩展为：</p>
+<figure class="highlight html"><pre><div class="line"><span class="tag">&lt;<span class="title">p</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="title">span</span>&gt;</span><span class="tag">&lt;/<span class="title">span</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="title">div</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">div</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div></pre></figure>
+
+<h3 id="分组">分组</h3>
+<p>Emmet使用<code>()</code>来分组dom子树</p>
+<p>你可以通过嵌套和括号来快速生成一些代码块，比如<code>(.foo&gt;h1)+(.bar&gt;h2)</code>，会扩展为： </p>
+<figure class="highlight html"><pre><div class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"foo"</span>&gt;</span>  </div><div class="line">  <span class="tag">&lt;<span class="title">h1</span>&gt;</span><span class="tag">&lt;/<span class="title">h1</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"bar"</span>&gt;</span>  </div><div class="line">  <span class="tag">&lt;<span class="title">h2</span>&gt;</span><span class="tag">&lt;/<span class="title">h2</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div></pre></figure>
+
+<h3 id="隐式标签">隐式标签</h3>
+<p>省略标签名，只输入class，Emmet能根据父标签进行判定，然后生成需要的带class的标签。比如在外层输入<code>.item</code>会生成<code>&lt;div class=&quot;item&quot;&gt;&lt;/div&gt;</code>。而在<code>&lt;ul&gt;</code>中输入<code>.item</code>，则会生成<code>&lt;li class=&quot;item&quot;&gt;&lt;/li&gt;</code>。 </p>
+<p>下面是所有的隐式标签名称： </p>
+<ul>
+<li>li：用于ul和ol中</li>
+<li>tr：用于table、tbody、thead和tfoot中</li>
+<li>td：用于tr中</li>
+<li>option：用于select和optgroup中</li>
+</ul>
+<h3 id="定义多个元素">定义多个元素</h3>
+<p>要定义多个元素，可以使用<code>*</code>符号。比如，<code>ul&gt;li*3</code>可以生成如下代码： </p>
+<figure class="highlight html"><pre><div class="line"><span class="tag">&lt;<span class="title">ul</span>&gt;</span>  </div><div class="line">  <span class="tag">&lt;<span class="title">li</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span>  </div><div class="line">  <span class="tag">&lt;<span class="title">li</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span>  </div><div class="line">  <span class="tag">&lt;<span class="title">li</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;/<span class="title">ul</span>&gt;</span></div></pre></figure>
+
+<p>还可以使用<code>$</code>给属性计数，比如<code>ul&gt;li.item$$e#item$*3</code>生成：</p>
+<figure class="highlight html"><pre><div class="line"><span class="tag">&lt;<span class="title">ul</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="title">li</span> <span class="attribute">class</span>=<span class="value">"item01e"</span> <span class="attribute">id</span>=<span class="value">"item1"</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="title">li</span> <span class="attribute">class</span>=<span class="value">"item02e"</span> <span class="attribute">id</span>=<span class="value">"item2"</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="title">li</span> <span class="attribute">class</span>=<span class="value">"item03e"</span> <span class="attribute">id</span>=<span class="value">"item3"</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">ul</span>&gt;</span></div></pre></figure>
+
+<p>还可以使用<code>@-</code>改变计数方向，<code>@N</code>改变计数起始数字，并且它们可以组合使用，比如<code>ul&gt;li.item$@-3*5</code>生成：</p>
+<figure class="highlight html"><pre><div class="line"><span class="tag">&lt;<span class="title">ul</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">li</span> <span class="attribute">class</span>=<span class="value">"item7"</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">li</span> <span class="attribute">class</span>=<span class="value">"item6"</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">li</span> <span class="attribute">class</span>=<span class="value">"item5"</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">li</span> <span class="attribute">class</span>=<span class="value">"item4"</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">li</span> <span class="attribute">class</span>=<span class="value">"item3"</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">ul</span>&gt;</span></div></pre></figure>
+
+<h3 id="Lorem_ipsum">Lorem ipsum</h3>
+<p>“Lorem ipsum”是一段无意义的文本用于测试页面会如何显示，Emmet提供了一个”Lorem ipsum”生成器，非常方便好用。比如<code>ul.generic-list&gt;lorem10.item*4</code>生成：</p>
+<figure class="highlight html"><pre><div class="line"><span class="tag">&lt;<span class="title">ul</span> <span class="attribute">class</span>=<span class="value">"generic-list"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="title">li</span> <span class="attribute">class</span>=<span class="value">"item"</span>&gt;</span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure, maiores?<span class="tag">&lt;/<span class="title">li</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="title">li</span> <span class="attribute">class</span>=<span class="value">"item"</span>&gt;</span>Repellat quia expedita ullam minima cum consectetur itaque sit quo.<span class="tag">&lt;/<span class="title">li</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="title">li</span> <span class="attribute">class</span>=<span class="value">"item"</span>&gt;</span>Labore maiores, minus unde itaque repellat quis delectus, ipsa dolore.<span class="tag">&lt;/<span class="title">li</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="title">li</span> <span class="attribute">class</span>=<span class="value">"item"</span>&gt;</span>Perferendis harum nulla quas necessitatibus nobis, amet dolorum unde aut!<span class="tag">&lt;/<span class="title">li</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">ul</span>&gt;</span></div></pre></figure>
+
+<p>lorem生成器后面的10表示的是单词数。</p>
+<hr>
+<h2 id="CSS缩写">CSS缩写</h2>
+<h3 id="值">值</h3>
+<p>比如要定义元素的宽度，只需输入<code>w100</code>，即可生成 </p>
+<figure class="highlight css"><pre><div class="line"><span class="tag">width</span>: 100<span class="tag">px</span>;</div></pre></figure>
+
+<p>除了px，也可以生成其他单位，比如输入<code>h10p+m5e</code>，结果如下： </p>
+<figure class="highlight css"><pre><div class="line"><span class="tag">height</span>: 10%;  </div><div class="line"><span class="tag">margin</span>: 5<span class="tag">em</span>;</div></pre></figure>
+
+<p>单位别名： </p>
+<ul>
+<li>p —&gt; %</li>
+<li>e —&gt; em</li>
+<li>x —&gt; ex</li>
+</ul>
+<h3 id="附加属性">附加属性</h3>
+<p>可能你之前已经了解了一些缩写，比如 <code>@f</code>，可以生成： </p>
+<figure class="highlight css"><pre><div class="line"><span class="at_rule">@<span class="keyword">font-face</span></span> <span class="rules">{  </span></div><div class="line">  <span class="rule"><span class="attribute">font-family</span>:<span class="value"></span></span>;  </div><div class="line">  <span class="rule"><span class="attribute">src</span>:<span class="value"><span class="function">url</span>()</span></span>;  </div><div class="line"><span class="rule">}</span></div></pre></figure>
+
+<p>一些其他的属性，比如<code>background-image、border-radius、font、@font-face,text-outline、text-shadow</code>等额外的选项，可以通过”+”符号来生成，比如输入<code>@f+</code>，将生成： </p>
+<figure class="highlight css"><pre><div class="line"><span class="at_rule">@<span class="keyword">font-face</span></span> <span class="rules">{  </span></div><div class="line">  <span class="rule"><span class="attribute">font-family</span>:<span class="value"> <span class="string">'FontName'</span></span></span>;  </div><div class="line">  <span class="rule"><span class="attribute">src</span>:<span class="value"> <span class="function">url</span>(<span class="string">'FileName.eot'</span>)</span></span>;  </div><div class="line">  <span class="rule"><span class="attribute">src</span>:<span class="value"> <span class="function">url</span>(<span class="string">'FileName.eot?#iefix'</span>) <span class="function">format</span>(<span class="string">'embedded-opentype'</span>),  </span></span></div><div class="line">     <span class="function">url</span>(<span class="string">'FileName.woff'</span>) <span class="function">format</span>(<span class="string">'woff'</span>),  </div><div class="line">     <span class="function">url</span>(<span class="string">'FileName.ttf'</span>) <span class="function">format</span>(<span class="string">'truetype'</span>),  </div><div class="line">     <span class="function">url</span>(<span class="string">'FileName.svg#FontName'</span>) <span class="function">format</span>(<span class="string">'svg'</span>);  </div><div class="line">  <span class="rule"><span class="attribute">font-style</span>:<span class="value"> normal</span></span>;  </div><div class="line">  <span class="rule"><span class="attribute">font-weight</span>:<span class="value"> normal</span></span>;  </div><div class="line"><span class="rule">}</span></div></pre></figure>
+
+<h3 id="模糊匹配">模糊匹配</h3>
+<p>如果有些缩写你拿不准，Emmet会根据你的输入内容匹配最接近的语法，比如输入ov:h、ov-h、ovh和oh，生成的代码是相同的： </p>
+<figure class="highlight css"><pre><div class="line"><span class="tag">overflow</span>: <span class="tag">hidden</span>;</div></pre></figure>
+
+<h3 id="浏览器厂商前缀">浏览器厂商前缀</h3>
+<p>如果输入非W3C标准的CSS属性，Emmet会自动加上浏览器厂商前缀，比如输入<code>trf</code>，则会生成:</p>
+<figure class="highlight css"><pre><div class="line"><span class="tag">-webkit-transform</span>: ;  </div><div class="line"><span class="tag">-moz-transform</span>: ;  </div><div class="line"><span class="tag">-ms-transform</span>: ;  </div><div class="line"><span class="tag">-o-transform</span>: ;  </div><div class="line"><span class="tag">transform</span>: ;</div></pre></figure>
+
+<p>你也可以在任意属性前加上”-“符号，也可以为该属性加上前缀。比如输入<code>-super-foo</code>： </p>
+<figure class="highlight css"><pre><div class="line"><span class="tag">-webkit-super-foo</span>: ;  </div><div class="line"><span class="tag">-moz-super-foo</span>: ;  </div><div class="line"><span class="tag">-ms-super-foo</span>: ;  </div><div class="line"><span class="tag">-o-super-foo</span>: ;  </div><div class="line"><span class="tag">super-foo</span>: ;</div></pre></figure>
+
+<p>如果不希望加上所有前缀，可以使用缩写来指定，比如<code>-wm-trf</code>表示只加上-webkit和-moz前缀：</p>
+<figure class="highlight css"><pre><div class="line"><span class="tag">-webkit-transform</span>: ;  </div><div class="line"><span class="tag">-moz-transform</span>: ;  </div><div class="line"><span class="tag">transform</span>: ;</div></pre></figure>
+
+<p>前缀缩写如下： </p>
+<ul>
+<li>w 表示 -webkit-</li>
+<li>m 表示 -moz-</li>
+<li>s 表示 -ms-</li>
+<li>o 表示 -o-</li>
+</ul>
+<h3 id="渐变">渐变</h3>
+<p>输入<code>lg(left, #fff 50%, #000)</code>，会生成如下代码： </p>
+<figure class="highlight css"><pre><div class="line"><span class="tag">background-image</span>: <span class="tag">-webkit-gradient</span>(<span class="tag">linear</span>, 0 0, 100% 0, <span class="tag">color-stop</span>(0<span class="class">.5</span>, <span class="id">#fff</span>), <span class="tag">to</span>(<span class="id">#000</span>));  </div><div class="line"><span class="tag">background-image</span>: <span class="tag">-webkit-linear-gradient</span>(<span class="tag">left</span>, <span class="id">#fff</span> 50%, <span class="id">#000</span>);  </div><div class="line"><span class="tag">background-image</span>: <span class="tag">-moz-linear-gradient</span>(<span class="tag">left</span>, <span class="id">#fff</span> 50%, <span class="id">#000</span>);  </div><div class="line"><span class="tag">background-image</span>: <span class="tag">-o-linear-gradient</span>(<span class="tag">left</span>, <span class="id">#fff</span> 50%, <span class="id">#000</span>);  </div><div class="line"><span class="tag">background-image</span>: <span class="tag">linear-gradient</span>(<span class="tag">left</span>, <span class="id">#fff</span> 50%, <span class="id">#000</span>);</div></pre></figure>
+
+<h2 id="定制">定制</h2>
+<p>你还可以定制Emmet插件： </p>
+<p>添加新缩写或更新现有缩写，可修改snippets.json文件,参考：<a href="https://github.com/sergeche/emmet-sublime/blob/master/emmet/snippets.json" target="_blank" rel="external">snippets.json</a></p>
+<p>更改Emmet过滤器和操作的行为，可修改preferences.json文件</p>
+<p>定义如何生成HTML或XML代码，可修改syntaxProfiles.json文件</p>
+<h2 id="针对不同编辑器的插件">针对不同编辑器的插件</h2>
+<p>Emmet支持的编辑器如下:</p>
+<ul>
+<li><a href="https://github.com/sergeche/emmet-sublime" target="_blank" rel="external">Sublime Text</a> </li>
+<li><a href="https://github.com/emmetio/emmet-atom" target="_blank" rel="external">Atom</a></li>
+<li><a href="https://github.com/emmetio/emmet-eclipse" target="_blank" rel="external">Eclipse</a></li>
+<li><a href="https://github.com/emmetio/npp" target="_blank" rel="external">Notepad++</a></li>
+<li><a href="https://github.com/emmetio/netbeans" target="_blank" rel="external">NetBeans</a></li>
+<li><a href="http://emmet.io/download/" target="_blank" rel="external">更多&gt;&gt;</a></li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="简介">简介</h2>
+<p>Emmet的前身是大名鼎鼎的Zen coding，如果你从事Web前端开发的话，对该插件一定不会陌生。它使用仿CSS选择器的语法来生成代码，大大提高了HTML/CSS代码编写的速度，比如下面的演示：
+<img src="/img/20]]>
+    </summary>
+    
+      <category term="Emmet" scheme="http://www.xuntuu.com/tags/Emmet/"/>
+    
+      <category term="Zen coding" scheme="http://www.xuntuu.com/tags/Zen-coding/"/>
+    
+      <category term="效率" scheme="http://www.xuntuu.com/categories/%E6%95%88%E7%8E%87/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[javascript之10种最全的跨域解决方式]]></title>
+    <link href="http://www.xuntuu.com/2012/08/18/js-cross-domain/"/>
+    <id>http://www.xuntuu.com/2012/08/18/js-cross-domain/</id>
+    <published>2012-08-18T15:58:00.000Z</published>
+    <updated>2014-09-25T06:59:01.000Z</updated>
+    <content type="html"><![CDATA[<p>在客户端编程语言中，如javascript和ActionScript，同源策略是一个很重要的安全理念，它在保证数据的安全性方面有着重要的意义。同源策略规定跨域之间的脚本是隔离的，一个域的脚本不能访问和操作另外一个域的绝大部分属性和方法。那么什么叫相同域，什么叫不同的域呢？</p>
+<hr>
+<h2 id="什么是跨域">什么是跨域</h2>
+<p>什么是跨域，简单地理解就是因为JavaScript同源策略的限制，a.com 域名下的js无法操作b.com或是c.a.com域名下的对象。更详细的说明可以看下表：</p>
+<table>
+    <thead>
+        <tr>
+            <th>URL</th>
+            <th>说明</th>
+            <th>是否允许通信</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><a href="http://www.a.com/a.js" target="_blank" rel="external">http://www.a.com/a.js</a> <br><a href="http://www.a.com/b.js" target="_blank" rel="external">http://www.a.com/b.js</a></td>
+            <td>同一域名下</td>
+            <td>允许</td>
+        </tr>
+        <tr>
+            <td><a href="http://www.a.com/lab/a.js" target="_blank" rel="external">http://www.a.com/lab/a.js</a> <br><a href="http://www.a.com/script/b.js" target="_blank" rel="external">http://www.a.com/script/b.js</a></td>
+            <td>同一域名下,不同文件夹</td>
+            <td>允许</td>
+        </tr>
+        <tr>
+            <td><a href="http://www.a.com/a.js" target="_blank" rel="external">http://www.a.com/a.js</a> <br><a href="http://www.a.com:8000/b.js" target="_blank" rel="external">http://www.a.com:8000/b.js</a></td>
+            <td>同一域名下,不同端口</td>
+            <td>不允许</td>
+        </tr>
+        <tr>
+            <td><a href="http://www.a.com/a.js" target="_blank" rel="external">http://www.a.com/a.js</a> <br><a href="https://www.a.com/b.js" target="_blank" rel="external">https://www.a.com/b.js</a></td>
+            <td>同一域名下,不同协议</td>
+            <td>不允许</td>
+        </tr>
+        <tr>
+            <td><a href="http://www.a.com/a.js" target="_blank" rel="external">http://www.a.com/a.js</a> <br><a href="http://70.32.92.74/b.js" target="_blank" rel="external">http://70.32.92.74/b.js</a></td>
+            <td>域名和ip对应域名不同</td>
+            <td>不允许</td>
+        </tr>
+        <tr>
+            <td><a href="http://www.a.com/a.js" target="_blank" rel="external">http://www.a.com/a.js</a> <br><a href="http://script.a.com/b.js" target="_blank" rel="external">http://script.a.com/b.js</a></td>
+            <td>主域相同，子域不同</td>
+            <td>不允许</td>
+        </tr>
+        <tr>
+            <td><a href="http://www.a.com/a.js" target="_blank" rel="external">http://www.a.com/a.js</a> <br><a href="http://a.com/b.js" target="_blank" rel="external">http://a.com/b.js</a></td>
+            <td>同一域名，不同二级域名（同上）</td>
+            <td>不允许（cookie这种情况下也不允许访问）</td>
+        </tr>
+        <tr>
+            <td><a href="http://www.a.com/a.js" target="_blank" rel="external">http://www.a.com/a.js</a> <br><a href="http://www.cnblogs.com/b.js" target="_blank" rel="external">http://www.cnblogs.com/b.js</a></td>
+            <td>不同域名</td>
+            <td>不允许</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>也就是说当两个域具有相同的协议(如http), 相同的端口(如80)，相同的host（如www.example.org)，那么我们就可以认为它们是相同的域，其他情况就是跨域的。</p>
+<hr>
+<h2 id="单向跨域">单向跨域</h2>
+<h3 id="JSONP">JSONP</h3>
+<p>JSONP (JSON with Padding)是一个简单高效的跨域方式，HTML中的script标签可以加载并执行其他域的javascript，于是我们可以通过script标记来动态加载其他域的资源。例如我要从域A的页面pageA加载域B的数据，那么在域B的页面pageB中我以JavaScript的形式声明pageA需要的数据，然后在 pageA中用script标签把pageB加载进来，那么pageB中的脚本就会得以执行。JSONP在此基础上加入了回调函数，pageB加载完之后会执行pageA中定义的函数，所需要的数据会以参数的形式传递给该函数。JSONP易于实现，但是也会存在一些安全隐患，如果第三方的脚本随意地执行，那么它就可以篡改页面内容，截获敏感数据。但是在受信任的双方传递数据，JSONP是非常合适的选择。</p>
+<h3 id="window-name">window.name</h3>
+<p>window 对象的name属性是一个很特别的属性，当该window的location变化，然后重新加载，它的name属性可以依然保持不变。那么我们可以在页面 A中用iframe加载其他域的页面B，而页面B中用JavaScript把需要传递的数据赋值给window.name，iframe加载完成之后，页面A修改iframe的地址，将其变成同域的一个地址，然后就可以读出window.name的值了。这个方式非常适合单向的数据请求，而且协议简单、安全。不会像JSONP那样不做限制地执行外部脚本。</p>
+<h3 id="SERVER_PROXY">SERVER PROXY</h3>
+<p>在数据提供方没有提供对JSONP协议或者 window.name协议的支持，也没有对其它域开放访问权限时，我们可以通过server proxy的方式来抓取数据。例如当www.a.com域下的页面需要请求www.b.com下的资源文件asset.txt时，直接发送一个指向 www.b.com/asset.txt的Ajax请求肯定是会被浏览器阻止。这时，我们在www.a.com下配一个代理，然后把Ajax请求绑定到这个代理路径下，例如www.a.com/proxy/, 然后这个代理发送HTTP请求访问www.b.com下的asset.txt，跨域的HTTP请求是在服务器端进行的，客户端并没有产生跨域的Ajax请求。这个跨域方式不需要和目标资源签订协议，带有侵略性，另外需要注意的是实践中应该对这个代理实施一定程度的保护，比如限制他人使用或者使用频率。</p>
+<h3 id="Access_Control">Access Control</h3>
+<p>Access Control是比较超越的跨域方式，目前只在很少的浏览器中得以支持，这些浏览器可以发送一个跨域的HTTP请求（Firefox, Google Chrome等通过XMLHTTPRequest实现，IE8下通过XDomainRequest实现），请求的响应必须包含一个<code>Access-Control-Allow-Origin</code>的HTTP响应头，该响应头声明了请求域的可访问权限。例如www.a.com对www.b.com下的 asset.php发送了一个跨域的HTTP请求，那么asset.php必须加入如下的响应头： </p>
+<figure class="highlight shell"><pre><div class="line"><span class="attribute">header("Access-Control-Allow-Origin</span>: <span class="string">http://www.a.com");</span></div></pre></figure>
+
+<h3 id="Flash_URLLoader">Flash URLLoader</h3>
+<p>flash有自己的一套安全策略，服务器可以通过crossdomain.xml文件来声明能被哪些域的SWF文件访问，SWF也可以通过API来确定自身能被哪些域的SWF加载。当跨域访问资源时，例如从域www.a.com请求域www.b.com上的数据，我们可以借助flash来发送HTTP请求。首先，修改域www.b.com上的crossdomain.xml(一般存放在根目录，如果没有需要手动创建) ，把www.a.com加入到白名单。其次，通过Flash URLLoader发送HTTP请求，最后，通过Flash API把响应结果传递给JavaScript。Flash URLLoader是一种很普遍的跨域解决方案，不过需要支持iOS的话，这个方案就无能为力了。</p>
+<hr>
+<h2 id="双向跨域">双向跨域</h2>
+<h3 id="document-domain">document.domain</h3>
+<p>通过修改document的domain属性，我们可以在域和子域或者不同的子域之间通信。同域策略认为域和子域隶属于不同的域，比如www.a.com和 sub.a.com是不同的域，这时，我们无法在www.a.com下的页面中调用sub.a.com中定义的JavaScript方法。但是当我们把它们document的domain属性都修改为a.com，浏览器就会认为它们处于同一个域下，那么我们就可以互相调用对方的method来通信了。</p>
+<h3 id="flash_localConnection">flash localConnection</h3>
+<p>页面上的双向通信也可以通过Flash来解决，Flash API中有LocalConnection这个类，该类允许两个SWF之间通过进程通信，这时SWF可以播放在独立的Flash Player或者AIR中，也可以嵌在HTML页面或者是PDF中。遵循这个通信原则，我们可以在不同域的HTML页面各自嵌套一个SWF来达到相互传递数据的目的了。SWF通过LocalConnection交换数据是很快的，但是每次的数据量有40kb的大小限制。用这种方式来跨域通信过于复杂，而且需要了2个SWF文件，实用性不强。</p>
+<h3 id="FIM——Fragment_Identitier_Messaging">FIM——Fragment Identitier Messaging</h3>
+<p>不同的域之间，JavaScript只能做很有限的访问和操作，其实我们利用这些有限的访问权限就可以达到跨域通信的目的了。FIM (Fragment Identitier Messaging)就是在这个大前提下被发明的。父窗口可以对iframe进行URL读写，iframe也可以读写父窗口的URL，URL有一部分被称为frag，就是#号及其后面的字符，它一般用于浏览器锚点定位，Server端并不关心这部分，应该说HTTP请求过程中不会携带frag，所以这部分的修改不会产生HTTP请求，但是会产生浏览器历史记录。FIM的原理就是改变URL的frag部分来进行双向通信。每个window通过改变其他 window的location来发送消息，并通过监听自己的URL的变化来接收消息。这个方式的通信会造成一些不必要的浏览器历史记录，而且有些浏览器不支持onhashchange事件，需要轮询来获知URL的改变，最后，URL在浏览器下有长度限制，这个制约了每次传送的数据量。</p>
+<h3 id="CROSS_IFRAME">CROSS IFRAME</h3>
+<p>Cross Frame是FIM的一个变种，它借助了一个空白的iframe，不会产生多余的浏览器历史记录，也不需要轮询URL的改变，在可用性和性能上都做了很大的改观。它的基本原理大致是这样的，假设在域www.a.com上有页面A.html和一个空白代理页面proxyA.html, 另一个域www.b.com上有个页面B.html和一个空白代理页面proxyB.html，A.html需要向B.html中发送消息时，页面会创建一个隐藏的iframe, iframe的src指向proxyB.html并把message作为URL frag，由于B.html和proxyB.html是同域，所以在iframe加载完成之后，B.html可以获得iframe的URL，然后解析出 message，并移除该iframe。当B.html需要向A.html发送消息时，原理一样。Cross Frame是很好的双向通信方式，而且安全高效，但是它在Opera中无法使用，不过在Opera下面我们可以使用更简单的 window.postMessage来代替。</p>
+<h3 id="window_postMessage">window postMessage</h3>
+<p>window.postMessage是HTML5定义的一个很新的方法，这个方法可以很方便地跨window通信。由于它是一个很新的方法，所以在很旧和比较旧的浏览器中都无法使用。</p>
+<p>使用方式：otherWindow.postMessage(message, targetOrigin);</p>
+<ul>
+<li>otherWindow: 对接收信息页面的window的引用。可以是页面中iframe的contentWindow属性;window.open 的返回值;通过name或下标从window.frames 取到的值。</li>
+<li>message: 所要发送的数据，string类型。</li>
+<li>targetOrigin: 用于限制otherWindow，“*”表示不作限制</li>
+</ul>
+<p>比如，a.com/index.html要向b.com/index.html发送数据。</p>
+<p>a.com/index.html的代码：</p>
+<figure class="highlight javascript"><pre><div class="line">&lt;iframe id=<span class="string">"ifr"</span> src=<span class="string">"b.com/index.html"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="title">iframe</span>&gt;</span></span></div><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">var</span> ifr = <span class="built_in">document</span>.getElementById(<span class="string">'ifr'</span>);</div><div class="line">    <span class="keyword">var</span> targetOrigin = <span class="string">'http://b.com'</span>;  <span class="comment">// 若写成'http://b.com/c/proxy.html'效果一样</span></div><div class="line">                                        <span class="comment">// 若写成'http://c.com'就不会执行postMessage了</span></div><div class="line">    ifr.contentWindow.postMessage(<span class="string">'I was there!'</span>, targetOrigin);</div><div class="line">};</div><div class="line"><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div></pre></figure>
+
+<p>b.com/index.html的代码:</p>
+<figure class="highlight javascript"><pre><div class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</div><div class="line">    <span class="built_in">window</span>.addEventListener(<span class="string">'message'</span>, <span class="function"><span class="keyword">function</span><span class="params">(event)</span></span>{</div><div class="line">        <span class="comment">// 通过origin属性判断消息来源地址</span></div><div class="line">        <span class="keyword">if</span> (event.origin == <span class="string">'http://a.com'</span>) {</div><div class="line">            alert(event.data);    <span class="comment">// 弹出"I was there!"</span></div><div class="line">            alert(event.source);  <span class="comment">// 对a.com、index.html中window对象的引用</span></div><div class="line">                                  <span class="comment">// 但由于同源策略，这里event.source不可以访问window对象</span></div><div class="line">        }</div><div class="line">    }, <span class="literal">false</span>);</div><div class="line"><span class="xml"><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span></div></pre></figure>
+
+<hr>
+<h2 id="总结">总结</h2>
+<p>跨域的方法很多，不同的应用场景我们都可以找到一个最合适的解决方案。比如单向的数据请求，我们应该优先选择JSONP或者window.name，双向通信我们采取Cross Frame，在未与数据提供方没有达成通信协议的情况下我们也可以用server proxy的方式来抓取数据。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>在客户端编程语言中，如javascript和ActionScript，同源策略是一个很重要的安全理念，它在保证数据的安全性方面有着重要的意义。同源策略规定跨域之间的脚本是隔离的，一个域的脚本不能访问和操作另外一个域的绝大部分属性和方法。那么什么叫相同域，什么叫不同的域呢？<]]>
+    </summary>
+    
+      <category term="跨域" scheme="http://www.xuntuu.com/tags/%E8%B7%A8%E5%9F%9F/"/>
+    
+      <category term="javascript" scheme="http://www.xuntuu.com/categories/javascript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[魔法javascript之事件]]></title>
+    <link href="http://www.xuntuu.com/2012/07/18/js-event/"/>
+    <id>http://www.xuntuu.com/2012/07/18/js-event/</id>
+    <published>2012-07-18T15:58:00.000Z</published>
+    <updated>2014-09-10T02:06:28.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="鼠标事件">鼠标事件</h2>
+<p><code>click、dbclick、mousedown、mouseout、mouseover、mouseup、mousemove</code>7个。</p>
+<p>所有鼠标事件都会冒泡，也可以被取消，而取消鼠标事件将影响浏览器的默认行为，比如取消一个链接的默认行为，则会打开那个链接。</p>
+<h3 id="触发顺序">触发顺序</h3>
+<p>只有在同一元素上相继触发mousedown 和 mouseup事件，才会触发click事件；如果mousedown或mouseup中的一个被取消，就不会触发click事件。类似地，只有触发两次click事件，才会触发一次dbclick事件。它们的顺序如下：
+mousedown —&gt; mouseup —&gt; click —&gt;  mousedown —&gt; mouseup —&gt; click —&gt; dbclick</p>
+<p>移动鼠标会同时发出mouseover(进入目标区)、mousemove(在目标区移动)、mouseout(离开目标区)。</p>
+<h3 id="鼠标坐标">鼠标坐标</h3>
+<p>鼠标事件对象event属性clientX和clientY表示鼠标指针相对视口的位置;screenX和screenY 相对屏幕的位置。
+表示修改的属性<code>shiftKey、ctrlKey、altKey、metaKey</code>，属性值代表了是否同时按住了那个键盘键，(ie不支持metaKey)。</p>
+<h2 id="键盘事件">键盘事件</h2>
+<p><code>keydown keyup keypress</code>3个。</p>
+<h3 id="触发顺序-1">触发顺序</h3>
+<p>在用户按了一下键盘上的字符键时，首先会出发keydown事件，然后紧跟着是keypress，最后是keyup。其中，keydown和keypress都是在文本框发生变化之前被触发的，而keyup则是在文本框已经发生变化之后被触发的。按下按键持续不放的话，会重复出发keydown和keypress。</p>
+<h3 id="如何获取按的键">如何获取按的键</h3>
+<p>键盘事件的event对象有3个属性：keyCode(键码), which, charCode(字符编码)</p>
+<blockquote>
+<p>keydown: 获得keyCode， charCode=0
+keypress: 字符（英文区分大小写+数字  / * , .  …等非功能键），keyCode=0 ，获取charCode值， 反之获取keyCode， charCode=0
+keyup: 获得keyCode， charCode=0
+jquery 中 event.which = original.charCode != null ? original.charCode : original.keyCode;</p>
+</blockquote>
+<p>总结：回车、上下左右、等功能键keydown、keypress、keyup都获取keyCode，并且值相等。
+开启大写情况，keydown、keypress(字母，主键盘数字、回车)、keyup，which值相等，小写kepress获取的which不同于keypress、keyup。</p>
+<p>keypress事件的keyCode对字母的大小写敏感，而keydown、keyup事件不敏感
+keypress事件的which值无法区分主键盘上的数字键和附键盘数字键的，而keydown、keyup的which值对主附键盘的数字键敏感。</p>
+<p>【
+IE(ie9以下)只有一个属性KeyCode属性，当为keydown和keyup 事件是，keycode属性表示你具体按下的键(也称为virtual keycode)，当捕捉的是keypress事件时keyCode属性指的是你键入的字符(character code)   </p>
+<p>标准浏览器中情况有些不同，event对象包含一个keyCode属性和一个charCode属性，keydown和keyup事件的时候，keyCode表示的就是你具体按的键，charCode为0；当捕捉的是keypress事件时，keyCode为0，charCode指的是你按下的字符，鉴于IE和FF中的区别，如果你比较懒的话，建议只使用keydow和keyup事件
+】</p>
+<p>部分浏览器支持DOM3的textInput事件，当用户在可编辑区域输入字符时就会触发此事件。</p>
+<p>任何可获得焦点的元素都可触发keypress，只有可编辑区域才触发textInput。</p>
+<p>三、HTML事件
+window上的事件  load unload resize scroll </p>
+<p>四、变动事件
+DOMSubtreeModified DOMNodeInserted DOMNodeRemoved DOMNodeInsertedIntoDocument DOMNodeRemovedFromDocument 
+DOMAttrModified DOMCharacterDataModified  </p>
+<p>五、专有事件
+1.上下文菜单
+     contextmenu事件，在dom上触发，属于鼠标事件，event.preventDefault可以取消系统自带的上下文菜单。
+2.卸载前事件
+     window上面的beforeunload
+3.鼠标滚动（mousewheel）和DOMMouseScroll事件
+     mousewheel可以在任何元素上触发，event对象包含一个特殊的wheelDelta属性，当用户向前滚动鼠标滚轮时，wheelDelta是120的倍数，当用户向后滚动鼠标滚轮时，wheelDelta是-120的倍数。要注意的是Opera9.5之前的版本中，wheelDelta值的正负号是颠倒的。
+Firefox支持与mousewheel很相似的DOMMouseScroll事件，保存滚动位移的event对象的dtail的属性，向前滚是-3的倍数，向后滚是3的倍数。
+4.DOMContentLoaded事件
+     DOMContentLoaded事件会在形成完整的DOM树之后就会触发，不理会图像、Javascript文件、css文件或其他资源是否已经下载完成。
+5.就绪状态变化（readystatechange）事件
+     支持readystatechange事件的每个对象会有一个readyState属性，可取的值：
+     uninitialized loading loaded interactive complete 
+     readyState不总是连续的，并非所有阶段都会经历，document <link> <script>一般会支持这个事件
+6.页面显示（pageshow）和页面隐藏（pagehide）事件
+     firefox和opera有一个特性，名叫“往返缓存”，可以在 用户使用浏览器的“后退”和“前进”按钮时加快页面的转换速度。这个缓存中不仅保存着页面数据，还保存了DOM和Javascript的状态；实际上是将整个页面都保存在了内存里。如果页面位于bfcache中，那么再次打开该页面就不会触发load事件。
+     是window上触发的事件，event对象有一个persisted属性表示页面是否保存在了bfcache中。</p>
+<p>六、移动safari支持的事件
+1.方向变化（orientationchange事件）
+window上触发的事件，当用户改变了设备的查看方式就会触发orientationchange，window.orientation保存了代表方向的值
+2.触摸事件
+touchstart touchmove touchend touchcancel 事件
+event对象保存了跟踪触摸的属性
+touches:表示当前跟踪的触摸操作的TOUCH对象的数组
+targetTouchs:特定于事件目标的Touch对象的数组
+ChangedTouches：表示自上次触摸以来发生了什么改变的Touch对象的数组
+3.手势事件
+gesturestart gesturechange gestureend 事件
+触摸事件和手势事件之间的关系。当一个手指放在屏幕上时，会出发touchstart事件。如果另一个手指又放在了屏幕上，则会先触发gesturestart事件，随后触发基于该手指的touchstart事件。如果一个或两个手指在屏幕上面滑动，将会触发gesturechange事件。但只要一个手指移开，就会触发gestureend事件，紧接着又会触发基于该手指的touchend事件。</p>
+<p>七、事件模拟
+DOM中的事件模拟
+document.createEvent(type);
+type有以下值 ：Events UIEvents MouseEvents MutationEvents HTMLEvents
+firefox支持KeyEvents
+一般调用init**Event() 完成事件对象的初始化，这些方法前三个参数都是type、bubbles、cancelable。
+element.dispatchEvent(模拟的事件对象)可以触发事件。</p>
+<p>IE中的事件模拟
+document.createEventObject();
+然后手动为event对象设置属性，如event.screenX = 100;
+element.fireEvent(“on”+type,模拟的事件对象)触发事件</p>
+</script></p>]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="鼠标事件">鼠标事件</h2>
+<p><code>click、dbclick、mousedown、mouseout、mouseover、mouseup、mousemove</code>7个。</p>
+<p>所有鼠标事件都会冒泡，也可以被取消，而取消鼠标事件将影响浏]]>
+    </summary>
+    
+      <category term="DOM" scheme="http://www.xuntuu.com/tags/DOM/"/>
+    
+      <category term="事件" scheme="http://www.xuntuu.com/tags/%E4%BA%8B%E4%BB%B6/"/>
+    
+      <category term="javascript" scheme="http://www.xuntuu.com/categories/javascript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[javascript的ajax技术]]></title>
+    <link href="http://www.xuntuu.com/2012/07/05/ajax-json/"/>
+    <id>http://www.xuntuu.com/2012/07/05/ajax-json/</id>
+    <published>2012-07-05T12:45:18.000Z</published>
+    <updated>2014-09-19T07:25:46.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="跨域">跨域</h2>
+<h3 id="什么是跨域？">什么是跨域？</h3>
+<p>简单地理解就是因为JavaScript同源策略的限制，a.com 域名下的js无法操作b.com或是c.a.com域名下的对象。更详细的说明可以看下表：
+<img src="/img/201206/cross-domain.jpg" alt="跨域图示"></p>
+<hr>
+<h2 id="Ajax">Ajax</h2>
+<h3 id="什么是AJAX?">什么是AJAX?</h3>
+<p>即“Asynchronous Javascript And XML[1] ”（异步JavaScript和XML[1] ），是指一种创建交互式网页应用的网页开发技术。通过在后台与服务器进行少量数据交换，AJAX 可以使网页实现异步更新。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。</p>
+<h3 id="XHR">XHR</h3>
+<p>Ajax技术的核心是XMLHttpRequest对象（简称XHR）。IE7+和现代浏览器都支持，IE6及早期的IE用的是XMLHttp 的对象。我们可以这样来创建一个兼容的XHR。</p>
+<figure class="highlight javascript"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">createXHR</span><span class="params">()</span></span>{</div><div class="line">	<span class="keyword">if</span> (<span class="keyword">typeof</span> XMLHttpRequest != <span class="string">"undefined"</span>) {</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">    } <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">window</span>.ActiveXObject) {</div><div class="line">    <span class="comment">//XMLHttp版本越新，性能越好，所以我们优先选用最新的</span></div><div class="line">      <span class="keyword">var</span> aVersions = [ <span class="string">"MSXML2.XMLHttp.5.0"</span>,</div><div class="line">        <span class="string">"MSXML2.XMLHttp.4.0"</span>,<span class="string">"MSXML2.XMLHttp.3.0"</span>,</div><div class="line">        <span class="string">"MSXML2.XMLHttp"</span>,<span class="string">"Microsoft.XMLHttp"</span></div><div class="line">      ];</div><div class="line"></div><div class="line">      <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; aVersions.length; i++) {</div><div class="line">        <span class="keyword">try</span> {</div><div class="line">            <span class="keyword">var</span> oXmlHttp = <span class="keyword">new</span> ActiveXObject(aVersions[i]);</div><div class="line">            <span class="keyword">return</span> oXmlHttp;</div><div class="line">        } <span class="keyword">catch</span> (oError) {</div><div class="line">            <span class="comment">//Do nothing</span></div><div class="line">        }</div><div class="line">      }</div><div class="line">    }</div><div class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"XMLHttp object could be created."</span>);</div><div class="line">}</div></pre></figure>
+
+<h3 id="发送请求">发送请求</h3>
+<p>创建xhr后我们就可以用来向服务器发送请求了。</p>
+<figure class="highlight javascript"><pre><div class="line"><span class="keyword">var</span> xhr = createXHR();</div><div class="line">xhr.open(<span class="string">"get"</span>,<span class="string">"example.php"</span>,<span class="literal">false</span>);</div><div class="line">xhr.send(<span class="literal">null</span>);</div></pre></figure>
+
+<p>open(method,url,async)方法有三个参数：</p>
+<ul>
+<li>method：请求的类型；GET 或 POST</li>
+<li>url：请求地址</li>
+<li>async：true（异步）或 false（同步）</li>
+</ul>
+<p>GET 和 POST发送请求的时候都可以带上参数，主要的区别的是，GET带数据参数的时候数据量受限于浏览器对URL长度的限制，而POST没有数据量的限制。</p>
+<p>异步和同步的区别在于是否会阻塞代码的执行，同步的情况下，代码会等到服务器响应之后再继续执行。在收到响应之后，响应的数据会自动填充XHR对象的属性。而异步的情况下不会阻塞代码执行，通过事件监听去获得响应情况，在收到响应后数据会自动填充XHR对象的属性。响应数据的属性有：
+responseText、responseXML，如果响应的内容类型是“text/xml”或“text/application”，这个属性中将保存包含着响应数据的XML DOM文档。如果响应内容是字符串则会填充到responseText中。</p>
+<h4 id="onreadystatechange事件">onreadystatechange事件</h4>
+<p>这个事件对异步有作用，每当 readyState 改变时，就会触发 onreadystatechange 事件。readyState 属性存有 XMLHttpRequest 的状态信息。从 0 到 4 发生变化。</p>
+<ul>
+<li>0: 请求未初始化</li>
+<li>1: 服务器连接已建立</li>
+<li>2: 请求已接收</li>
+<li>3: 请求处理中</li>
+<li>4: 请求已完成，且响应已就绪
+你的代码中应该少涉及到状态0-2的使用，因为有些浏览器并不支持。</li>
+</ul>
+<p>另外还有一个属性表示响应码status，比如：</p>
+<ul>
+<li>200: “OK”</li>
+<li>404: 未找到页面</li>
+</ul>
+<p>于是结合readyState == 4 &amp;&amp; status==200，我们可以得知请求得到了正确响应，可以获取响应内容。</p>
+<figure class="highlight javascript"><pre><div class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">	<span class="keyword">if</span>(xmlhttp.readyState==<span class="number">4</span> && xmlhttp.status==<span class="number">200</span>){</div><div class="line">    	<span class="built_in">document</span>.getElementById(<span class="string">"myDiv"</span>).innerHTML=xmlhttp.responseText;</div><div class="line">    }</div><div class="line">}</div></pre></figure>
+
+<h4 id="HTTP头部信息">HTTP头部信息</h4>
+<p>默认情况下，发送XHR请求的同时，会发送以下头部：
+<code>Accept 、Accept-Charset 、 Accept-Encoding 、 Accept-Language 、Connection 、Cookie 、Host、 Referer 、User-Agent</code>
+xhr.setRequestHeader(header,value)可以修改头部信息
+xhr.getResponseHeader(header)可以取得响应头部信息
+xhr.getAllResponseHeaders()可以取得一个包含所有头部信息的长字符串</p>
+<h4 id="浏览器差异">浏览器差异</h4>
+<p>ie8有ontimeout事件，可以处理超时，xhr.timeout设置超时。</p>
+<p>在firefox某些版本利用onreadystatechange事件监听readystate==4会有一定概率fail，这是它的一个bug
+<a href="http://www.nczonline.net/blog/2009/07/09/firefox-35firebug-xmlhttprequest-and-readystatechange-bug/" target="_blank" rel="external">Firefox 3.5/Firebug XMLHttpRequest and readystatechange bug</a>
+但是它支持W3C的事件比如load、error、abort 、progress，所以可以用onload替换</p>
+<figure class="highlight javascript"><pre><div class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line"><span class="keyword">if</span> (firefox3_5){</div><div class="line">    xhr.onload = xhr.onerror = xhr.onabort = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        processResponse(xhr);</div><div class="line">    };</div><div class="line">} <span class="keyword">else</span> {</div><div class="line">    xhr.onreadystatechange = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        <span class="keyword">if</span> (xhr.readyState == <span class="number">4</span>){</div><div class="line">            processResponse(xhr);</div><div class="line">        }</div><div class="line">    };</div><div class="line">}</div><div class="line">xhr.open(<span class="string">"get"</span>, <span class="string">"/url"</span>, <span class="literal">true</span>);</div><div class="line">xhr.send(<span class="literal">null</span>);</div></pre></figure>
+
+<p>onload事件，相当于readystate==4的 onreadystatechange事件，还有个onprogress事件，获取接收数据进度，event对象的position表示已经接收到的字节数，totalSize表示根据Content-Length响应头部确定的预期字节数。</p>
+<hr>
+<h2 id="跨域请求">跨域请求</h2>
+<h3 id="CORS">CORS</h3>
+<p>当前几乎所有的浏览器（Internet Explorer 8+， Firefox 3.5+， Safari 4+和 Chrome）都可通过名为Cross-Origin Resource Sharing（CORS）的协议支持ajax跨域调用。</p>
+<p>对一个简单的请求，没有自定义头部，要么使用GET，要么使用POST，它的主体是text/plain,请求用一个名叫Orgin的额外的头部发送。Origin头部包含请求页面的头部（协议，域名，端口），这样服务器可以很容易的决定它是否应该提供响应。</p>
+<p>Origin: <a href="http://www.nczonline.net" target="_blank" rel="external">http://www.nczonline.net</a></p>
+<p>如果服务器确定请求被通过，它将发送一个Access-Control-Allow-Origin头部响应发送请求的同一个源，如果是一个公共资源，则返回“*”。如：</p>
+<p>Access-Control-Allow-Origin: <a href="http://www.nczonline.net" target="_blank" rel="external">http://www.nczonline.net</a></p>
+<p>先前提到的所有浏览器都支持这些简单的请求。FF3.5 +，Safari 4和chrome以及IE9+通过使用XMLHttpRequest对象支持其使用。当尝试在不同域打开一个资源时，不需任何代码，这个行为会自动触发。如：</p>
+<figure class="highlight javascript"><pre><div class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">xhr.open(<span class="string">"get"</span>, <span class="string">"http://www.nczonline.net/some_resource/"</span>, <span class="literal">true</span>);</div><div class="line">xhr.onload = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{  <span class="comment">//instead of onreadystatechange</span></div><div class="line">    <span class="comment">//do something</span></div><div class="line">};</div><div class="line">xhr.send(<span class="literal">null</span>);</div></pre></figure>
+
+<p>在IE8你需要用到XDomainRequest，所以一个通用的代码可以这样：</p>
+<figure class="highlight javascript"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">createCORSRequest</span><span class="params">(method, url)</span></span>{</div><div class="line">    <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">    <span class="keyword">if</span> (<span class="string">"withCredentials"</span> <span class="keyword">in</span> xhr){</div><div class="line">        xhr.open(method, url, <span class="literal">true</span>);</div><div class="line">    } <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> XDomainRequest != <span class="string">"undefined"</span>){</div><div class="line">        xhr = <span class="keyword">new</span> XDomainRequest();</div><div class="line">        xhr.open(method, url);</div><div class="line">    } <span class="keyword">else</span> {</div><div class="line">        xhr = <span class="literal">null</span>;</div><div class="line">    }</div><div class="line">    <span class="keyword">return</span> xhr;</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">var</span> request = createCORSRequest(<span class="string">"get"</span>, <span class="string">"http://www.nczonline.net/"</span>);</div><div class="line"><span class="keyword">if</span> (request){</div><div class="line">    request.onload = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        <span class="comment">//do something with request.responseText</span></div><div class="line">    };</div><div class="line">    request.send();</div><div class="line">}</div></pre></figure>
+
+<p>我们需要用到“withCredentials”去检测 XMLHttpRequest 对象是否支持跨域请求。Firefox, Safari, and Chrome和IE8+通用的属性和方法有：</p>
+<ul>
+<li>abort()——用来终止已在进程中请求。</li>
+<li>onerror()——替代onreadystatechange方法来探测错误。</li>
+<li>onload()——替代onreadystatechange方法来探测成功。</li>
+<li>responseText——用来取得响应地文本。</li>
+<li>send()——用来发送请求。</li>
+</ul>
+<h3 id="Preflighted请求">Preflighted请求</h3>
+<p>除了GET或POST，通过一种称之为preflighted请求的服务器透明验证机制，CORS允许使用自定义的头部和方法，以及不同主体内容类型。当你尝试使用高级选项中的一个来试着建立一个请求时，这时就建立了一个preflighted请求。该请求使用可选的方法，并发送如下头部：</p>
+<ul>
+<li>Origin——与简单请求相同。</li>
+<li>Access-Control-Request-Method   ——请求将要使用的方法。</li>
+<li>Access-Control-Request-Headers  ——（可选）一个逗号分开的正被使用的自定义头部列表。</li>
+</ul>
+<p>在请求期间，服务器能决定是否允许这类请求。服务器通过在响应中发送以下头部来与浏览器通信。</p>
+<ul>
+<li>Access-Control-Allow-Origin  ——与简单请求相同。</li>
+<li>Access-Control-Allow-Methods ——用逗号分开的可接受的方法列表。</li>
+<li>Access-Control-Allow-Headers ——用逗号分开的服务器可接受的头部列表。</li>
+<li>Access-Control-Max-Age  ——preflighted 请求应该被缓存的时间。</li>
+</ul>
+<p><strong>IE8不支持</strong></p>
+<h3 id="Credentialed请求">Credentialed请求</h3>
+<p>默认状态下，跨域请求不提供证书（cookie、HTTP身份验证、客户端SSL证书）。你可以规定一个请求应该通过设置withCredentials属性为true来发送证书。如果服务器允许credentialed请求，那么它将用下面的头部作出响应：</p>
+<blockquote>
+<p>Access-Control-Allow-Credentials: true</p>
+</blockquote>
+<p>如果一个credentialed请求被发送，这个头部不会作为响应地一部分被发送。浏览器不会将响应传递给JavaScript(responseText是一个空字符串，状态为 0，onerror()被调用)。注意，服务器也能发送这个HTTP头部作为preflight响应的一部分，以此来表明该源允许发送 credentialed请求。</p>
+<p><strong>IE8不支持</strong></p>
+<h3 id="对比">对比</h3>
+<p>ie8的XDomainRequest与同域XHR的不同之处：</p>
+<ol>
+<li>cookie不会随着请求发送，也不会随响应返回</li>
+<li>只能设置请求头部信息中的Content-Type字段，xhr.contentType = xxx，设置Content-Type字段</li>
+<li>不能访问响应头部信息</li>
+<li>只支持GET和POST请求</li>
+<li>XDR只能访问Access-Control-Allow-Origin头部字段设置为*资源。</li>
+<li>用onload事件和onerror事件代替onreadystatechange事件</li>
+</ol>
+<p>XMLHttpRequest的跨域请求，与同域XHR的不同之处：</p>
+<ol>
+<li>不能使用setRequestHeader()设置自定义头部，只能请求contentType为”text/plain”的资源</li>
+<li>不会发送也不会接收cookie</li>
+<li>getAllResponseHeaders()方法只能返回空字符串</li>
+<li>要求远程资源设置Access-Control-Allow-Origin决定此域是否可以访问远程资源，但不限于”*”</li>
+</ol>
+<h2 id="参考阅读">参考阅读</h2>
+<ul>
+<li><a href="http://www.wrox.com/WileyCDA/Section/id-291289.html" target="_blank" rel="external">XMLHttp Requests for Ajax</a>  </li>
+<li><a href="http://www.weste.net/2011/4-27/75028.html" target="_blank" rel="external">利用跨域资源共享（CORS）实现ajax跨域调用</a></li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="跨域">跨域</h2>
+<h3 id="什么是跨域？">什么是跨域？</h3>
+<p>简单地理解就是因为JavaScript同源策略的限制，a.com 域名下的js无法操作b.com或是c.a.com域名下的对象。更详细的说明可以看下表：
+<img src="/i]]>
+    </summary>
+    
+      <category term="javascript" scheme="http://www.xuntuu.com/tags/javascript/"/>
+    
+      <category term="ajax" scheme="http://www.xuntuu.com/tags/ajax/"/>
+    
+      <category term="跨域" scheme="http://www.xuntuu.com/tags/%E8%B7%A8%E5%9F%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[DOM必知]]></title>
+    <link href="http://www.xuntuu.com/2012/07/03/dom-must-know/"/>
+    <id>http://www.xuntuu.com/2012/07/03/dom-must-know/</id>
+    <published>2012-07-03T11:20:20.000Z</published>
+    <updated>2014-09-04T04:02:37.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="DOM必知">DOM必知</h2>
+<h3 id="id和name">id和name</h3>
+<p>如果在HTML文档中用id属性来为元素命名，并且如果window对象没有此名字的属性，window对象会赋予一个属性，它的名字是id属性的值，而它们的值指向表示文档元素的HTMLElement对象。
+假设Id并没有被window对象使用的话，那么任何有id属性的html元素都会成为全局变量的值。以下元素如果有name属性的话，也会这么表现：
+a applet area embed form frame frameset iframe img object</p>
+<p>form img iframe applet(废弃) embed(html 5) object 会在document中创建name属性值为名字的属性，其中iframe创建的是window对象</p>
+<h3 id="iframe">iframe</h3>
+<p>iframe 元素有contentWindow属性，引用该窗口的window对象，此window对象有个frameElement属性，表示此iframe 元素</p>
+<p>全局对象处于作用域链的顶级，并且是全局变量和函数所定义的地方。事实上，全局对象会在窗口或窗口载入新内容时被替换。我们称为’window’对象实际上不是全局对象，而是全局对象的一个代理。</p>
+<h3 id="data">data</h3>
+<p>html5为ELEMENT设计了data-xx属性 ，用element.data.xx访问</p>
+<h3 id="原生选择器">原生选择器</h3>
+<p>ie8+，可以用querySelector和querySelectorAll传入css选择器选择节点，效果跟jQuery的选择器一样 </p>
+<h3 id="模板引擎">模板引擎</h3>
+<p>可以将没有的src的script，type设置为某些值，text/x-custom-data 不执行，但可以用text属性植入文本。某些前端模板引擎就是利用这个，来暂存模板。</p>
+<h3 id="富文本">富文本</h3>
+<p>设置HTML元素的contenteditable 可以使的元素可以编辑，还有spellcheck开启拼写检查 
+设置Document元素的designMode = on 可以使得iframe 可以编辑，并可以使用命令</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="DOM必知">DOM必知</h2>
+<h3 id="id和name">id和name</h3>
+<p>如果在HTML文档中用id属性来为元素命名，并且如果window对象没有此名字的属性，window对象会赋予一个属性，它的名字是id属性的值，而它们的值指向表示文]]>
+    </summary>
+    
+      <category term="前端" scheme="http://www.xuntuu.com/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="javascript" scheme="http://www.xuntuu.com/tags/javascript/"/>
+    
+      <category term="javascript" scheme="http://www.xuntuu.com/categories/javascript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[javascript魔法--DOM]]></title>
+    <link href="http://www.xuntuu.com/2012/07/01/js-dom/"/>
+    <id>http://www.xuntuu.com/2012/07/01/js-dom/</id>
+    <published>2012-07-01T14:20:20.000Z</published>
+    <updated>2014-09-19T07:28:36.000Z</updated>
+    <content type="html"><![CDATA[<p>DOM（Document Object Model，文档对象模型）是一个通过和JavaScript进行内容交互的API。Javascript和DOM一般经常作为一个整体，因为Javascript通常都是用来进行DOM操作和交互的。</p>
+<h2 id="DOM查找">DOM查找</h2>
+<h3 id="方法">方法</h3>
+<p>主要有两个查找节点的方法：</p>
+<ol>
+<li>document.getElementById(domid)
+ 因为domid唯一，所以返回唯一的节点</li>
+<li>document.getElementsByTagName(tagname)</li>
+</ol>
+<h3 id="属性">属性</h3>
+<p>DOM API提供了大量的节点属性让我们来往上或者往下查询节点。</p>
+<ol>
+<li>Node.parentNode: 访问当前节点的父节点，父节点只能有一个，祖节点可以用<code>Node.parentNode.parentNode</code>的形式来访问。</li>
+<li>Node.childNodes: 访问一个单元素下所有的直接子节点元素，可以是一个可循环的类数组对象。该节点集合可以保护不同的类型的子节点（比如text节点或其他元素节点）。</li>
+<li>Node.firstChild: 与<code>childNodes</code>数组的第一个项(<code>Element.childNodes[0]</code>)是同样的效果，仅仅是快捷方式。</li>
+<li>Node.lastChild: 与’childNodes’数组的最后一个项(<code>Element.childNodes[Element.childNodes.length-1]</code>)是同样的效果，仅仅是快捷方式。shortcut。</li>
+<li>Node.nextSibling: 访问DOM树上与当前节点同级别的下一个节点。</li>
+<li>Node.previousSibling: 访问DOM树上与当前节点同级别的上一个节点。</li>
+</ol>
+<p><img src="/img/201206/dom-find.png" alt="节点属性示意图"></p>
+<p>元素之间不能有空格，如果ul和li之间有空格的话，就会被认为是内容为空的text node节点，这样ul.childNodes[0]就不是第一个li元素了。相应地，<code>&lt;p&gt;</code>的下一个节点也不是<code>&lt;ul&gt;</code>，因为<code>&lt;p&gt;</code>和<code>&lt;ul&gt;</code>之间有一个空行的节点，一般遇到这种情况需要遍历所有的子节点然后判断nodeType类型，1是元素，2是属性，3是text节点，详细的type类型如下：</p>
+<figure class="highlight javascript"><pre><div class="line">Node.ELEMENT_NODE == <span class="number">1</span></div><div class="line">Node.ATTRIBUTE_NODE == <span class="number">2</span></div><div class="line">Node.TEXT_NODE == <span class="number">3</span></div><div class="line">Node.CDATA_SECTION_NODE == <span class="number">4</span></div><div class="line">Node.ENTITY_REFERENCE_NODE == <span class="number">5</span></div><div class="line">Node.ENTITY_NODE == <span class="number">6</span></div><div class="line">Node.PROCESSING_INSTRUCTION_NODE == <span class="number">7</span></div><div class="line">Node.COMMENT_NODE == <span class="number">8</span></div><div class="line">Node.DOCUMENT_NODE == <span class="number">9</span></div><div class="line">Node.DOCUMENT_TYPE_NODE == <span class="number">10</span></div><div class="line">Node.DOCUMENT_FRAGMENT_NODE == <span class="number">11</span></div><div class="line">Node.NOTATION_NODE == <span class="number">12</span></div></pre></figure>
+
+<p>javascript中的所有节点类型都继承自Node类型。表示nodeType的Node常量在IE中无效，必须用数字表示。</p>
+<h3 id="NodeList">NodeList</h3>
+<p>NodeList对象是一个节点的集合,是由Node.childNodes and the querySelectorAll返回的。每个节点都有一个NodeList属性保存了子节点，可以用索引可以用item访问单个子节点。非IE可以用Array.prototype.slice将NodeList转化为数组，而IE是将NodeList实现为COM对象，不可以转化为数组。</p>
+<p>大多数情况下,NodeList对象都是个live集合。意思是说,如果文档中的节点树发生变化,则已经存在的NodeList对象也可能会变化。但如果该NodeList对象是由document.querySelectorAll(或者Element.querySelectorAll)方法返回的, 则它是非live的(就算把页面内的所有节点清空,links.length还等于2)。</p>
+<hr>
+<h2 id="ELEMENT操作">ELEMENT操作</h2>
+<h3 id="创建节点">创建节点</h3>
+<p>document.createElement();</p>
+<h3 id="是否包含子节点">是否包含子节点</h3>
+<p>判断元素是否含有某个子节点 parent.contains(child) ，firefox不支持。</p>
+<h3 id="操作子节点">操作子节点</h3>
+<figure class="highlight javascript"><pre><div class="line">parent.appendChild(childNode)  <span class="comment">//添加子节点到parent下</span></div><div class="line"><span class="keyword">new</span>.insertBefore(parent,front)   <span class="comment">//添加子节点new到parent下的front前面</span></div><div class="line">parent.replaceChild(<span class="keyword">new</span>,old)   <span class="comment">//替换new节点替换掉old节点</span></div><div class="line">parent.removeChild(node)      <span class="comment">//移除子节点node</span></div><div class="line">cloneNode = srcNode.cloneNode(<span class="literal">true</span>) <span class="comment">//递归复制其子节点，false则不复制其子节点</span></div></pre></figure>
+
+<h3 id="操作内容">操作内容</h3>
+<p><code>innerText、outerText 、innerHTML、outerHTML</code>四个属性可以直接读写，相应内容会发生改变</p>
+<p>区别在于xxxText是去除了标签的纯文本，xxxHTML是HTML内容。</p>
+<p>firefox中用textContent对应innerText,firefox不支持outerText。</p>
+<p>读取的时候 innerText等于outerText，但写的时候inner 只会替换子节点 ，而outer会替换元素自身。</p>
+<p>innerHTML写入<code>&lt;script&gt;</code>时只有ie支持，且要加defer，且认为是作用域外，必须在前面加一个作用域内元素才行，例如：文本，<code>&lt;input type=&#39;hidden&#39;/&gt;</code>，<code>&lt;div&gt;&amp;nbsp;&lt;/div&gt;</code></p>
+<hr>
+<h2 id="几种NODE">几种NODE</h2>
+<h3 id="ELEMENT">ELEMENT</h3>
+<p>其nodeType等于1。</p>
+<p>操作属性的方法：getAttribute、setAttribute、removeAttribut。属性名不区分大小写，使用标准的属性名即使是javascript保留字。</p>
+<p>W3C规范还有一个方法 hasAttribute 用于判断是否含有某属性</p>
+<h3 id="Text">Text</h3>
+<p>其nodeType等于3。</p>
+<p>创建一个Text节点document.createTextNode();</p>
+<p>操作Text节点内容的方法有：</p>
+<figure class="highlight javascript"><pre><div class="line">var box = document.createElement('div');</div><div class="line">box.id = 'box';</div><div class="line">var text1 = document.createTextNode('Mr.');</div><div class="line">var text2 = document.createTextNode('Cai!);</div><div class="line">box.appendChild(text1);</div><div class="line">box.appendChild(text2);</div><div class="line">document.body.appendChild(box);</div><div class="line">alert(box.childNodes.length);                             //2，两个文本节点</div><div class="line">box.normalize();                                          //合并成一个节点</div><div class="line">alert(box.childNodes.length);        //1</div><div class="line">box.firstChild.splitText(3);       //分离一个节点，参数表示分离位置</div><div class="line">alert(box.childNodes.length);        //2</div><div class="line">box.firstChild.deleteData(0,2);                         //删除从0位置的2个字符</div><div class="line">box.firstChild.insertData(0,'Hello.');                  //从0位置添加指定字符</div><div class="line">box.firstChild.replaceData(0,2,'Miss');               //从0位置替换掉2个指定字符</div><div class="line">box.firstChild.substringData(0,2);                    //从0位置获取2个字符，直接输出</div><div class="line">alert(box.firstChild.nodeValue);                         //Missllo..</div></pre></figure>
+
+<p>另外Text和CDATASection 都是CharacterData的子类型，可以用data和nodeValue属性获取文本</p>
+<h3 id="DocumentFragment">DocumentFragment</h3>
+<p>其nodeType等于11。</p>
+<p>创建一个片段document.createDocumentFragment();  </p>
+<p>将片段添加到文档中时，只会把片段的子节点添加进去，它本身不会成为文档树的一部分</p>
+<hr>
+<h2 id="其他">其他</h2>
+<h3 id="document">document</h3>
+<p>document代表整个文档
+html == document.documentElement;
+body == document.body;
+document几个常用的属性
+titile URL domain referrer</p>
+<h3 id="节点的集合">节点的集合</h3>
+<p>document.images document.forms document.links document.anchors</p>
+<h3 id="呈现模式">呈现模式</h3>
+<p>如何判断呈现模式是标准还是混杂？</p>
+<figure class="highlight javascript"><pre><div class="line"><span class="built_in">document</span>.compatMode == <span class="string">"CSS1Compat"</span>  <span class="comment">//标准模式</span></div><div class="line"><span class="built_in">document</span>.compatMode == <span class="string">"BackCompat"</span>  <span class="comment">//混杂模式</span></div></pre></figure>
+
+<p>ie8还有一个属性 document.documentMode，用于判断渲染模式，有以下值:</p>
+<ul>
+<li>5   表示 “in IE5 mode”</li>
+<li>7   表示 “in IE7 mode”</li>
+<li>8   表示 “in IE8 mode”</li>
+<li>9   表示 “in IE9 mode”</li>
+</ul>
+<h3 id="滚动，让元素可视">滚动，让元素可视</h3>
+<p>element.scrollIntoView()滚动浏览器滚动条使得元素显示在视图 。 </p>
+<p>属性scrollLeft、scrollTop 可用于设置有滚动条元素的滚动条位置。</p>
+<p>window.scrollTo(xpos,ypos) 把内容滚动到指定的坐标。</p>
+<p>window.scrollBy(xpos,ypos)如果有滚动条，将横向滚动条移动到相对于当前横向滚动条的x个像素的位置(就是向左移动x像素)，将纵向滚动条移动到相对于当前纵向滚动条高度为y个像素的位置(就是向下移动y像素)。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>DOM（Document Object Model，文档对象模型）是一个通过和JavaScript进行内容交互的API。Javascript和DOM一般经常作为一个整体，因为Javascript通常都是用来进行DOM操作和交互的。</p>
+<h2 id="DOM查找">DO]]>
+    </summary>
+    
+      <category term="前端" scheme="http://www.xuntuu.com/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="javascript" scheme="http://www.xuntuu.com/tags/javascript/"/>
+    
+      <category term="javascript" scheme="http://www.xuntuu.com/categories/javascript/"/>
+    
+  </entry>
+  
+</feed>
