@@ -4,7 +4,7 @@
   <subtitle><![CDATA[程序猿、全栈工程师]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.xuntuu.com/"/>
-  <updated>2014-11-13T12:11:17.895Z</updated>
+  <updated>2014-11-13T12:22:43.423Z</updated>
   <id>http://www.xuntuu.com/</id>
   
   <author>
@@ -253,7 +253,7 @@
     <link href="http://www.xuntuu.com/2014/08/20/automating/"/>
     <id>http://www.xuntuu.com/2014/08/20/automating/</id>
     <published>2014-08-20T14:14:10.000Z</published>
-    <updated>2014-09-21T06:39:44.000Z</updated>
+    <updated>2014-11-13T12:22:37.000Z</updated>
     <content type="html"><![CDATA[<p>开发一个web项目可能会。。。
 <img src="/img/automating/slide_2.jpg" alt="">
 需要掌握的知识越来越复杂。。。<br>boilerplate abstractions frameworks testing docs workflow dependency management performance   optimization build continuous integration<br>deployment version control   </p>
@@ -330,7 +330,7 @@
 <li>Zip</li>
 <li>npm</li>
 </ul>
-<p>嘿嘿，从此几行命令，就可以解决依赖问题了</p>
+<p>嘿嘿，从此几行命令，就可以解决依赖问题了,没错</p>
 <p><strong>grunt-bower-install</strong></p>
 <figure class="highlight shell"><pre><div class="line">$ npm <span class="operator"><span class="keyword">install</span> grunt-bower-<span class="keyword">install</span> <span class="comment">--save-dev</span></span></div></pre></figure>
 
