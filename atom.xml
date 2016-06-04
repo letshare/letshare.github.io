@@ -3,9 +3,9 @@
   <title><![CDATA[xuntuu]]></title>
   <subtitle><![CDATA[程序猿、全栈工程师]]></subtitle>
   <link href="/atom.xml" rel="self"/>
-  <link href="http://www.xuntuu.com/"/>
-  <updated>2016-03-29T13:14:05.981Z</updated>
-  <id>http://www.xuntuu.com/</id>
+  <link href="http://letshare.github.io/"/>
+  <updated>2016-06-04T13:14:11.518Z</updated>
+  <id>http://letshare.github.io/</id>
   
   <author>
     <name><![CDATA[bruce]]></name>
@@ -16,8 +16,8 @@
   
   <entry>
     <title><![CDATA[深圳，高房价已透支你的生命--股灾引发的猜想]]></title>
-    <link href="http://www.xuntuu.com/2015/07/08/5-10/"/>
-    <id>http://www.xuntuu.com/2015/07/08/5-10/</id>
+    <link href="http://letshare.github.io/2015/07/08/5-10/"/>
+    <id>http://letshare.github.io/2015/07/08/5-10/</id>
     <published>2015-07-08T14:14:10.000Z</published>
     <updated>2015-07-09T02:09:18.000Z</updated>
     <content type="html"><![CDATA[<p>说一说最近的股市，本人不相信大跌是恶意做空势力造成。股市仍在市场规律解释范围内，股价过高，自然有往下回归价值的动能。即使最伟大的投机者也不能逆趋势，他们只是推泼助澜。这一波大跌，在下跌趋势已定的时候，被投机者看到机会，自然他们要狠狠赚一把。苍蝇不叮无缝之蛋。在市场中，如果做空是恶意的，那么做多是不是也有恶意的嫌疑，诱多为了套牢散户。出来混，迟早要还的，没有最糟只有更糟，08年zf救市产生的种种后遗症和危害，也许会由这次股灾来引爆。下一步，股市可能会打爆场内1w多亿融资盘，进而引发银行的信贷危机。银行会收紧房市信贷，加上经济下行的更加担忧，房市会有价无市，房价开始下跌。这次下跌，并不会带来量的回升，因为刚需这几年已被透支，很多父母在孩子上大学的时候就准备好了他们的婚房。因为没有成交量，房市引来更大的下跌和融资住房的“强平”。</p>
@@ -37,20 +37,20 @@
     <![CDATA[<p>说一说最近的股市，本人不相信大跌是恶意做空势力造成。股市仍在市场规律解释范围内，股价过高，自然有往下回归价值的动能。即使最伟大的投机者也不能逆趋势，他们只是推泼助澜。这一波大跌，在下跌趋势已定的时候，被投机者看到机会，自然他们要狠狠赚一把。苍蝇不叮无缝之蛋。在市场中，如果做]]>
     </summary>
     
-      <category term="房价" scheme="http://www.xuntuu.com/tags/%E6%88%BF%E4%BB%B7/"/>
+      <category term="房价" scheme="http://letshare.github.io/tags/%E6%88%BF%E4%BB%B7/"/>
     
-      <category term="深圳" scheme="http://www.xuntuu.com/tags/%E6%B7%B1%E5%9C%B3/"/>
+      <category term="深圳" scheme="http://letshare.github.io/tags/%E6%B7%B1%E5%9C%B3/"/>
     
-      <category term="经济" scheme="http://www.xuntuu.com/tags/%E7%BB%8F%E6%B5%8E/"/>
+      <category term="经济" scheme="http://letshare.github.io/tags/%E7%BB%8F%E6%B5%8E/"/>
     
-      <category term="经济" scheme="http://www.xuntuu.com/categories/%E7%BB%8F%E6%B5%8E/"/>
+      <category term="经济" scheme="http://letshare.github.io/categories/%E7%BB%8F%E6%B5%8E/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[SSO及oauth机制]]></title>
-    <link href="http://www.xuntuu.com/2014/09/22/sso-oauth/"/>
-    <id>http://www.xuntuu.com/2014/09/22/sso-oauth/</id>
+    <link href="http://letshare.github.io/2014/09/22/sso-oauth/"/>
+    <id>http://letshare.github.io/2014/09/22/sso-oauth/</id>
     <published>2014-09-22T14:14:10.000Z</published>
     <updated>2014-09-25T06:19:53.000Z</updated>
     <content type="html"><![CDATA[<h2 id="介绍">介绍</h2>
@@ -61,16 +61,16 @@
 <p>OAUTH协议为用户资源的授权提供了一个安全的、开放而又简易的标准。与以往的授权方式不同之处是OAUTH的授权不会使第三方触及到用户的帐号信息（如用户名与密码），即第三方无需使用用户的用户名与密码就可以申请获得该用户资源的授权，因此O]]>
     </summary>
     
-      <category term="web 安全" scheme="http://www.xuntuu.com/tags/web-%E5%AE%89%E5%85%A8/"/>
+      <category term="web 安全" scheme="http://letshare.github.io/tags/web-%E5%AE%89%E5%85%A8/"/>
     
-      <category term="安全" scheme="http://www.xuntuu.com/categories/%E5%AE%89%E5%85%A8/"/>
+      <category term="安全" scheme="http://letshare.github.io/categories/%E5%AE%89%E5%85%A8/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[A寻路算法理解]]></title>
-    <link href="http://www.xuntuu.com/2014/09/22/a-pathfinding/"/>
-    <id>http://www.xuntuu.com/2014/09/22/a-pathfinding/</id>
+    <link href="http://letshare.github.io/2014/09/22/a-pathfinding/"/>
+    <id>http://letshare.github.io/2014/09/22/a-pathfinding/</id>
     <published>2014-09-22T14:14:10.000Z</published>
     <updated>2014-09-22T16:31:29.000Z</updated>
     <content type="html"><![CDATA[<h2 id="概念">概念</h2>
@@ -112,20 +112,20 @@
 <p>A*寻路算法解决的问题是寻找A点到B点的最短路径，不能碰到障碍，如图中所示，绿色块为出发点A点，红色块为目标B点，]]>
     </summary>
     
-      <category term="A* Pathfinding" scheme="http://www.xuntuu.com/tags/A-Pathfinding/"/>
+      <category term="A* Pathfinding" scheme="http://letshare.github.io/tags/A-Pathfinding/"/>
     
-      <category term="html5" scheme="http://www.xuntuu.com/tags/html5/"/>
+      <category term="html5" scheme="http://letshare.github.io/tags/html5/"/>
     
-      <category term="game" scheme="http://www.xuntuu.com/tags/game/"/>
+      <category term="game" scheme="http://letshare.github.io/tags/game/"/>
     
-      <category term="算法" scheme="http://www.xuntuu.com/categories/%E7%AE%97%E6%B3%95/"/>
+      <category term="算法" scheme="http://letshare.github.io/categories/%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[折腾hexo]]></title>
-    <link href="http://www.xuntuu.com/2014/09/01/work-hexo-more/"/>
-    <id>http://www.xuntuu.com/2014/09/01/work-hexo-more/</id>
+    <link href="http://letshare.github.io/2014/09/01/work-hexo-more/"/>
+    <id>http://letshare.github.io/2014/09/01/work-hexo-more/</id>
     <published>2014-09-01T11:50:12.000Z</published>
     <updated>2014-09-19T11:57:26.000Z</updated>
     <content type="html"><![CDATA[<p>要想让hexo博客更好，更符合我们自己的要求，就要弄清楚怎么配置hexo。先从hexo
@@ -273,18 +273,18 @@
 <figure class="highlight shell"><pr]]>
     </summary>
     
-      <category term="hexo" scheme="http://www.xuntuu.com/tags/hexo/"/>
+      <category term="hexo" scheme="http://letshare.github.io/tags/hexo/"/>
     
-      <category term="blog" scheme="http://www.xuntuu.com/tags/blog/"/>
+      <category term="blog" scheme="http://letshare.github.io/tags/blog/"/>
     
-      <category term="web" scheme="http://www.xuntuu.com/categories/web/"/>
+      <category term="web" scheme="http://letshare.github.io/categories/web/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[automating  workflow]]></title>
-    <link href="http://www.xuntuu.com/2014/08/20/automating/"/>
-    <id>http://www.xuntuu.com/2014/08/20/automating/</id>
+    <link href="http://letshare.github.io/2014/08/20/automating/"/>
+    <id>http://letshare.github.io/2014/08/20/automating/</id>
     <published>2014-08-20T14:14:10.000Z</published>
     <updated>2014-11-13T12:22:37.000Z</updated>
     <content type="html"><![CDATA[<p>开发一个web项目可能会。。。
@@ -374,16 +374,16 @@
 需要掌握的知识越来越复杂。。。<br>boilerplate abstractions frameworks testing docs workfl]]>
     </summary>
     
-      <category term="automating" scheme="http://www.xuntuu.com/tags/automating/"/>
+      <category term="automating" scheme="http://letshare.github.io/tags/automating/"/>
     
-      <category term="效率" scheme="http://www.xuntuu.com/categories/%E6%95%88%E7%8E%87/"/>
+      <category term="效率" scheme="http://letshare.github.io/categories/%E6%95%88%E7%8E%87/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[玩转hexo]]></title>
-    <link href="http://www.xuntuu.com/2014/08/12/play-hexo/"/>
-    <id>http://www.xuntuu.com/2014/08/12/play-hexo/</id>
+    <link href="http://letshare.github.io/2014/08/12/play-hexo/"/>
+    <id>http://letshare.github.io/2014/08/12/play-hexo/</id>
     <published>2014-08-12T11:50:12.000Z</published>
     <updated>2014-09-21T23:50:14.000Z</updated>
     <content type="html"><![CDATA[<h2 id="一些小玩意">一些小玩意</h2>
@@ -439,18 +439,18 @@
     
     </summary>
     
-      <category term="hexo" scheme="http://www.xuntuu.com/tags/hexo/"/>
+      <category term="hexo" scheme="http://letshare.github.io/tags/hexo/"/>
     
-      <category term="blog" scheme="http://www.xuntuu.com/tags/blog/"/>
+      <category term="blog" scheme="http://letshare.github.io/tags/blog/"/>
     
-      <category term="web" scheme="http://www.xuntuu.com/categories/web/"/>
+      <category term="web" scheme="http://letshare.github.io/categories/web/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[用hexo建blog]]></title>
-    <link href="http://www.xuntuu.com/2014/08/02/build-hexo-blog/"/>
-    <id>http://www.xuntuu.com/2014/08/02/build-hexo-blog/</id>
+    <link href="http://letshare.github.io/2014/08/02/build-hexo-blog/"/>
+    <id>http://letshare.github.io/2014/08/02/build-hexo-blog/</id>
     <published>2014-08-02T12:08:20.000Z</published>
     <updated>2014-09-19T11:57:03.000Z</updated>
     <content type="html"><![CDATA[<h2 id="why_hexo？">why hexo？</h2>
@@ -507,18 +507,18 @@
     
     </summary>
     
-      <category term="hexo" scheme="http://www.xuntuu.com/tags/hexo/"/>
+      <category term="hexo" scheme="http://letshare.github.io/tags/hexo/"/>
     
-      <category term="blog" scheme="http://www.xuntuu.com/tags/blog/"/>
+      <category term="blog" scheme="http://letshare.github.io/tags/blog/"/>
     
-      <category term="web" scheme="http://www.xuntuu.com/categories/web/"/>
+      <category term="web" scheme="http://letshare.github.io/categories/web/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[如何使用codepen]]></title>
-    <link href="http://www.xuntuu.com/2014/06/18/codepen-use/"/>
-    <id>http://www.xuntuu.com/2014/06/18/codepen-use/</id>
+    <link href="http://letshare.github.io/2014/06/18/codepen-use/"/>
+    <id>http://letshare.github.io/2014/06/18/codepen-use/</id>
     <published>2014-06-18T14:14:10.000Z</published>
     <updated>2014-09-19T07:26:29.000Z</updated>
     <content type="html"><![CDATA[<h2 id="简介">简介</h2>
@@ -550,16 +550,16 @@
 <p>codepen的]]>
     </summary>
     
-      <category term="codepen" scheme="http://www.xuntuu.com/tags/codepen/"/>
+      <category term="codepen" scheme="http://letshare.github.io/tags/codepen/"/>
     
-      <category term="工具" scheme="http://www.xuntuu.com/categories/%E5%B7%A5%E5%85%B7/"/>
+      <category term="工具" scheme="http://letshare.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[30秒用cleaver做一个幻灯片]]></title>
-    <link href="http://www.xuntuu.com/2014/05/18/cleaver-use/"/>
-    <id>http://www.xuntuu.com/2014/05/18/cleaver-use/</id>
+    <link href="http://letshare.github.io/2014/05/18/cleaver-use/"/>
+    <id>http://letshare.github.io/2014/05/18/cleaver-use/</id>
     <published>2014-05-18T14:14:10.000Z</published>
     <updated>2014-09-21T06:34:12.000Z</updated>
     <content type="html"><![CDATA[<h1 id="大家好!">大家好!</h1>
@@ -617,22 +617,22 @@
 <]]>
     </summary>
     
-      <category term="cleaver" scheme="http://www.xuntuu.com/tags/cleaver/"/>
+      <category term="cleaver" scheme="http://letshare.github.io/tags/cleaver/"/>
     
-      <category term="幻灯片" scheme="http://www.xuntuu.com/tags/%E5%B9%BB%E7%81%AF%E7%89%87/"/>
+      <category term="幻灯片" scheme="http://letshare.github.io/tags/%E5%B9%BB%E7%81%AF%E7%89%87/"/>
     
-      <category term="ppt" scheme="http://www.xuntuu.com/tags/ppt/"/>
+      <category term="ppt" scheme="http://letshare.github.io/tags/ppt/"/>
     
-      <category term="slider" scheme="http://www.xuntuu.com/tags/slider/"/>
+      <category term="slider" scheme="http://letshare.github.io/tags/slider/"/>
     
-      <category term="工具" scheme="http://www.xuntuu.com/categories/%E5%B7%A5%E5%85%B7/"/>
+      <category term="工具" scheme="http://letshare.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[web安全要点]]></title>
-    <link href="http://www.xuntuu.com/2013/09/22/web-safe/"/>
-    <id>http://www.xuntuu.com/2013/09/22/web-safe/</id>
+    <link href="http://letshare.github.io/2013/09/22/web-safe/"/>
+    <id>http://letshare.github.io/2013/09/22/web-safe/</id>
     <published>2013-09-22T14:14:10.000Z</published>
     <updated>2014-09-25T15:25:42.000Z</updated>
     <content type="html"><![CDATA[<h2 id="概述">概述</h2>
@@ -706,16 +706,16 @@
 <p>XSS，即跨站脚本，发]]>
     </summary>
     
-      <category term="web 安全" scheme="http://www.xuntuu.com/tags/web-%E5%AE%89%E5%85%A8/"/>
+      <category term="web 安全" scheme="http://letshare.github.io/tags/web-%E5%AE%89%E5%85%A8/"/>
     
-      <category term="安全" scheme="http://www.xuntuu.com/categories/%E5%AE%89%E5%85%A8/"/>
+      <category term="安全" scheme="http://letshare.github.io/categories/%E5%AE%89%E5%85%A8/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[css之flex]]></title>
-    <link href="http://www.xuntuu.com/2013/07/23/css-flex/"/>
-    <id>http://www.xuntuu.com/2013/07/23/css-flex/</id>
+    <link href="http://letshare.github.io/2013/07/23/css-flex/"/>
+    <id>http://letshare.github.io/2013/07/23/css-flex/</id>
     <published>2013-07-23T11:10:00.000Z</published>
     <updated>2014-09-19T07:27:07.000Z</updated>
     <content type="html"><![CDATA[<h2 id="flex">flex</h2>
@@ -909,18 +909,18 @@
 <p>flex是css3新增的display值，它是为了更加复杂的web布局而生的。一般中文翻译为伸缩布局。长期以来人们都是使用表格、浮动、行内块元素和其他 CSS 属性来布局网站内容。要实现在使用了居左对齐、居右对齐、两端对齐、居]]>
     </summary>
     
-      <category term="前端" scheme="http://www.xuntuu.com/tags/%E5%89%8D%E7%AB%AF/"/>
+      <category term="前端" scheme="http://letshare.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="css" scheme="http://www.xuntuu.com/tags/css/"/>
+      <category term="css" scheme="http://letshare.github.io/tags/css/"/>
     
-      <category term="css" scheme="http://www.xuntuu.com/categories/css/"/>
+      <category term="css" scheme="http://letshare.github.io/categories/css/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[git简易使用指南-2]]></title>
-    <link href="http://www.xuntuu.com/2013/07/14/git-use-2/"/>
-    <id>http://www.xuntuu.com/2013/07/14/git-use-2/</id>
+    <link href="http://letshare.github.io/2013/07/14/git-use-2/"/>
+    <id>http://letshare.github.io/2013/07/14/git-use-2/</id>
     <published>2013-07-14T11:20:00.000Z</published>
     <updated>2014-09-18T17:32:16.000Z</updated>
     <content type="html"><![CDATA[<h2 id="命令详解">命令详解</h2>
@@ -975,18 +975,18 @@
 <figure class="highlight bash"><pre><div ]]>
     </summary>
     
-      <category term="git" scheme="http://www.xuntuu.com/tags/git/"/>
+      <category term="git" scheme="http://letshare.github.io/tags/git/"/>
     
-      <category term="版本" scheme="http://www.xuntuu.com/tags/%E7%89%88%E6%9C%AC/"/>
+      <category term="版本" scheme="http://letshare.github.io/tags/%E7%89%88%E6%9C%AC/"/>
     
-      <category term="工具" scheme="http://www.xuntuu.com/categories/%E5%B7%A5%E5%85%B7/"/>
+      <category term="工具" scheme="http://letshare.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[git简易使用指南]]></title>
-    <link href="http://www.xuntuu.com/2013/07/12/git-use/"/>
-    <id>http://www.xuntuu.com/2013/07/12/git-use/</id>
+    <link href="http://letshare.github.io/2013/07/12/git-use/"/>
+    <id>http://letshare.github.io/2013/07/12/git-use/</id>
     <published>2013-07-12T11:20:00.000Z</published>
     <updated>2014-09-19T07:28:20.000Z</updated>
     <content type="html"><![CDATA[<h2 id="安装">安装</h2>
@@ -1065,18 +1065,18 @@
 <p><a href="http://code.google.com/p/git-osx-installer/downloads/list?can=3" target="_blank" rel="external">下载 git OSX 版]]>
     </summary>
     
-      <category term="git" scheme="http://www.xuntuu.com/tags/git/"/>
+      <category term="git" scheme="http://letshare.github.io/tags/git/"/>
     
-      <category term="版本" scheme="http://www.xuntuu.com/tags/%E7%89%88%E6%9C%AC/"/>
+      <category term="版本" scheme="http://letshare.github.io/tags/%E7%89%88%E6%9C%AC/"/>
     
-      <category term="工具" scheme="http://www.xuntuu.com/categories/%E5%B7%A5%E5%85%B7/"/>
+      <category term="工具" scheme="http://letshare.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[markdown简明使用]]></title>
-    <link href="http://www.xuntuu.com/2013/05/13/markdown-use/"/>
-    <id>http://www.xuntuu.com/2013/05/13/markdown-use/</id>
+    <link href="http://letshare.github.io/2013/05/13/markdown-use/"/>
+    <id>http://letshare.github.io/2013/05/13/markdown-use/</id>
     <published>2013-05-13T12:08:20.000Z</published>
     <updated>2014-09-03T02:53:58.000Z</updated>
     <content type="html"><![CDATA[<h2 id="使用markdown的好处">使用markdown的好处</h2>
@@ -1210,16 +1210,16 @@
     
     </summary>
     
-      <category term="markdown" scheme="http://www.xuntuu.com/tags/markdown/"/>
+      <category term="markdown" scheme="http://letshare.github.io/tags/markdown/"/>
     
-      <category term="效率" scheme="http://www.xuntuu.com/categories/%E6%95%88%E7%8E%87/"/>
+      <category term="效率" scheme="http://letshare.github.io/categories/%E6%95%88%E7%8E%87/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[高性能javascript编程]]></title>
-    <link href="http://www.xuntuu.com/2013/03/15/js-best-performance/"/>
-    <id>http://www.xuntuu.com/2013/03/15/js-best-performance/</id>
+    <link href="http://letshare.github.io/2013/03/15/js-best-performance/"/>
+    <id>http://letshare.github.io/2013/03/15/js-best-performance/</id>
     <published>2013-03-15T11:20:00.000Z</published>
     <updated>2014-09-25T17:06:57.000Z</updated>
     <content type="html"><![CDATA[<h2 id="优化代码">优化代码</h2>
@@ -1270,18 +1270,18 @@
 <li><p>eval 2. Function 3. setTimeout 4. setInterv]]>
     </summary>
     
-      <category term="前端" scheme="http://www.xuntuu.com/tags/%E5%89%8D%E7%AB%AF/"/>
+      <category term="前端" scheme="http://letshare.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="javascript" scheme="http://www.xuntuu.com/tags/javascript/"/>
+      <category term="javascript" scheme="http://letshare.github.io/tags/javascript/"/>
     
-      <category term="javascript" scheme="http://www.xuntuu.com/categories/javascript/"/>
+      <category term="javascript" scheme="http://letshare.github.io/categories/javascript/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[Emmet简明用法]]></title>
-    <link href="http://www.xuntuu.com/2013/01/18/emmet-use/"/>
-    <id>http://www.xuntuu.com/2013/01/18/emmet-use/</id>
+    <link href="http://letshare.github.io/2013/01/18/emmet-use/"/>
+    <id>http://letshare.github.io/2013/01/18/emmet-use/</id>
     <published>2013-01-18T15:58:00.000Z</published>
     <updated>2014-09-19T07:28:05.000Z</updated>
     <content type="html"><![CDATA[<h2 id="简介">简介</h2>
@@ -1422,18 +1422,18 @@ html:4s：用于HTML4严格文档类型</p>
 <img src="/img/20]]>
     </summary>
     
-      <category term="Emmet" scheme="http://www.xuntuu.com/tags/Emmet/"/>
+      <category term="Emmet" scheme="http://letshare.github.io/tags/Emmet/"/>
     
-      <category term="Zen coding" scheme="http://www.xuntuu.com/tags/Zen-coding/"/>
+      <category term="Zen coding" scheme="http://letshare.github.io/tags/Zen-coding/"/>
     
-      <category term="效率" scheme="http://www.xuntuu.com/categories/%E6%95%88%E7%8E%87/"/>
+      <category term="效率" scheme="http://letshare.github.io/categories/%E6%95%88%E7%8E%87/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[javascript之10种最全的跨域解决方式]]></title>
-    <link href="http://www.xuntuu.com/2012/08/18/js-cross-domain/"/>
-    <id>http://www.xuntuu.com/2012/08/18/js-cross-domain/</id>
+    <link href="http://letshare.github.io/2012/08/18/js-cross-domain/"/>
+    <id>http://letshare.github.io/2012/08/18/js-cross-domain/</id>
     <published>2012-08-18T15:58:00.000Z</published>
     <updated>2014-09-25T06:59:01.000Z</updated>
     <content type="html"><![CDATA[<p>在客户端编程语言中，如javascript和ActionScript，同源策略是一个很重要的安全理念，它在保证数据的安全性方面有着重要的意义。同源策略规定跨域之间的脚本是隔离的，一个域的脚本不能访问和操作另外一个域的绝大部分属性和方法。那么什么叫相同域，什么叫不同的域呢？</p>
@@ -1540,16 +1540,16 @@ html:4s：用于HTML4严格文档类型</p>
     <![CDATA[<p>在客户端编程语言中，如javascript和ActionScript，同源策略是一个很重要的安全理念，它在保证数据的安全性方面有着重要的意义。同源策略规定跨域之间的脚本是隔离的，一个域的脚本不能访问和操作另外一个域的绝大部分属性和方法。那么什么叫相同域，什么叫不同的域呢？<]]>
     </summary>
     
-      <category term="跨域" scheme="http://www.xuntuu.com/tags/%E8%B7%A8%E5%9F%9F/"/>
+      <category term="跨域" scheme="http://letshare.github.io/tags/%E8%B7%A8%E5%9F%9F/"/>
     
-      <category term="javascript" scheme="http://www.xuntuu.com/categories/javascript/"/>
+      <category term="javascript" scheme="http://letshare.github.io/categories/javascript/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[魔法javascript之事件]]></title>
-    <link href="http://www.xuntuu.com/2012/07/18/js-event/"/>
-    <id>http://www.xuntuu.com/2012/07/18/js-event/</id>
+    <link href="http://letshare.github.io/2012/07/18/js-event/"/>
+    <id>http://letshare.github.io/2012/07/18/js-event/</id>
     <published>2012-07-18T15:58:00.000Z</published>
     <updated>2014-09-10T02:06:28.000Z</updated>
     <content type="html"><![CDATA[<h2 id="鼠标事件">鼠标事件</h2>
@@ -1636,18 +1636,18 @@ element.fireEvent(“on”+type,模拟的事件对象)触发事件</p>
 <p>所有鼠标事件都会冒泡，也可以被取消，而取消鼠标事件将影响浏]]>
     </summary>
     
-      <category term="DOM" scheme="http://www.xuntuu.com/tags/DOM/"/>
+      <category term="DOM" scheme="http://letshare.github.io/tags/DOM/"/>
     
-      <category term="事件" scheme="http://www.xuntuu.com/tags/%E4%BA%8B%E4%BB%B6/"/>
+      <category term="事件" scheme="http://letshare.github.io/tags/%E4%BA%8B%E4%BB%B6/"/>
     
-      <category term="javascript" scheme="http://www.xuntuu.com/categories/javascript/"/>
+      <category term="javascript" scheme="http://letshare.github.io/categories/javascript/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[javascript的ajax技术]]></title>
-    <link href="http://www.xuntuu.com/2012/07/05/ajax-json/"/>
-    <id>http://www.xuntuu.com/2012/07/05/ajax-json/</id>
+    <link href="http://letshare.github.io/2012/07/05/ajax-json/"/>
+    <id>http://letshare.github.io/2012/07/05/ajax-json/</id>
     <published>2012-07-05T12:45:18.000Z</published>
     <updated>2014-09-19T07:25:46.000Z</updated>
     <content type="html"><![CDATA[<h2 id="跨域">跨域</h2>
@@ -1781,18 +1781,18 @@ xhr.getAllResponseHeaders()可以取得一个包含所有头部信息的长字�
 <img src="/i]]>
     </summary>
     
-      <category term="javascript" scheme="http://www.xuntuu.com/tags/javascript/"/>
+      <category term="javascript" scheme="http://letshare.github.io/tags/javascript/"/>
     
-      <category term="ajax" scheme="http://www.xuntuu.com/tags/ajax/"/>
+      <category term="ajax" scheme="http://letshare.github.io/tags/ajax/"/>
     
-      <category term="跨域" scheme="http://www.xuntuu.com/tags/%E8%B7%A8%E5%9F%9F/"/>
+      <category term="跨域" scheme="http://letshare.github.io/tags/%E8%B7%A8%E5%9F%9F/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[DOM必知]]></title>
-    <link href="http://www.xuntuu.com/2012/07/03/dom-must-know/"/>
-    <id>http://www.xuntuu.com/2012/07/03/dom-must-know/</id>
+    <link href="http://letshare.github.io/2012/07/03/dom-must-know/"/>
+    <id>http://letshare.github.io/2012/07/03/dom-must-know/</id>
     <published>2012-07-03T11:20:20.000Z</published>
     <updated>2014-09-04T04:02:37.000Z</updated>
     <content type="html"><![CDATA[<h2 id="DOM必知">DOM必知</h2>
@@ -1820,11 +1820,11 @@ a applet area embed form frame frameset iframe img object</p>
 <p>如果在HTML文档中用id属性来为元素命名，并且如果window对象没有此名字的属性，window对象会赋予一个属性，它的名字是id属性的值，而它们的值指向表示文]]>
     </summary>
     
-      <category term="前端" scheme="http://www.xuntuu.com/tags/%E5%89%8D%E7%AB%AF/"/>
+      <category term="前端" scheme="http://letshare.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="javascript" scheme="http://www.xuntuu.com/tags/javascript/"/>
+      <category term="javascript" scheme="http://letshare.github.io/tags/javascript/"/>
     
-      <category term="javascript" scheme="http://www.xuntuu.com/categories/javascript/"/>
+      <category term="javascript" scheme="http://letshare.github.io/categories/javascript/"/>
     
   </entry>
   
